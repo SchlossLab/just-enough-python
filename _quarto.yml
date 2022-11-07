@@ -1,0 +1,10 @@
+project:
+  title: "just-enough-python"
+  output-dir: docs/
+
+toc: true
+format:
+  html
+
+
+
