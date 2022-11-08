@@ -28,7 +28,7 @@ This is just enough Python to understand and apply some cool tricks in your Snak
 - Basic R experience.
 
 
-## data types
+## Variables
 
 ### basic data types
 
@@ -82,6 +82,19 @@ str(32)
 bool(0)
 bool(1)
 bool(None)
+```
+
+### Naming variables
+
+Biggest difference between R and Python: no dots are allowed in Python variable names.
+All other rules from R apply. Python variable names must start with an alphabetic character and they can contain alphanumeric characters and underscores.
+
+Just like in R, it is a good idea not to name a variable the same thing as a 
+reserved keyword or global function.
+
+```{python}
+#| filename: Python keywords
+help("keywords")
 ```
 
 
@@ -367,7 +380,7 @@ square(2)
 Sometimes you want to write a simple function that you only use once.
 They're so inconsequential you don't even want to give them a name.
 
-We've already used one in R^[more on anonymous functions here: http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions] inside `sapply()`:
+We've already used one in R^[more on anonymous functions here: <http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions>] inside `sapply()`:
 
 ```{R r-anon}
 #| filename: "R"
@@ -399,6 +412,7 @@ You can find out what class an object belongs to in Python with `type()`:
 #| filename: "Python"
 type(numbers)
 type(name)
+type(name) == str
 ```
 
 or in R with `class()`:
@@ -408,15 +422,15 @@ or in R with `class()`:
 class(1:3)
 class(list(1, 2, 3))
 class(name)
+class(name) == 'character'
 ```
 
 
-Objects have attributes and methods. 
+Objects of different classes have different attributes and methods.
 
 - attributes: metadata associated with an object.
 - methods: functions that operate on an object.
 
-Different classes have different attributes and methods.
 
 lists have methods that can modify them in place
 ```{python}
@@ -440,17 +454,60 @@ filename.split('.')[0]
 ```
 
 
-# Applying Python tricks to Snakemake 
-TODO: COLLATE THESE WITH python concepts above
+## Packages
 
-config files get imported as dictionaries
+Using packages works a little differently between R and Python.
 
-use f strings all the time
+In R, you can refer to a function from any package you have installed with double colons:
 
-use lambda functions
+```{R pkg-syntax}
+#| filename: R script
+#| eval: false
+dplyr::tibble(a = 1:3, b = 4:6)
+```
 
-input.name syntax is because of OOP
+Alternatively, you can first load the package at the top of your script so you
+can call the functions you want to use without specifying the package name every
+time you use them.
 
+```{R library}
+#| filename: R script
+#| eval: false
+library(dplyr)
+tibble(a = 1:5, b = 6:10) %>%
+    filter(a > 3)
+```
+
+
+In Python, you must `import` a package before you can use anything from it and
+reference the package name like this:
+
+```{Python import-pkg}
+#| filename: Python script
+#| eval: false
+import pandas
+pandas.DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
+```
+
+You can give a package a nickname to cut down on the characters you have to type.
+`pandas` is often renamed to `pd`:
+
+
+```{Python import-pkg-pd}
+#| filename: Python script
+#| eval: false
+import pandas as pd
+DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
+```
+
+Alternatively, you can choose to import only the functions you want to use from a package:
+
+```{Python import-pkg-dataframe}
+#| filename: Python script
+#| eval: false
+from pandas import DataFrame
+DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
+```
 
 <!--
 # topics i wish i had time to cover 
@@ -462,6 +519,18 @@ input.name syntax is because of OOP
 ## reading & writing files
 -->
 
+
+# Applying Python tricks to Snakemake 
+TODO: COLLATE THESE WITH python concepts above
+
+config files get imported as dictionaries
+
+use f strings all the time
+
+use lambda functions
+
+input.name syntax is because of OOP
+
 # Resources
 
-- The Python docs: https://docs.python.org/3/
+- The Python docs: <https://docs.python.org/3/>
