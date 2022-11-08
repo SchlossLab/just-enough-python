@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "*.qmd"
+#    paths:
+#     - "*.qmd"
 
 jobs:
   build:
@@ -22,8 +22,7 @@ jobs:
           git config --local user.name "GitHub"
       - name: fast forward
         run: |
-          echo "the tag is ${{ github.ref_name }}"
-          git merge --ff-only ${{ github.ref_name }}
+          git merge --ff-only origin/main
       - uses: quarto-dev/quarto-actions/setup@v2
       - run: |
           quarto --version
