@@ -19,6 +19,7 @@ workflows from beginner to advanced, learning a little Python goes a long way.
 
 This is just enough Python to understand and apply some cool tricks in your Snakemake workflows.
 
+
 ###  Prereqs
 
 - Basic snakemake knowledge. you've gone through the official tutorial. 
