@@ -433,6 +433,13 @@ join
 split
 
 
+```{python}
+filename = "path/to/file.txt"
+filename.split('.')
+filename.split('.')[0]
+```
+
+
 # Applying Python tricks to Snakemake 
 TODO: COLLATE THESE WITH python concepts above
 
