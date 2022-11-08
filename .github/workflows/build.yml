@@ -31,7 +31,6 @@ jobs:
       - uses: quarto-dev/quarto-actions/render@v2
       - name: git commit
         run: |
-          git checkout docs/index.html
           git add .
           git commit -m "📄 Render quarto project"
           git push
