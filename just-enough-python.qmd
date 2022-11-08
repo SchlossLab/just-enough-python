@@ -426,7 +426,10 @@ numbers.reverse()
 print(numbers)
 ```
 
+string methods
 
+join
+split
 
 
 # Applying Python tricks to Snakemake 
