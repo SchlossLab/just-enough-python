@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="author" content="Kelly Sovacool">
+<title>Just Enough Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="just-enough-python_files/libs/clipboard/clipboard.min.js"></script>
+<script src="just-enough-python_files/libs/quarto-html/quarto.js"></script>
+<script src="just-enough-python_files/libs/quarto-html/popper.min.js"></script>
+<script src="just-enough-python_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="just-enough-python_files/libs/quarto-html/anchor.min.js"></script>
+<link href="just-enough-python_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="just-enough-python_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="just-enough-python_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="just-enough-python_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="just-enough-python_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+</head>
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#prereqs" id="toc-prereqs" class="nav-link active" data-scroll-target="#prereqs">Prereqs</a></li>
+  <li>
+<a href="#data-types" id="toc-data-types" class="nav-link" data-scroll-target="#data-types">data types</a>
+  <ul class="collapse">
+<li><a href="#basic-data-types" id="toc-basic-data-types" class="nav-link" data-scroll-target="#basic-data-types">basic data types</a></li>
+  <li><a href="#types-that-contain-other-types" id="toc-types-that-contain-other-types" class="nav-link" data-scroll-target="#types-that-contain-other-types">types that contain other types</a></li>
+  </ul>
+</li>
+  <li><a href="#conditionals" id="toc-conditionals" class="nav-link" data-scroll-target="#conditionals">conditionals</a></li>
+  <li><a href="#if-else-statements" id="toc-if-else-statements" class="nav-link" data-scroll-target="#if-else-statements">if-else statements</a></li>
+  <li>
+<a href="#for-loops" id="toc-for-loops" class="nav-link" data-scroll-target="#for-loops">for loops</a>
+  <ul class="collapse">
+<li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range">range</a></li>
+  <li><a href="#iterate-over-dictionaries" id="toc-iterate-over-dictionaries" class="nav-link" data-scroll-target="#iterate-over-dictionaries">iterate over dictionaries</a></li>
+  <li><a href="#comprehensions" id="toc-comprehensions" class="nav-link" data-scroll-target="#comprehensions">comprehensions</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">functions</a>
+  <ul class="collapse">
+<li><a href="#anonymous-functions" id="toc-anonymous-functions" class="nav-link" data-scroll-target="#anonymous-functions">anonymous functions</a></li>
+  </ul>
+</li>
+  <li><a href="#applying-python-tricks-to-snakemake" id="toc-applying-python-tricks-to-snakemake" class="nav-link" data-scroll-target="#applying-python-tricks-to-snakemake">Applying Python tricks to Snakemake</a></li>
+  </ul></nav>
+</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Just Enough Python</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source" data-quarto-source-url="https://github.com/SchlossLab/just-enough-python/blob/main/just-enough-python.qmd"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Kelly Sovacool </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header><p>Snakemake is extra magic on top of Python. If you want to take your Snakemake workflows from beginner to advanced, learning a little Python goes a long way.</p>
+<p>This is just enough Python to use some cool tricks in your Snakemake workflows.</p>
+<section id="prereqs" class="level3"><h3 class="anchored" data-anchor-id="prereqs">Prereqs</h3>
+<ul>
+<li>Basic snakemake knowledge. you’ve gone through the official tutorial. maybe you’ve even tried building your own snakemake workflow.</li>
+<li>Minimal or no python knowledge outside of what you may have gleaned from the snakemake docs.</li>
+<li>Basic R experience.</li>
+</ul></section><section id="data-types" class="level2"><h2 class="anchored" data-anchor-id="data-types">data types</h2>
+<section id="basic-data-types" class="level3"><h3 class="anchored" data-anchor-id="basic-data-types">basic data types</h3>
+<table class="table">
+<thead><tr class="header">
+<th>Python</th>
+<th>R</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>string</td>
+<td>character</td>
+</tr>
+<tr class="even">
+<td>integer</td>
+<td>integer</td>
+</tr>
+<tr class="odd">
+<td>float</td>
+<td>numeric</td>
+</tr>
+<tr class="even">
+<td>boolean</td>
+<td>logical</td>
+</tr>
+<tr class="odd">
+<td>None</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># string</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>name <span class="op">=</span> <span class="st">"Kelly"</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>favorite_color <span class="op">=</span> <span class="st">'green'</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># float</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>height_inches <span class="op">=</span> <span class="fl">64.0</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># int</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>num_plants <span class="op">=</span> <span class="dv">14</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co"># bool</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>likes_cats <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># none</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>invalid <span class="op">=</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># character</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>name <span class="ot">&lt;-</span> <span class="st">"Kelly"</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>favorite_color <span class="ot">&lt;-</span> <span class="st">'green'</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># numeric</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>height_inches <span class="ot">&lt;-</span> <span class="dv">64</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># integer</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>num_plants <span class="ot">&lt;-</span> 14L</span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># logical</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>likes_cats <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># null</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>invalid <span class="ot">=</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<section id="type-casting" class="level4"><h4 class="anchored" data-anchor-id="type-casting">type casting</h4>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="bu">int</span>(<span class="fl">32.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>32</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="bu">float</span>(<span class="dv">32</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>32.0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">str</span>(<span class="dv">32</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'32'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="bu">bool</span>(<span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>False</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="bu">bool</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="bu">bool</span>(<span class="va">None</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>False</code></pre>
+</div>
+</div>
+</section></section><section id="types-that-contain-other-types" class="level3"><h3 class="anchored" data-anchor-id="types-that-contain-other-types">types that contain other types</h3>
+<table class="table">
+<thead><tr class="header">
+<th>Python</th>
+<th>R</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>list</td>
+<td>vector (all same type) or list (multiple types)</td>
+</tr>
+<tr class="even">
+<td>dictionary</td>
+<td>named list</td>
+</tr>
+<tr class="odd">
+<td>dataframe (pandas)</td>
+<td>dataframe (base) or tibble (tidyverse)</td>
+</tr>
+</tbody>
+</table>
+<section id="lists" class="level4"><h4 class="anchored" data-anchor-id="lists">lists</h4>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>fruit <span class="op">=</span> [<span class="st">'apple'</span>,<span class="st">'banana'</span>,<span class="st">'grape'</span>]</span>
+<span id="cb15-2"><a href="#cb15-2"></a>my_list <span class="op">=</span> [<span class="st">'pizza'</span>, <span class="st">'fries'</span>, <span class="dv">3</span>, <span class="op">-</span><span class="fl">2.5</span>, <span class="st">'donuts'</span>]</span>
+<span id="cb15-3"><a href="#cb15-3"></a>fruit <span class="op">+</span> my_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['apple', 'banana', 'grape', 'pizza', 'fries', 3, -2.5, 'donuts']</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>fruit.append(<span class="st">'mango'</span>)</span>
+<span id="cb17-2"><a href="#cb17-2"></a>fruit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['apple', 'banana', 'grape', 'mango']</code></pre>
+</div>
+</div>
+<p>Indexing is 0-based in Python.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="co"># length</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="bu">len</span>(numbers)</span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># first item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>numbers[<span class="dv">0</span>]</span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="co"># last item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>numbers[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>numbers[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4</code></pre>
+</div>
+</div>
+<p>You can <code>join</code> lists to create strings:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="co">','</span>.join(fruit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'apple,banana,grape,mango'</code></pre>
+</div>
+</div>
+</section><section id="dictionaries" class="level4"><h4 class="anchored" data-anchor-id="dictionaries">dictionaries</h4>
+<p>Dictionaries consist of key-value pairs where you use the key to access the value. Keys can be strings, integers, floats, or booleans. Values can be anything!</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>foods <span class="op">=</span> {<span class="st">'vegetable'</span>: [<span class="st">'carrot'</span>, <span class="st">'eggplant'</span>], </span>
+<span id="cb29-2"><a href="#cb29-2"></a>         <span class="st">'fruit'</span>: <span class="st">'cherry'</span>}</span>
+<span id="cb29-3"><a href="#cb29-3"></a>foods[<span class="st">'fruit'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'cherry'</code></pre>
+</div>
+</div>
+<p>Dictionaries can be nested:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a>hyperparams <span class="op">=</span> {<span class="st">'glmnet'</span>: {<span class="st">'alpha'</span>: [<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>],</span>
+<span id="cb31-2"><a href="#cb31-2"></a>                          <span class="st">'lambda'</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">0</span>]</span>
+<span id="cb31-3"><a href="#cb31-3"></a>                          },</span>
+<span id="cb31-4"><a href="#cb31-4"></a>                <span class="st">'rf'</span>: {<span class="st">'mtry'</span>: <span class="dv">500</span>}</span>
+<span id="cb31-5"><a href="#cb31-5"></a>               }</span>
+<span id="cb31-6"><a href="#cb31-6"></a>hyperparams[<span class="st">'glmnet'</span>][<span class="st">'alpha'</span>][<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.5</code></pre>
+</div>
+</div>
+</section></section></section><section id="conditionals" class="level2"><h2 class="anchored" data-anchor-id="conditionals">conditionals</h2>
+<p>Think of conditionals as functions that return booleans. Most of the ones you know from R are the same in Python.</p>
+<table class="table">
+<thead><tr class="header">
+<th>operator</th>
+<th>meaning</th>
+<th>same in R</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>==</code></td>
+<td>equal</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>not equal</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td>less than</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td><code>&gt;</code></td>
+<td>greater than</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;=</code></td>
+<td>less than or equal to</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td>greater than or equal to</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>or</td>
+<td>or (inclusive)</td>
+<td><code>|</code></td>
+</tr>
+<tr class="even">
+<td>and</td>
+<td>and</td>
+<td><code>&amp;</code></td>
+</tr>
+</tbody>
+</table></section><section id="if-else-statements" class="level2"><h2 class="anchored" data-anchor-id="if-else-statements">if-else statements</h2>
+<p>No curly braces here! But indentation does matter.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="cf">if</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">10</span>:</span>
+<span id="cb33-2"><a href="#cb33-2"></a>    <span class="bu">print</span>(<span class="st">"This list is short"</span>)</span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="cf">elif</span> <span class="bu">len</span>(my_list) <span class="op">&gt;=</span> <span class="dv">10</span> <span class="kw">and</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">15</span>:</span>
+<span id="cb33-4"><a href="#cb33-4"></a>    <span class="bu">print</span>(<span class="st">"This list is medium length"</span>)</span>
+<span id="cb33-5"><a href="#cb33-5"></a><span class="cf">else</span>:</span>
+<span id="cb33-6"><a href="#cb33-6"></a>    <span class="bu">print</span>(<span class="st">"This list is long!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>This list is short</code></pre>
+</div>
+</div>
+<p>Nested if-else blocks</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a>num <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="cf">if</span> num <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
+<span id="cb35-3"><a href="#cb35-3"></a>    <span class="cf">if</span> num <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb35-4"><a href="#cb35-4"></a>        <span class="bu">print</span>(<span class="st">"zero"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5"></a>    <span class="cf">else</span>:</span>
+<span id="cb35-6"><a href="#cb35-6"></a>        <span class="bu">print</span>(<span class="st">"positive"</span>)</span>
+<span id="cb35-7"><a href="#cb35-7"></a><span class="cf">else</span>:</span>
+<span id="cb35-8"><a href="#cb35-8"></a>    <span class="bu">print</span>(<span class="st">"negative"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>positive</code></pre>
+</div>
+</div>
+</section><section id="for-loops" class="level2"><h2 class="anchored" data-anchor-id="for-loops">for loops</h2>
+<p>If a variable has a length (i.e.&nbsp;you can run <code>len(myvar)</code>), then you can <strong>iterate</strong> over it in a for loop.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a>postdocs <span class="op">=</span> [<span class="st">'Allison Mason'</span>, <span class="st">'Courtney Armour'</span>, <span class="st">'Sarah Lucas'</span>]</span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="cf">for</span> phd <span class="kw">in</span> postdocs:</span>
+<span id="cb37-3"><a href="#cb37-3"></a>    <span class="bu">print</span>(phd, <span class="st">", PhD"</span>, sep <span class="op">=</span> <span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Allison Mason, PhD
+Courtney Armour, PhD
+Sarah Lucas, PhD</code></pre>
+</div>
+</div>
+<section id="range" class="level3"><h3 class="anchored" data-anchor-id="range">range</h3>
+<p>Use <code>range</code> to loop over a range of numbers.</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a>num_bottles <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, num_bottles<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb39-3"><a href="#cb39-3"></a>    <span class="bu">print</span>(i, <span class="st">" bottles of pop on the wall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1  bottles of pop on the wall
+2  bottles of pop on the wall
+3  bottles of pop on the wall</code></pre>
+</div>
+</div>
+<p>You can also create lists with the <code>range</code> function:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a>mylist <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>When you use range with one argument as above, that argument is the value to stop <em>just before</em>. The stop value is <em>exclusive</em>. By default it will start at 0 and step by 1.</p>
+<p>Or you can give both the start and stop values:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a><span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3]</code></pre>
+</div>
+</div>
+<p>Or give a start, stop, and step value:</p>
+<p>You can even move backward:</p>
+<p>You might think it’s weird that range stops just <em>before</em> the stop value. But it works nicely when you give it the length of the list – now you have the list indices!</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(numbers)):</span>
+<span id="cb44-2"><a href="#cb44-2"></a>    <span class="bu">print</span>(<span class="st">"index"</span>, i, <span class="st">"is"</span>, numbers[i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>index 0 is 1
+index 1 is 2
+index 2 is 3
+index 3 is 4</code></pre>
+</div>
+</div>
+<p>f strings in Python work just like glue() in R</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1"></a><span class="bu">print</span>(<span class="ss">f"index </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>numbers[i]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>index 3 is 4</code></pre>
+</div>
+</div>
+</section><section id="iterate-over-dictionaries" class="level3"><h3 class="anchored" data-anchor-id="iterate-over-dictionaries">iterate over dictionaries</h3>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a>problems <span class="op">=</span> {<span class="dv">1</span>: <span class="st">"naming things"</span>, <span class="dv">2</span>: <span class="st">"understanding binary"</span>, <span class="dv">3</span>: <span class="st">"off-by-one errors"</span>}</span>
+<span id="cb48-2"><a href="#cb48-2"></a><span class="bu">print</span>(<span class="st">'There are only 10 hard problems in computer science:'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>There are only 10 hard problems in computer science:</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a><span class="cf">for</span> num <span class="kw">in</span> problems:</span>
+<span id="cb50-2"><a href="#cb50-2"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, num, problems[num])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     1 naming things
+     2 understanding binary
+     3 off-by-one errors</code></pre>
+</div>
+</div>
+</section><section id="comprehensions" class="level3"><h3 class="anchored" data-anchor-id="comprehensions">comprehensions</h3>
+<p>when you want to make a for loop that creates a new list, dictionary, or set, use a <strong>comprehension</strong>.</p>
+<section id="list-comprehension" class="level4"><h4 class="anchored" data-anchor-id="list-comprehension">list comprehension</h4>
+<p>To build a list with a for loop, you can do this</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>squares <span class="op">=</span> []</span>
+<span id="cb52-2"><a href="#cb52-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
+<span id="cb52-3"><a href="#cb52-3"></a>    squares.append(i<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb52-4"><a href="#cb52-4"></a>squares</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0, 1, 4, 9]</code></pre>
+</div>
+</div>
+<p>but a list comprehension is much sleeker and performs faster:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a>squares <span class="op">=</span> [i<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>this is roughly equivalent to using *apply functions in R:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">sapply</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, <span class="cf">function</span>(x) {x<span class="sc">**</span><span class="dv">2</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0 1 4 9</code></pre>
+</div>
+</div>
+</section><section id="dictionary-comprehension" class="level4"><h4 class="anchored" data-anchor-id="dictionary-comprehension">dictionary comprehension</h4>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a>movies <span class="op">=</span> [<span class="st">'star wars episode V'</span>, <span class="st">'the godfather'</span>, <span class="st">'the dark knight'</span>]</span>
+<span id="cb57-2"><a href="#cb57-2"></a>years <span class="op">=</span> [<span class="dv">1980</span>, <span class="dv">1972</span>, <span class="dv">2008</span>]</span>
+<span id="cb57-3"><a href="#cb57-3"></a>movie_dict <span class="op">=</span> {}</span>
+<span id="cb57-4"><a href="#cb57-4"></a><span class="cf">for</span> movie, year <span class="kw">in</span> <span class="bu">zip</span>(movies, years):</span>
+<span id="cb57-5"><a href="#cb57-5"></a>    movie_dict[movie] <span class="op">=</span> year</span>
+<span id="cb57-6"><a href="#cb57-6"></a>movie_dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'star wars episode V': 1980, 'the godfather': 1972, 'the dark knight': 2008}</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a>movie_dict <span class="op">=</span> {movie: year <span class="cf">for</span> movie, year <span class="kw">in</span> <span class="bu">zip</span>(movies, years)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section></section></section><section id="functions" class="level2"><h2 class="anchored" data-anchor-id="functions">functions</h2>
+<p>in R:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>square <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb60-2"><a href="#cb60-2"></a>    <span class="fu">return</span>(x<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb60-3"><a href="#cb60-3"></a>}</span>
+<span id="cb60-4"><a href="#cb60-4"></a></span>
+<span id="cb60-5"><a href="#cb60-5"></a><span class="fu">square</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<p>in Python:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">def</span> square(x):</span>
+<span id="cb62-2"><a href="#cb62-2"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb62-3"><a href="#cb62-3"></a></span>
+<span id="cb62-4"><a href="#cb62-4"></a>square(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4</code></pre>
+</div>
+</div>
+<section id="anonymous-functions" class="level3"><h3 class="anchored" data-anchor-id="anonymous-functions">anonymous functions</h3>
+<p>Sometimes you want to write a simple function that you only use once. They’re so inconsequential you don’t even want to give them a name.</p>
+<p>We’ve already used one in R inside <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="cf">function</span>(x) { x<span class="sc">**</span><span class="dv">2</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function(x) { x**2 }</code></pre>
+</div>
+</div>
+<p>in Python you use the <code>lambda</code> keyword:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1"></a><span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;function &lt;lambda&gt; at 0x10711bd30&gt;</code></pre>
+</div>
+</div>
+<p>Before the colon, list the arguments of the function. After the colon, compute the value that the function should return.</p>
+</section></section><section id="applying-python-tricks-to-snakemake" class="level1"><h1>Applying Python tricks to Snakemake</h1>
+<p>TODO: COLLATE THESE WITH python concepts above</p>
+<p>config files get imported as dictionaries</p>
+<p>use f strings all the time</p>
+<p>use lambda functions</p>
+<p>input.name syntax is because of OOP</p>
+<!--
+# topics i wish i had time to cover 
+
+## mutability
+
+## iterables, iterators, generators
+
+## reading & writing files
+
+## classes
+
+i wish i could justify covering classes and object-oriented programming in depth,
+but i'm only going to scratch the surface.
+-->
+</section></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

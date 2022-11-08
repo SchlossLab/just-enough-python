@@ -1,8 +1,388 @@
 ---
-title: "just-enough-python"
+title: "Just Enough Python"
+author: "Kelly Sovacool"
 engine: knitr
 ---
 
-## Quarto
+Snakemake is extra magic on top of Python. If you want to take your Snakemake 
+workflows from beginner to advanced, learning a little Python goes a long way.
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+This is just enough Python to use some cool tricks in your Snakemake workflows.
+
+###  Prereqs
+
+- Basic snakemake knowledge. you've gone through the official tutorial. 
+  maybe you've even tried building your own snakemake workflow.
+- Minimal or no python knowledge outside of what you may have gleaned from the snakemake docs.
+- Basic R experience.
+
+
+## data types
+
+### basic data types
+
+| Python  | R         |
+|---------|-----------|
+| string  | character |
+| integer | integer   |
+| float   | numeric   |
+| boolean | logical   |
+| None    | NULL      |
+
+```{python py-types}
+#| filename: "Python"
+
+# string
+name = "Kelly"
+favorite_color = 'green'
+# float
+height_inches = 64.0
+# int
+num_plants = 14
+# bool
+likes_cats = True
+# none
+invalid = None
+```
+
+```{r r-types}
+#| filename: "R"
+
+# character
+name <- "Kelly"
+favorite_color <- 'green'
+# numeric
+height_inches <- 64
+# integer
+num_plants <- 14L
+# logical
+likes_cats <- TRUE
+# null
+invalid = NULL
+```
+
+#### type casting
+
+```{python type-cast}
+#| filename: "Python"
+int(32.0)
+float(32)
+str(32)
+bool(0)
+bool(1)
+bool(None)
+```
+
+
+### types that contain other types
+
+| Python             | R              |
+|--------------------|----------------|
+| list               | vector (all same type) or list (multiple types) |
+| dictionary         | named list     |
+| dataframe (pandas) | dataframe (base) or tibble (tidyverse) |
+
+#### lists
+
+```{python py-lists}
+#| filename: "Python"
+fruit = ['apple','banana','grape']
+my_list = ['pizza', 'fries', 3, -2.5, 'donuts']
+fruit + my_list
+fruit.append('mango')
+fruit
+```
+
+Indexing is 0-based in Python.
+
+```{python index}
+#| filename: "Python"
+numbers = [1,2,3,4]
+# length
+len(numbers)
+# first item
+numbers[0]
+# last item
+numbers[3]
+numbers[-1]
+```
+
+You can `join` lists to create strings:
+
+```{python join}
+#| filename: "Python"
+','.join(fruit)
+```
+
+
+#### dictionaries
+
+Dictionaries consist of key-value pairs where you use the key to access the value.
+Keys can be strings, integers, floats, or booleans. Values can be anything!
+
+```{python}
+#| filename: "Python"
+foods = {'vegetable': ['carrot', 'eggplant'], 
+         'fruit': 'cherry'}
+foods['fruit']
+```
+
+Dictionaries can be nested:
+
+```{python}
+#| filename: "Python"
+hyperparams = {'glmnet': {'alpha': [0, 0.5, 1],
+                          'lambda': [0.01, 0.1, 0]
+                          },
+                'rf': {'mtry': 500}
+               }
+hyperparams['glmnet']['alpha'][1]
+```
+
+
+## conditionals
+
+Think of conditionals as functions that return booleans.
+Most of the ones you know from R are the same in Python.
+
+| operator | meaning | same in R |
+|----------|---------|-----------|
+| `==`     | equal   | ✅ |
+| `!=`     | not equal | ✅ |
+| `<`      | less than | ✅ |
+| `>`      | greater than | ✅ |
+| `<=`     | less than or equal to | ✅ |
+| `>=`     | greater than or equal to | ✅ |
+| or       | or (inclusive) | `|` |
+| and      | and | `&` |
+
+## if-else statements
+
+No curly braces here! But indentation does matter.
+
+```{python}
+#| filename: "Python"
+if len(my_list) < 10:
+    print("This list is short")
+elif len(my_list) >= 10 and len(my_list) < 15:
+    print("This list is medium length")
+else:
+    print("This list is long!")
+```
+
+Nested if-else blocks
+
+```{python}
+#| filename: "Python"
+num = 1
+if num >= 0:
+    if num == 0:
+        print("zero")
+    else:
+        print("positive")
+else:
+    print("negative")
+```
+
+## for loops
+
+If a variable has a length (i.e. you can run `len(myvar)`), then you can 
+**iterate** over it in a for loop.
+
+```{python}
+#| filename: "Python"
+postdocs = ['Allison Mason', 'Courtney Armour', 'Sarah Lucas']
+for phd in postdocs:
+    print(phd, ", PhD", sep = '')
+```
+
+### range
+
+Use `range` to loop over a range of numbers.
+
+```{python}
+#| filename: "Python"
+num_bottles = 3
+for i in range(1, num_bottles+1):
+    print(i, " bottles of pop on the wall")
+```
+
+
+You can also create lists with the `range` function:
+
+```{python}
+#| filename: "Python"
+mylist = list(range(3))
+```
+
+When you use range with one argument as above, that argument is the value to stop
+_just before_. The stop value is _exclusive_. 
+By default it will start at 0 and step by 1.
+
+Or you can give both the start and stop values:
+
+```{python}
+#| filename: "Python"
+list(range(1, 4))
+```
+
+Or give a start, stop, and step value:
+
+You can even move backward:
+
+You might think it's weird that range stops just _before_ the stop value.
+But it works nicely when you give it the length of the list -- now you have the list indices!
+
+```{python}
+#| filename: "Python"
+for i in range(len(numbers)):
+    print("index", i, "is", numbers[i])
+```
+
+f strings in Python work just like glue() in R
+
+```{python}
+#| filename: "Python"
+print(f"index {i} is {numbers[i]}")
+```
+
+
+### iterate over dictionaries
+
+```{python}
+#| filename: "Python"
+problems = {1: "naming things", 2: "understanding binary", 3: "off-by-one errors"}
+print('There are only 10 hard problems in computer science:')
+for num in problems:
+    print("\t", num, problems[num])
+```
+
+
+### comprehensions
+
+when you want to make a for loop that creates a new list, dictionary, or set,
+use a **comprehension**.
+
+
+#### list comprehension
+
+
+To build a list with a for loop, you can do this
+```{python list-comp-for}
+#| filename: "Python"
+squares = []
+for i in range(4):
+    squares.append(i**2)
+squares
+```
+
+but a list comprehension is much sleeker and performs faster:
+```{python list-comp}
+#| filename: "Python"
+squares = [i**2 for i in range(4)]
+```
+
+this is roughly equivalent to using *apply functions in R:
+
+```{r apply}
+#| filename: "R"
+sapply(0:3, function(x) {x**2})
+```
+
+
+#### dictionary comprehension
+
+```{python}
+#| filename: "Python"
+movies = ['star wars episode V', 'the godfather', 'the dark knight']
+years = [1980, 1972, 2008]
+movie_dict = {}
+for movie, year in zip(movies, years):
+    movie_dict[movie] = year
+movie_dict
+```
+
+
+```{python}
+#| filename: "Python"
+movie_dict = {movie: year for movie, year in zip(movies, years)}
+```
+
+
+## functions
+
+in R: 
+
+```{R r-function}
+#| filename: "R"
+square <- function(x) {
+    return(x^2)
+}
+
+square(2)
+```
+
+in Python:
+
+```{python py-function}
+#| filename: "Python"
+def square(x):
+    return x**2
+
+square(2)
+```
+
+
+### anonymous functions
+
+Sometimes you want to write a simple function that you only use once.
+They're so inconsequential you don't even want to give them a name.
+
+We've already used one in R inside `sapply()`:
+
+```{R r-anon}
+#| filename: "R"
+function(x) { x**2 }
+```
+
+
+in Python you use the `lambda` keyword:
+
+```{python py-anon}
+#| filename: "Python"
+lambda x: x**2
+```
+
+Before the colon, list the arguments of the function.
+After the colon, compute the value that the function should return.
+
+
+
+
+
+# Applying Python tricks to Snakemake 
+TODO: COLLATE THESE WITH python concepts above
+
+config files get imported as dictionaries
+
+use f strings all the time
+
+use lambda functions
+
+input.name syntax is because of OOP
+
+
+<!--
+# topics i wish i had time to cover 
+
+## mutability
+
+## iterables, iterators, generators
+
+## reading & writing files
+
+## classes
+
+i wish i could justify covering classes and object-oriented programming in depth,
+but i'm only going to scratch the surface.
+-->
