@@ -1,6 +1,8 @@
 ---
 title: "Just Enough Python"
 author: "Kelly Sovacool"
+aliases: 
+    - index.html
 engine: knitr
 ---
 
@@ -338,7 +340,7 @@ square(2)
 Sometimes you want to write a simple function that you only use once.
 They're so inconsequential you don't even want to give them a name.
 
-We've already used one in R inside `sapply()`:
+We've already used one in R^[more on anonymous functions here: http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions] inside `sapply()`:
 
 ```{R r-anon}
 #| filename: "R"
