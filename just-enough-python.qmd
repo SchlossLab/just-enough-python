@@ -4,12 +4,20 @@ author: "Kelly Sovacool"
 aliases: 
     - index.html
 engine: knitr
+code-tools:
+    source: https://github.com/SchlossLab/just-enough-python/blob/main/just-enough-python.qmd
+css: custom.css
+toc: true
+format:
+  html:
+    code-line-numbers: true
+    code-link: true
 ---
 
 Snakemake is extra magic on top of Python. If you want to take your Snakemake 
 workflows from beginner to advanced, learning a little Python goes a long way.
 
-This is just enough Python to use some cool tricks in your Snakemake workflows.
+This is just enough Python to understand and apply some cool tricks in your Snakemake workflows.
 
 ###  Prereqs
 
@@ -100,13 +108,10 @@ Indexing is 0-based in Python.
 ```{python index}
 #| filename: "Python"
 numbers = [1,2,3,4]
-# length
-len(numbers)
-# first item
-numbers[0]
-# last item
-numbers[3]
-numbers[-1]
+len(numbers) # length
+numbers[0] # first item
+numbers[3] # last item
+numbers[-1] # last item
 ```
 
 You can `join` lists to create strings:
@@ -127,6 +132,8 @@ Keys can be strings, integers, floats, or booleans. Values can be anything!
 foods = {'vegetable': ['carrot', 'eggplant'], 
          'fruit': 'cherry'}
 foods['fruit']
+foods['vegetable']
+foods['vegetable'][0]
 ```
 
 Dictionaries can be nested:
@@ -136,27 +143,46 @@ Dictionaries can be nested:
 hyperparams = {'glmnet': {'alpha': [0, 0.5, 1],
                           'lambda': [0.01, 0.1, 0]
                           },
-                'rf': {'mtry': 500}
+                'rf': {'mtry': [128, 256, 512]}
                }
 hyperparams['glmnet']['alpha'][1]
 ```
 
 
-## conditionals
+## Conditional operators
 
-Think of conditionals as functions that return booleans.
-Most of the ones you know from R are the same in Python.
+Think of these as functions that return a boolean.
 
-| operator | meaning | same in R |
-|----------|---------|-----------|
-| `==`     | equal   | ✅ |
-| `!=`     | not equal | ✅ |
-| `<`      | less than | ✅ |
-| `>`      | greater than | ✅ |
-| `<=`     | less than or equal to | ✅ |
-| `>=`     | greater than or equal to | ✅ |
-| or       | or (inclusive) | `|` |
-| and      | and | `&` |
+| operator | meaning                  | same in R |
+|----------|--------------------------|-----------|
+| `==`     | equal                    | ✅        |
+| `!=`     | not equal                | ✅        |
+| `<`      | less than                | ✅        |
+| `>`      | greater than             | ✅        |
+| `<=`     | less than or equal to    | ✅        |
+| `>=`     | greater than or equal to | ✅        |
+| or       | or (inclusive)           | `|`       |
+| and      | and                      | `&`       |
+| in       | in                       | `%in%`    |
+| not      | not                      | `!`       |
+
+```{python}
+3 > 2
+```
+
+
+### Boolean operators
+
+These are functions that take two booleans and return one.
+
+| Python | R   |
+|--------|-----|
+
+```{python}
+True or False
+
+```
+
 
 ## if-else statements
 
@@ -359,6 +385,47 @@ Before the colon, list the arguments of the function.
 After the colon, compute the value that the function should return.
 
 
+## object-oriented programming
+
+i wish i could justify covering classes and object-oriented programming in depth,
+but i'm only going to scratch the surface.
+
+Everything in Python is an object. This is also true in R.
+
+You can find out what class an object belongs to in Python with `type()`:
+
+```{python}
+#| filename: "Python"
+type(numbers)
+type(name)
+```
+
+or in R with `class()`:
+
+```{r}
+#| filename: "R"
+class(1:3)
+class(list(1, 2, 3))
+class(name)
+```
+
+
+Objects have attributes and methods. 
+
+- attributes: metadata associated with an object.
+- methods: functions that operate on an object.
+
+Different classes have different attributes and methods.
+
+lists have methods that can modify them in place
+```{python}
+#| filename: "Python"
+print(numbers)
+numbers.append(5)
+numbers.reverse()
+print(numbers)
+```
+
 
 
 
@@ -382,9 +449,8 @@ input.name syntax is because of OOP
 ## iterables, iterators, generators
 
 ## reading & writing files
-
-## classes
-
-i wish i could justify covering classes and object-oriented programming in depth,
-but i'm only going to scratch the surface.
 -->
+
+# Resources
+
+- The Python docs: https://docs.python.org/3/

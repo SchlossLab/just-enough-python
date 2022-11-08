@@ -1,14 +1,3 @@
 project:
   title: "just-enough-python"
   output-dir: docs/
-
-toc: true
-format:
-  html:
-    code-line-numbers: true
-    code-link: true
-    code-tools:
-      source: https://github.com/SchlossLab/just-enough-python/blob/main/just-enough-python.qmd
-
-
-

@@ -92,7 +92,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="just-enough-python_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="just-enough-python_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="just-enough-python_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="just-enough-python_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="just-enough-python_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><link rel="stylesheet" href="custom.css">
 </head>
 <body>
 
@@ -109,7 +109,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#types-that-contain-other-types" id="toc-types-that-contain-other-types" class="nav-link" data-scroll-target="#types-that-contain-other-types">types that contain other types</a></li>
   </ul>
 </li>
-  <li><a href="#conditionals" id="toc-conditionals" class="nav-link" data-scroll-target="#conditionals">conditionals</a></li>
+  <li>
+<a href="#conditional-operators" id="toc-conditional-operators" class="nav-link" data-scroll-target="#conditional-operators">Conditional operators</a>
+  <ul class="collapse">
+<li><a href="#boolean-operators" id="toc-boolean-operators" class="nav-link" data-scroll-target="#boolean-operators">Boolean operators</a></li>
+  </ul>
+</li>
   <li><a href="#if-else-statements" id="toc-if-else-statements" class="nav-link" data-scroll-target="#if-else-statements">if-else statements</a></li>
   <li>
 <a href="#for-loops" id="toc-for-loops" class="nav-link" data-scroll-target="#for-loops">for loops</a>
@@ -125,7 +130,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#anonymous-functions" id="toc-anonymous-functions" class="nav-link" data-scroll-target="#anonymous-functions">anonymous functions</a></li>
   </ul>
 </li>
+  <li><a href="#object-oriented-programming" id="toc-object-oriented-programming" class="nav-link" data-scroll-target="#object-oriented-programming">object-oriented programming</a></li>
   <li><a href="#applying-python-tricks-to-snakemake" id="toc-applying-python-tricks-to-snakemake" class="nav-link" data-scroll-target="#applying-python-tricks-to-snakemake">Applying Python tricks to Snakemake</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul></nav>
 </div>
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -148,7 +155,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
 
 </header><p>Snakemake is extra magic on top of Python. If you want to take your Snakemake workflows from beginner to advanced, learning a little Python goes a long way.</p>
-<p>This is just enough Python to use some cool tricks in your Snakemake workflows.</p>
+<p>This is just enough Python to understand and apply some cool tricks in your Snakemake workflows.</p>
 <section id="prereqs" class="level3"><h3 class="anchored" data-anchor-id="prereqs">Prereqs</h3>
 <ul>
 <li>Basic snakemake knowledge. you’ve gone through the official tutorial. maybe you’ve even tried building your own snakemake workflow.</li>
@@ -299,23 +306,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><strong>Python</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]</span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="co"># length</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="bu">len</span>(numbers)</span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># first item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="bu">len</span>(numbers) <span class="co"># length</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>numbers[<span class="dv">0</span>]</span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="co"># last item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>numbers[<span class="dv">0</span>] <span class="co"># first item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>numbers[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>numbers[<span class="dv">3</span>] <span class="co"># last item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>numbers[<span class="op">-</span><span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>numbers[<span class="op">-</span><span class="dv">1</span>] <span class="co"># last item</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>4</code></pre>
 </div>
@@ -346,6 +350,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>'cherry'</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a>foods[<span class="st">'vegetable'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['carrot', 'eggplant']</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a>foods[<span class="st">'vegetable'</span>][<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'carrot'</code></pre>
+</div>
 </div>
 <p>Dictionaries can be nested:</p>
 <div class="cell">
@@ -353,19 +365,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a>hyperparams <span class="op">=</span> {<span class="st">'glmnet'</span>: {<span class="st">'alpha'</span>: [<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>],</span>
-<span id="cb31-2"><a href="#cb31-2"></a>                          <span class="st">'lambda'</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">0</span>]</span>
-<span id="cb31-3"><a href="#cb31-3"></a>                          },</span>
-<span id="cb31-4"><a href="#cb31-4"></a>                <span class="st">'rf'</span>: {<span class="st">'mtry'</span>: <span class="dv">500</span>}</span>
-<span id="cb31-5"><a href="#cb31-5"></a>               }</span>
-<span id="cb31-6"><a href="#cb31-6"></a>hyperparams[<span class="st">'glmnet'</span>][<span class="st">'alpha'</span>][<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a>hyperparams <span class="op">=</span> {<span class="st">'glmnet'</span>: {<span class="st">'alpha'</span>: [<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>],</span>
+<span id="cb35-2"><a href="#cb35-2"></a>                          <span class="st">'lambda'</span>: [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">0</span>]</span>
+<span id="cb35-3"><a href="#cb35-3"></a>                          },</span>
+<span id="cb35-4"><a href="#cb35-4"></a>                <span class="st">'rf'</span>: {<span class="st">'mtry'</span>: [<span class="dv">128</span>, <span class="dv">256</span>, <span class="dv">512</span>]}</span>
+<span id="cb35-5"><a href="#cb35-5"></a>               }</span>
+<span id="cb35-6"><a href="#cb35-6"></a>hyperparams[<span class="st">'glmnet'</span>][<span class="st">'alpha'</span>][<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.5</code></pre>
 </div>
 </div>
-</section></section></section><section id="conditionals" class="level2"><h2 class="anchored" data-anchor-id="conditionals">conditionals</h2>
-<p>Think of conditionals as functions that return booleans. Most of the ones you know from R are the same in Python.</p>
+</section></section></section><section id="conditional-operators" class="level2"><h2 class="anchored" data-anchor-id="conditional-operators">Conditional operators</h2>
+<p>Think of these as functions that return a boolean.</p>
 <table class="table">
 <thead><tr class="header">
 <th>operator</th>
@@ -413,20 +425,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td>and</td>
 <td><code>&amp;</code></td>
 </tr>
+<tr class="odd">
+<td>in</td>
+<td>in</td>
+<td><code>%in%</code></td>
+</tr>
+<tr class="even">
+<td>not</td>
+<td>not</td>
+<td><code>!</code></td>
+</tr>
 </tbody>
-</table></section><section id="if-else-statements" class="level2"><h2 class="anchored" data-anchor-id="if-else-statements">if-else statements</h2>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="dv">3</span> <span class="op">&gt;</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+</div>
+<section id="boolean-operators" class="level3"><h3 class="anchored" data-anchor-id="boolean-operators">Boolean operators</h3>
+<p>These are functions that take two booleans and return one.</p>
+<table>
+<thead><tr class="header">
+<th>Python</th>
+<th>R</th>
+</tr></thead>
+<tbody></tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a><span class="va">True</span> <span class="kw">or</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+</div>
+</section></section><section id="if-else-statements" class="level2"><h2 class="anchored" data-anchor-id="if-else-statements">if-else statements</h2>
 <p>No curly braces here! But indentation does matter.</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="cf">if</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">10</span>:</span>
-<span id="cb33-2"><a href="#cb33-2"></a>    <span class="bu">print</span>(<span class="st">"This list is short"</span>)</span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="cf">elif</span> <span class="bu">len</span>(my_list) <span class="op">&gt;=</span> <span class="dv">10</span> <span class="kw">and</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">15</span>:</span>
-<span id="cb33-4"><a href="#cb33-4"></a>    <span class="bu">print</span>(<span class="st">"This list is medium length"</span>)</span>
-<span id="cb33-5"><a href="#cb33-5"></a><span class="cf">else</span>:</span>
-<span id="cb33-6"><a href="#cb33-6"></a>    <span class="bu">print</span>(<span class="st">"This list is long!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a><span class="cf">if</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">10</span>:</span>
+<span id="cb41-2"><a href="#cb41-2"></a>    <span class="bu">print</span>(<span class="st">"This list is short"</span>)</span>
+<span id="cb41-3"><a href="#cb41-3"></a><span class="cf">elif</span> <span class="bu">len</span>(my_list) <span class="op">&gt;=</span> <span class="dv">10</span> <span class="kw">and</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">15</span>:</span>
+<span id="cb41-4"><a href="#cb41-4"></a>    <span class="bu">print</span>(<span class="st">"This list is medium length"</span>)</span>
+<span id="cb41-5"><a href="#cb41-5"></a><span class="cf">else</span>:</span>
+<span id="cb41-6"><a href="#cb41-6"></a>    <span class="bu">print</span>(<span class="st">"This list is long!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>This list is short</code></pre>
@@ -438,14 +482,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a>num <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a><span class="cf">if</span> num <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
-<span id="cb35-3"><a href="#cb35-3"></a>    <span class="cf">if</span> num <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb35-4"><a href="#cb35-4"></a>        <span class="bu">print</span>(<span class="st">"zero"</span>)</span>
-<span id="cb35-5"><a href="#cb35-5"></a>    <span class="cf">else</span>:</span>
-<span id="cb35-6"><a href="#cb35-6"></a>        <span class="bu">print</span>(<span class="st">"positive"</span>)</span>
-<span id="cb35-7"><a href="#cb35-7"></a><span class="cf">else</span>:</span>
-<span id="cb35-8"><a href="#cb35-8"></a>    <span class="bu">print</span>(<span class="st">"negative"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a>num <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a><span class="cf">if</span> num <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
+<span id="cb43-3"><a href="#cb43-3"></a>    <span class="cf">if</span> num <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb43-4"><a href="#cb43-4"></a>        <span class="bu">print</span>(<span class="st">"zero"</span>)</span>
+<span id="cb43-5"><a href="#cb43-5"></a>    <span class="cf">else</span>:</span>
+<span id="cb43-6"><a href="#cb43-6"></a>        <span class="bu">print</span>(<span class="st">"positive"</span>)</span>
+<span id="cb43-7"><a href="#cb43-7"></a><span class="cf">else</span>:</span>
+<span id="cb43-8"><a href="#cb43-8"></a>    <span class="bu">print</span>(<span class="st">"negative"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>positive</code></pre>
@@ -458,9 +502,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a>postdocs <span class="op">=</span> [<span class="st">'Allison Mason'</span>, <span class="st">'Courtney Armour'</span>, <span class="st">'Sarah Lucas'</span>]</span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="cf">for</span> phd <span class="kw">in</span> postdocs:</span>
-<span id="cb37-3"><a href="#cb37-3"></a>    <span class="bu">print</span>(phd, <span class="st">", PhD"</span>, sep <span class="op">=</span> <span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a>postdocs <span class="op">=</span> [<span class="st">'Allison Mason'</span>, <span class="st">'Courtney Armour'</span>, <span class="st">'Sarah Lucas'</span>]</span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="cf">for</span> phd <span class="kw">in</span> postdocs:</span>
+<span id="cb45-3"><a href="#cb45-3"></a>    <span class="bu">print</span>(phd, <span class="st">", PhD"</span>, sep <span class="op">=</span> <span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Allison Mason, PhD
@@ -475,9 +519,9 @@ Sarah Lucas, PhD</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a>num_bottles <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, num_bottles<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb39-3"><a href="#cb39-3"></a>    <span class="bu">print</span>(i, <span class="st">" bottles of pop on the wall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a>num_bottles <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, num_bottles<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb47-3"><a href="#cb47-3"></a>    <span class="bu">print</span>(i, <span class="st">" bottles of pop on the wall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1  bottles of pop on the wall
@@ -491,7 +535,7 @@ Sarah Lucas, PhD</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a>mylist <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a>mylist <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>When you use range with one argument as above, that argument is the value to stop <em>just before</em>. The stop value is <em>exclusive</em>. By default it will start at 0 and step by 1.</p>
@@ -501,7 +545,7 @@ Sarah Lucas, PhD</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a><span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a><span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1, 2, 3]</code></pre>
@@ -515,8 +559,8 @@ Sarah Lucas, PhD</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(numbers)):</span>
-<span id="cb44-2"><a href="#cb44-2"></a>    <span class="bu">print</span>(<span class="st">"index"</span>, i, <span class="st">"is"</span>, numbers[i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(numbers)):</span>
+<span id="cb52-2"><a href="#cb52-2"></a>    <span class="bu">print</span>(<span class="st">"index"</span>, i, <span class="st">"is"</span>, numbers[i])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>index 0 is 1
@@ -531,7 +575,7 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1"></a><span class="bu">print</span>(<span class="ss">f"index </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>numbers[i]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a><span class="bu">print</span>(<span class="ss">f"index </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>numbers[i]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>index 3 is 4</code></pre>
@@ -543,14 +587,14 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a>problems <span class="op">=</span> {<span class="dv">1</span>: <span class="st">"naming things"</span>, <span class="dv">2</span>: <span class="st">"understanding binary"</span>, <span class="dv">3</span>: <span class="st">"off-by-one errors"</span>}</span>
-<span id="cb48-2"><a href="#cb48-2"></a><span class="bu">print</span>(<span class="st">'There are only 10 hard problems in computer science:'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>problems <span class="op">=</span> {<span class="dv">1</span>: <span class="st">"naming things"</span>, <span class="dv">2</span>: <span class="st">"understanding binary"</span>, <span class="dv">3</span>: <span class="st">"off-by-one errors"</span>}</span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="bu">print</span>(<span class="st">'There are only 10 hard problems in computer science:'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>There are only 10 hard problems in computer science:</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a><span class="cf">for</span> num <span class="kw">in</span> problems:</span>
-<span id="cb50-2"><a href="#cb50-2"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, num, problems[num])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a><span class="cf">for</span> num <span class="kw">in</span> problems:</span>
+<span id="cb58-2"><a href="#cb58-2"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, num, problems[num])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     1 naming things
      2 understanding binary
@@ -566,10 +610,10 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>squares <span class="op">=</span> []</span>
-<span id="cb52-2"><a href="#cb52-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
-<span id="cb52-3"><a href="#cb52-3"></a>    squares.append(i<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb52-4"><a href="#cb52-4"></a>squares</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1"></a>squares <span class="op">=</span> []</span>
+<span id="cb60-2"><a href="#cb60-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
+<span id="cb60-3"><a href="#cb60-3"></a>    squares.append(i<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb60-4"><a href="#cb60-4"></a>squares</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[0, 1, 4, 9]</code></pre>
@@ -581,7 +625,7 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a>squares <span class="op">=</span> [i<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a>squares <span class="op">=</span> [i<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>this is roughly equivalent to using *apply functions in R:</p>
@@ -590,7 +634,7 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">sapply</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, <span class="cf">function</span>(x) {x<span class="sc">**</span><span class="dv">2</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fu">sapply</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, <span class="cf">function</span>(x) {x<span class="sc">**</span><span class="dv">2</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0 1 4 9</code></pre>
@@ -602,12 +646,12 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a>movies <span class="op">=</span> [<span class="st">'star wars episode V'</span>, <span class="st">'the godfather'</span>, <span class="st">'the dark knight'</span>]</span>
-<span id="cb57-2"><a href="#cb57-2"></a>years <span class="op">=</span> [<span class="dv">1980</span>, <span class="dv">1972</span>, <span class="dv">2008</span>]</span>
-<span id="cb57-3"><a href="#cb57-3"></a>movie_dict <span class="op">=</span> {}</span>
-<span id="cb57-4"><a href="#cb57-4"></a><span class="cf">for</span> movie, year <span class="kw">in</span> <span class="bu">zip</span>(movies, years):</span>
-<span id="cb57-5"><a href="#cb57-5"></a>    movie_dict[movie] <span class="op">=</span> year</span>
-<span id="cb57-6"><a href="#cb57-6"></a>movie_dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1"></a>movies <span class="op">=</span> [<span class="st">'star wars episode V'</span>, <span class="st">'the godfather'</span>, <span class="st">'the dark knight'</span>]</span>
+<span id="cb65-2"><a href="#cb65-2"></a>years <span class="op">=</span> [<span class="dv">1980</span>, <span class="dv">1972</span>, <span class="dv">2008</span>]</span>
+<span id="cb65-3"><a href="#cb65-3"></a>movie_dict <span class="op">=</span> {}</span>
+<span id="cb65-4"><a href="#cb65-4"></a><span class="cf">for</span> movie, year <span class="kw">in</span> <span class="bu">zip</span>(movies, years):</span>
+<span id="cb65-5"><a href="#cb65-5"></a>    movie_dict[movie] <span class="op">=</span> year</span>
+<span id="cb65-6"><a href="#cb65-6"></a>movie_dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{'star wars episode V': 1980, 'the godfather': 1972, 'the dark knight': 2008}</code></pre>
@@ -618,7 +662,7 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a>movie_dict <span class="op">=</span> {movie: year <span class="cf">for</span> movie, year <span class="kw">in</span> <span class="bu">zip</span>(movies, years)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1"></a>movie_dict <span class="op">=</span> {movie: year <span class="cf">for</span> movie, year <span class="kw">in</span> <span class="bu">zip</span>(movies, years)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section></section></section><section id="functions" class="level2"><h2 class="anchored" data-anchor-id="functions">functions</h2>
@@ -628,11 +672,11 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>square <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb60-2"><a href="#cb60-2"></a>    <span class="fu">return</span>(x<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb60-3"><a href="#cb60-3"></a>}</span>
-<span id="cb60-4"><a href="#cb60-4"></a></span>
-<span id="cb60-5"><a href="#cb60-5"></a><span class="fu">square</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>square <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb68-2"><a href="#cb68-2"></a>    <span class="fu">return</span>(x<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb68-3"><a href="#cb68-3"></a>}</span>
+<span id="cb68-4"><a href="#cb68-4"></a></span>
+<span id="cb68-5"><a href="#cb68-5"></a><span class="fu">square</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
@@ -644,10 +688,10 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">def</span> square(x):</span>
-<span id="cb62-2"><a href="#cb62-2"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb62-3"><a href="#cb62-3"></a></span>
-<span id="cb62-4"><a href="#cb62-4"></a>square(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">def</span> square(x):</span>
+<span id="cb70-2"><a href="#cb70-2"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb70-3"><a href="#cb70-3"></a></span>
+<span id="cb70-4"><a href="#cb70-4"></a>square(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>4</code></pre>
@@ -661,7 +705,7 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="cf">function</span>(x) { x<span class="sc">**</span><span class="dv">2</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="cf">function</span>(x) { x<span class="sc">**</span><span class="dv">2</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function(x) { x**2 }</code></pre>
@@ -673,14 +717,77 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1"></a><span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1"></a><span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;function &lt;lambda&gt; at 0x10a09fd30&gt;</code></pre>
+<pre><code>&lt;function &lt;lambda&gt; at 0x1130b2ca0&gt;</code></pre>
 </div>
 </div>
 <p>Before the colon, list the arguments of the function. After the colon, compute the value that the function should return.</p>
-</section></section><section id="applying-python-tricks-to-snakemake" class="level1"><h1>Applying Python tricks to Snakemake</h1>
+</section></section><section id="object-oriented-programming" class="level2"><h2 class="anchored" data-anchor-id="object-oriented-programming">object-oriented programming</h2>
+<p>i wish i could justify covering classes and object-oriented programming in depth, but i’m only going to scratch the surface.</p>
+<p>Everything in Python is an object. This is also true in R.</p>
+<p>You can find out what class an object belongs to in Python with <code>type()</code>:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1"></a><span class="bu">type</span>(numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'list'&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1"></a><span class="bu">type</span>(name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'str'&gt;</code></pre>
+</div>
+</div>
+<p>or in R with <code><a href="https://rdrr.io/r/base/class.html">class()</a></code>:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>R</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a><span class="fu">class</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a><span class="fu">class</span>(<span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="fu">class</span>(name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+<p>Objects have attributes and methods.</p>
+<ul>
+<li>attributes: metadata associated with an object.</li>
+<li>methods: functions that operate on an object.</li>
+</ul>
+<p>Different classes have different attributes and methods.</p>
+<p>lists have methods that can modify them in place</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1"></a><span class="bu">print</span>(numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1, 2, 3, 4]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1"></a>numbers.append(<span class="dv">5</span>)</span>
+<span id="cb88-2"><a href="#cb88-2"></a>numbers.reverse()</span>
+<span id="cb88-3"><a href="#cb88-3"></a><span class="bu">print</span>(numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[5, 4, 3, 2, 1]</code></pre>
+</div>
+</div>
+</section><section id="applying-python-tricks-to-snakemake" class="level1"><h1>Applying Python tricks to Snakemake</h1>
 <p>TODO: COLLATE THESE WITH python concepts above</p>
 <p>config files get imported as dictionaries</p>
 <p>use f strings all the time</p>
@@ -694,13 +801,11 @@ index 3 is 4</code></pre>
 ## iterables, iterators, generators
 
 ## reading & writing files
-
-## classes
-
-i wish i could justify covering classes and object-oriented programming in depth,
-but i'm only going to scratch the surface.
 -->
-</section><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+</section><section id="resources" class="level1"><h1>Resources</h1>
+<ul>
+<li>The Python docs: https://docs.python.org/3/</li>
+</ul></section><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 <ol>
 <li id="fn1"><p>more on anonymous functions here: http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></div></main><!-- /main column --><script id="quarto-html-after-body" type="application/javascript">
