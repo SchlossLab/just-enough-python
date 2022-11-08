@@ -20,7 +20,7 @@ jobs:
       - uses: quarto-dev/quarto-actions/setup@v2
       - run: |
           quarto --version
-          R -e "install.packages('rmarkdown')"
+          R -e "install.packages(c('rmarkdown', 'reticulate'))"
       - name: git config
         run: |
           git config --local user.email "noreply@github.com"
