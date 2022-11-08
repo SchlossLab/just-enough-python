@@ -1,0 +1,33 @@
+name: build
+
+on: 
+  push:
+    - just-enough-quarto.qmd
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          persist-credentials: false
+          fetch-depth: 0
+      - name: git config
+        run: |
+          git config --local user.email "noreply@github.com"
+          git config --local user.name "GitHub"
+      - name: fast forward
+        run: |
+          echo "the tag is ${{ github.ref_name }}"
+          git merge --ff-only ${{ github.ref_name }}
+      - uses: quarto-dev/quarto-actions/setup@v2
+      - run: |
+          quarto --version
+      - uses: quarto-dev/quarto-actions/render@v2
+      - name: git commit
+        run: |
+          git checkout docs/index.html
+          git add .
+          git commit -m "📄 Render quarto project"
+          git push
