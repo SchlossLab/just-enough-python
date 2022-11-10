@@ -1,6 +1,11 @@
 ---
 title: "Just Enough Python"
+subtitle: "for writing advanced Snakemake workflows"
+title-block-banner: true
+title-block-style: default
 author: "Kelly Sovacool"
+date: 2022-11-14
+date-format: iso
 aliases: 
     - index.html
 engine: knitr
@@ -8,19 +13,22 @@ code-tools:
     source: https://github.com/SchlossLab/just-enough-python/blob/main/just-enough-python.qmd
 css: custom.css
 toc: true
+toc-depth: 5
+theme: default
 format:
   html:
     code-line-numbers: true
     code-link: true
 ---
 
-Snakemake is extra magic on top of Python. If you want to take your Snakemake 
-workflows from beginner to advanced, learning a little Python goes a long way.
+Snakemake is a workflow management tool implemented as extra magic on top of Python. 
+If you want to take your Snakemake workflows from beginner to advanced, 
+learning a little Python goes a long way.
 
 This is just enough Python to understand and apply some cool tricks in your Snakemake workflows.
 
 
-###  Prereqs
+#####  prereqs
 
 - Basic snakemake knowledge. you've gone through the official tutorial. 
   maybe you've even tried building your own snakemake workflow.
@@ -28,7 +36,7 @@ This is just enough Python to understand and apply some cool tricks in your Snak
 - Basic R experience.
 
 
-## Variables
+## variables
 
 ### basic data types
 
@@ -134,11 +142,15 @@ This is equivalent to:
 
 ```{R}
 #| filename: "R"
+firstname <- "Marie"
+lastname <- "Curie"
+middle_init <- 'S'
+prefix <- "Madame"
 glue::glue("{prefix} {firstname} {middle_init}. {lastname}")
 ```
 
 
-### types that contain other types
+### container types
 
 | Python             | R              |
 |--------------------|----------------|
@@ -227,7 +239,7 @@ rule trail_ml_model:
 
 You can improve this by creating a configuration file in YAML format:
 
-```{YAML}
+```{R}
 #| filename: "config/default.yml"
 #| eval: false
 dataset: 'OTU'
@@ -286,7 +298,7 @@ total                 1              1              1
 Now you can change the values of these variables by editing the config file,
 or by creating multiple config files and specifying them on the command line:
 
-```{YAML}
+```{R}
 #| filename: "config/genus.yml"
 #| eval: false
 dataset: 'genus'
@@ -708,7 +720,7 @@ filename.split('.')[0]
 ```
 
 
-## Packages
+## packages
 
 Using packages works a little differently between R and Python.
 
@@ -736,7 +748,7 @@ tibble(a = 1:5, b = 6:10) %>%
 In Python, you must `import` a package before you can use anything from it and
 reference the package name like this:
 
-```{Python import-pkg}
+```{python import-pkg}
 #| filename: Python script
 #| eval: false
 import pandas
@@ -747,7 +759,7 @@ You can give a package a nickname to cut down on the characters you have to type
 `pandas` is often renamed to `pd`:
 
 
-```{Python import-pkg-pd}
+```{python import-pkg-pd}
 #| filename: Python script
 #| eval: false
 import pandas as pd
@@ -756,7 +768,7 @@ DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
 
 Alternatively, you can choose to import only the functions you want to use from a package:
 
-```{Python import-pkg-dataframe}
+```{python import-pkg-dataframe}
 #| filename: Python script
 #| eval: false
 from pandas import DataFrame
