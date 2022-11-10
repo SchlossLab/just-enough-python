@@ -1,24 +1,9 @@
 ---
 title: "Just Enough Python"
 subtitle: "for writing advanced Snakemake workflows"
-title-block-banner: true
-title-block-style: default
-author: "Kelly Sovacool"
-date: 2022-11-14
-date-format: iso
 aliases: 
     - index.html
 engine: knitr
-code-tools:
-    source: https://github.com/SchlossLab/just-enough-python/blob/main/just-enough-python.qmd
-css: custom.css
-toc: true
-toc-depth: 5
-theme: default
-format:
-  html:
-    code-line-numbers: true
-    code-link: true
 ---
 
 Snakemake is a workflow management tool implemented as extra magic on top of Python. 
@@ -663,6 +648,7 @@ lambda x: x**2
 Before the colon, list the arguments of the function.
 After the colon, compute the value that the function should return.
 
+TODO demonstrate use in Snakemake workflow
 
 ## object-oriented programming
 
@@ -707,11 +693,13 @@ numbers.reverse()
 print(numbers)
 ```
 
-Strings can't be modified in place, but you can  methods
+Strings can't be modified in place, but you can 
+
+ methods
 
 join
 split
-
+TODO
 
 ```{python}
 filename = "path/to/file.txt"
@@ -719,90 +707,18 @@ filename.split('.')
 filename.split('.')[0]
 ```
 
+TODO explain how this works in Snakemake input/output/params etc
 
-## packages
+# Recap
 
-Using packages works a little differently between R and Python.
+**Snakemake concepts covered**
 
-In R, you can refer to a function from any package you have installed with double colons:
+- Use f-Strings for readable string formatting.
+- Config files are imported as dictionaries and allow you to change workflow parameters without modifying code.
+- Lambda functions help define Snakemake input files and parameters based on output files and wildcards.
+- Take advantage of object-oriented programming to DRY your code by referencing output files from other rules.
 
-```{R pkg-syntax}
-#| filename: R script
-#| eval: false
-dplyr::tibble(a = 1:3, b = 4:6)
-```
+# Resources {.appendix}
 
-Alternatively, you can first load the package at the top of your script so you
-can call the functions you want to use without specifying the package name every
-time you use them.
-
-```{R library}
-#| filename: R script
-#| eval: false
-library(dplyr)
-tibble(a = 1:5, b = 6:10) %>%
-    filter(a > 3)
-```
-
-
-In Python, you must `import` a package before you can use anything from it and
-reference the package name like this:
-
-```{python import-pkg}
-#| filename: Python script
-#| eval: false
-import pandas
-pandas.DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
-```
-
-You can give a package a nickname to cut down on the characters you have to type.
-`pandas` is often renamed to `pd`:
-
-
-```{python import-pkg-pd}
-#| filename: Python script
-#| eval: false
-import pandas as pd
-DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
-```
-
-Alternatively, you can choose to import only the functions you want to use from a package:
-
-```{python import-pkg-dataframe}
-#| filename: Python script
-#| eval: false
-from pandas import DataFrame
-DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
-```
-
-<!--
-# topics i wish i had time to cover 
-
-## mutability
-
-## iterables, iterators, generators
-
-## reading & writing files
--->
-
-
-# Applying Python tricks to Snakemake 
-TODO: COLLATE THESE WITH python concepts above
-
-config files get imported as dictionaries
-
-use f-Strings all the time
-
-use lambda functions
-
-input.name syntax is because of OOP
-
-# Recap: Snakemake concepts covered
-
-- Use f-Strings for pretty string formatting.
-- Config files are imported as dictionaries. 
-
-
-# Resources
-
-- The Python docs: <https://docs.python.org/3/>
+- [Just A Little More Python](just-a-little-more-python.qmd): topics I wish I had time to cover in this tutorial.
+- [The Python docs](https://docs.python.org/3/)

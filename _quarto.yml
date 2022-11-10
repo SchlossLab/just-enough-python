@@ -1,3 +1,27 @@
 project:
+  type: website
   title: "just-enough-python"
   output-dir: docs/
+
+website:
+  repo-url: https://github.com/SchlossLab/just-enough-python/
+  repo-actions: [edit, issue]
+  navbar:
+    search: true
+    left:
+      - text: "Home"
+        file: just-enough-python.qmd
+
+title-block-banner: true
+title-block-style: default
+author: "Kelly Sovacool"
+date: 2022-11-14
+date-format: iso
+css: custom.css
+toc: true
+toc-depth: 5
+theme: default
+format:
+  html:
+    code-line-numbers: true
+    code-link: true

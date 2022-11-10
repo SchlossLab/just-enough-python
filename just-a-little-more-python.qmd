@@ -1,0 +1,72 @@
+---
+title: "Just A Little More Python"
+subtitle: "than what I could cover in Just Enough Python"
+engine: knitr
+---
+
+I wish I had time to cover everything in-depth, but then I'd have to change the 
+title from "[Just Enough Python](just-enough-python.qmd)" to "Way More Python 
+Than We Could Possibly Cover In An Hour". 
+So as a compromise, here's just a little more Python.
+
+<!--
+# topics i wish i had time to cover 
+## mutability
+## iterables, iterators, generators
+## reading & writing files
+-->
+
+## packages
+
+Using packages works a little differently between R and Python.
+
+In R, you can refer to a function from any package you have installed with double colons:
+
+```{R pkg-syntax}
+#| filename: R script
+#| eval: false
+dplyr::tibble(a = 1:3, b = 4:6)
+```
+
+Alternatively, you can first load the package at the top of your script so you
+can call the functions you want to use without specifying the package name every
+time you use them.
+
+```{R library}
+#| filename: R script
+#| eval: false
+library(dplyr)
+tibble(a = 1:5, b = 6:10) %>%
+    filter(a > 3)
+```
+
+
+In Python, you must `import` a package before you can use anything from it and
+reference the package name like this:
+
+```{python import-pkg}
+#| filename: Python script
+#| eval: false
+import pandas
+pandas.DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
+```
+
+You can give a package a nickname to cut down on the characters you have to type.
+`pandas` is often renamed to `pd`:
+
+
+```{python import-pkg-pd}
+#| filename: Python script
+#| eval: false
+import pandas as pd
+DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
+```
+
+Alternatively, you can choose to import only the functions you want to use from a package:
+
+```{python import-pkg-dataframe}
+#| filename: Python script
+#| eval: false
+from pandas import DataFrame
+DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
+```
