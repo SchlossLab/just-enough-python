@@ -20,7 +20,7 @@ jobs:
       - uses: quarto-dev/quarto-actions/setup@v2
       - run: |
           quarto --version
-          R -e "install.packages(c('rmarkdown', 'reticulate'))"
+          R -e "install.packages(c('rmarkdown', 'reticulate', 'glue'))"
       - name: fast forward
         run: |
           git merge --ff-only origin/main

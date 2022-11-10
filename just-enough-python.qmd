@@ -84,7 +84,7 @@ bool(1)
 bool(None)
 ```
 
-### Naming variables
+#### Naming variables
 
 Biggest difference between R and Python: no dots are allowed in Python variable names.
 All other rules from R apply. Python variable names must start with an alphabetic character and they can contain alphanumeric characters and underscores.
@@ -93,8 +93,48 @@ Just like in R, it is a good idea not to name a variable the same thing as a
 reserved keyword or global function.
 
 ```{python}
-#| filename: Python keywords
+#| filename: "Python keywords"
 help("keywords")
+```
+
+#### formatting strings
+
+You can add strings together to build new ones like this:
+
+```{python}
+#| filename: "Python"
+firstname = "Marie"
+lastname = "Curie"
+middle_init = 'S'
+prefix = "Madame"
+
+fullname = prefix + " " + firstname + " " + middle_init + ". " + lastname
+print(fullname)
+```
+
+The print function takes any number of arguments and will insert a space between
+items by default:
+
+```{python}
+#| filename: "Python"
+print(prefix, firstname, middle_init + ".", lastname)
+```
+
+But there's a better way!
+
+**f-Strings** in Python work just like `glue()` in R, where curly braces in the 
+string are interpreted as code. They're much easier to read & write:
+
+```{python}
+#| filename: "Python"
+f"{prefix} {firstname} {middle_init}. {lastname}"
+```
+
+This is equivalent to:
+
+```{R}
+#| filename: "R"
+glue::glue("{prefix} {firstname} {middle_init}. {lastname}")
 ```
 
 
@@ -118,6 +158,8 @@ fruit
 ```
 
 Indexing is 0-based in Python.
+You might find 0-based indexing unintuitive if you're used to working in 
+languages like R that use 1-based indexing.
 
 ```{python index}
 #| filename: "Python"
@@ -126,13 +168,6 @@ len(numbers) # length
 numbers[0] # first item
 numbers[3] # last item
 numbers[-1] # last item
-```
-
-You can `join` lists to create strings:
-
-```{python join}
-#| filename: "Python"
-','.join(fruit)
 ```
 
 
@@ -155,7 +190,7 @@ Dictionaries can be nested:
 ```{python}
 #| filename: "Python"
 hyperparams = {'glmnet': {'alpha': [0, 0.5, 1],
-                          'lambda': [0.01, 0.1, 0]
+                          'lambda': [0.01, 0.1, 0, 1]
                           },
                 'rf': {'mtry': [128, 256, 512]}
                }
@@ -164,8 +199,120 @@ hyperparams['glmnet']['alpha'][1]
 
 ##### Snakemake config
 
-Snakemake parses your YAML config files to dictionaries.
-You 
+Say you have a Snakemake workflow for training machine learning models.
+You want to be able to specify different datasets, ML methods, and random seeds, so 
+you use f-Strings to fill in these variables:
+
+```{python}
+#| filename: "Snakefile"
+#| eval: false
+dataset = "OTU"
+method = "rf"
+seed = 1001
+
+rule trail_ml_model:
+    input:
+        R="workflow/scripts/train_ml.R",
+        csv=f"data/{dataset}.csv"
+    output:
+        model=f"results/{dataset}/runs/{method}_{seed}_model.Rds"
+    script:
+        "scripts/train_ml.R"
+```
+
+You can improve this by creating a configuration file in YAML format:
+
+```{YAML}
+#| filename: "config/default.yml"
+#| eval: false
+dataset: 'OTU'
+method: 'rf'
+seed: 1001
+```
+
+Then specify your config file at the top of your Snakefile.
+Snakemake parses your YAML config files to a dictionary called `config`.
+
+```{python}
+#| filename: "Snakefile"
+#| eval: false
+configfile: "config/default.yml"
+
+dataset = config["dataset"]
+method = config['rf']
+seed = config['seed']
+
+rule trail_ml_model:
+    input:
+        R="workflow/scripts/train_ml.R",
+        csv=f"data/{dataset}.csv"
+    output:
+        model=f"results/{dataset}/runs/{method}_{seed}_model.Rds"
+    script:
+        "scripts/train_ml.R"
+```
+
+
+When you run this workflow, it uses `config/default.yml` by default:
+
+```{bash}
+#| filename: sh
+#| eval: false
+snakemake --configfile config/test.yml
+```
+
+```{bash}
+#| eval: false
+rule trail_ml_model:
+    input: workflow/scripts/train_ml.R, data/OTU.csv
+    output: results/OTU/runs/rf_1001_model.Rds
+    jobid: 0
+    reason: Missing output files: results/OTU/runs/rf_1001_model.Rds
+    resources: tmpdir=/var/folders/9n/glrhxtfx453gl68sc1gzq0mc0000gr/T
+
+Job stats:
+job               count    min threads    max threads
+--------------  -------  -------------  -------------
+trail_ml_model        1              1              1
+total                 1              1              1
+```
+
+
+Now you can change the values of these variables by editing the config file,
+or by creating multiple config files and specifying them on the command line:
+
+```{YAML}
+#| filename: "config/genus.yml"
+#| eval: false
+dataset: 'genus'
+method: 'glmnet'
+seed: 1001
+```
+
+
+```{bash}
+#| filename: sh
+#| eval: false
+snakemake --configfile config/test.yml
+```
+
+```{bash}
+#| eval: false
+rule trail_ml_model:
+    input: workflow/scripts/train_ml.R, data/genus.csv
+    output: results/genus/runs/glmnet_1001_model.Rds
+    jobid: 0
+    reason: Missing output files: results/genus/runs/glmnet_1001_model.Rds
+    resources: tmpdir=/var/folders/9n/glrhxtfx453gl68sc1gzq0mc0000gr/T
+
+Job stats:
+job               count    min threads    max threads
+--------------  -------  -------------  -------------
+trail_ml_model        1              1              1
+total                 1              1              1
+```
+
+
 
 ## conditionals
 
@@ -247,13 +394,16 @@ If a variable has a length (i.e. you can run `len(myvar)`), then you can
 ```{python}
 #| filename: "Python"
 postdocs = ['Allison Mason', 'Courtney Armour', 'Sarah Lucas']
-for phd in postdocs:
-    print(phd, ", PhD", sep = '')
+for person in postdocs:
+    print(f"{person}, PhD")
 ```
 
 ### range
 
-Use `range` to loop over a range of numbers.
+Use `range()` to loop over a range of numbers. If you give `range()` two arguments,
+range starts counting from the first argument and stops _just before_ the second argument,
+stepping by 1.
+In other words, the stop argument is _exclusive_.
 
 ```{python}
 #| filename: "Python"
@@ -262,28 +412,35 @@ for i in range(1, num_bottles+1):
     print(i, " bottles of pop on the wall")
 ```
 
+If you give range just one argument, it starts counting from zero and uses
+the argument as the stop value:
+```{python}
+#| filename: "Python"
+num_bottles = 3
+for i in range(num_bottles+1):
+    print(i, " bottles of pop on the wall")
+```
 
-You can also create lists with the `range` function:
+You can also use `range()` to create lists:
 
 ```{python}
 #| filename: "Python"
 mylist = list(range(3))
+mylist
 ```
 
-When you use range with one argument as above, that argument is the value to stop
-_just before_. The stop value is _exclusive_. 
-By default it will start at 0 and step by 1.
-
-Or you can give both the start and stop values:
+You can use range with three arguments: `start`, `stop`, and `step`:
 
 ```{python}
 #| filename: "Python"
-list(range(1, 4))
+list(range(2, 11, 2))
 ```
 
-Or give a start, stop, and step value:
-
-You can even move backward:
+Give the `step` argument a negative value and make `start` greater than `stop` to move backwards:
+```{python}
+#| filename: "Python"
+list(range(4, -7, -2))
+```
 
 You might think it's weird that range stops just _before_ the stop value.
 But it works nicely when you give it the length of the list -- now you have the list indices!
@@ -291,14 +448,7 @@ But it works nicely when you give it the length of the list -- now you have the 
 ```{python}
 #| filename: "Python"
 for i in range(len(numbers)):
-    print("index", i, "is", numbers[i])
-```
-
-f strings in Python work just like glue() in R
-
-```{python}
-#| filename: "Python"
-print(f"index {i} is {numbers[i]}")
+    print(f"index {i} is {numbers[i]}")
 ```
 
 
@@ -368,7 +518,7 @@ rule trail_ml_model:
 You want snakemake to fill in certain values for these wildcards, so you create 
 lists with the values you want and write a target rule at the top of your Snakefile.
 
-You could use an f string and a list comprehension to create the list of target files.
+You could use an f-String and a list comprehension to create the list of target files.
 
 ```{python}
 datasets = ['OTU', 'genus']
@@ -624,11 +774,17 @@ TODO: COLLATE THESE WITH python concepts above
 
 config files get imported as dictionaries
 
-use f strings all the time
+use f-Strings all the time
 
 use lambda functions
 
 input.name syntax is because of OOP
+
+# Recap: Snakemake concepts covered
+
+- Use f-Strings for pretty string formatting.
+- Config files are imported as dictionaries. 
+
 
 # Resources
 
