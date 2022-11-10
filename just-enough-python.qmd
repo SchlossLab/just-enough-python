@@ -162,8 +162,12 @@ hyperparams = {'glmnet': {'alpha': [0, 0.5, 1],
 hyperparams['glmnet']['alpha'][1]
 ```
 
+##### Snakemake config
 
-## Conditional operators
+Snakemake parses your YAML config files to dictionaries.
+You 
+
+## conditionals
 
 Think of these as functions that return a boolean.
 
@@ -182,37 +186,45 @@ Think of these as functions that return a boolean.
 
 ```{python}
 3 > 2
-```
-
-
-### Boolean operators
-
-These are functions that take two booleans and return one.
-
-| Python | R   |
-|--------|-----|
-
-```{python}
 True or False
-
 ```
 
-
-## if-else statements
+### if-else statements
 
 No curly braces here! But indentation does matter.
 
 ```{python}
 #| filename: "Python"
 if len(my_list) < 10:
-    print("This list is short")
+    list_description = "This list is short"
 elif len(my_list) >= 10 and len(my_list) < 15:
-    print("This list is medium length")
+    list_description = "This list is medium length"
 else:
-    print("This list is long!")
+    list_description = "This list is long!"
+print(list_description)
 ```
 
-Nested if-else blocks
+#### inline if-else statement
+
+When you create a variable with an if-else statement, 
+you can do it all on one line:
+
+```{python}
+list_description = "short" if len(my_list) < 10 else "not short"
+```
+
+This is equivalent to:
+
+```{python}
+if len(my_list) < 10:
+    list_description = "short"
+else:
+    list_description = "not short"
+```
+
+You can't make it a one-liner if you need to use `elif`.
+
+#### nested if-else blocks
 
 ```{python}
 #| filename: "Python"
@@ -225,6 +237,7 @@ if num >= 0:
 else:
     print("negative")
 ```
+
 
 ## for loops
 
@@ -306,7 +319,7 @@ when you want to make a for loop that creates a new list, dictionary, or set,
 use a **comprehension**.
 
 
-#### list comprehension
+#### list comprehensions
 
 
 To build a list with a for loop, you can do this
@@ -331,8 +344,91 @@ this is roughly equivalent to using *apply functions in R:
 sapply(0:3, function(x) {x**2})
 ```
 
+##### Snakemake expand
 
-#### dictionary comprehension
+Let's say you have a Snakemake workflow with a rule that should run multiple times
+with different parameters. For example, you may want to train machine learning models
+with different ML methods, datasets, and random seeds. 
+You define these as `wildcards` in a rule to train each ML model:
+
+```{python}
+#| filename: "Snakefile"
+#| eval: false
+
+rule trail_ml_model:
+    input:
+        R="workflow/scripts/train_ml.R",
+        csv="data/{dataset}.csv"
+    output:
+        model="results/{dataset}/runs/{method}_{seed}_model.Rds"
+    script:
+        "scripts/train_ml.R"
+```
+
+You want snakemake to fill in certain values for these wildcards, so you create 
+lists with the values you want and write a target rule at the top of your Snakefile.
+
+You could use an f string and a list comprehension to create the list of target files.
+
+```{python}
+datasets = ['OTU', 'genus']
+methods = ['rf', 'glmnet', 'svmRadial']
+seeds = range(1000, 1005)
+[f"results/{dataset}/runs/{method}_{seed}_model.Rds" for dataset in datasets for method in methods for seed in seeds]
+```
+
+Here's what your Snakefile looks like now.
+
+```{python}
+#| filename: "Snakefile"
+#| eval: false
+
+datasets = ['OTU', 'genus']
+methods = ['rf', 'glmnet', 'svmRadial']
+seeds = range(1000, 1005)
+
+rule targets:
+    input:
+        [f"results/{dataset}/runs/{method}_{seed}_model.Rds" for dataset in datasets for method in methods for seed in seeds]
+
+rule trail_ml_model:
+    input:
+        R="workflow/scripts/train_ml.R"
+    output:
+        model="results/{dataset}/runs/{method}_{seed}_model.Rds"
+    script:
+        "scripts/train_ml.R"
+```
+
+The list comprehension gets harder to read the more `for` statements you add to it.
+So Snakemake provides a function `expand()` to clean this up:
+
+```{python}
+#| filename: "Snakefile"
+#| eval: false
+
+datasets = ['OTU', 'genus']
+methods = ['rf', 'glmnet', 'svmRadial']
+seeds = range(1000, 1005)
+
+rule targets:
+    input:
+        expand("results/{dataset}/runs/{method}_{seed}_model.Rds", 
+                dataset = datasets, method = methods, seed = seeds)
+
+rule trail_ml_model:
+    input:
+        R="workflow/scripts/train_ml.R"
+    output:
+        model="results/{dataset}/runs/{method}_{seed}_model.Rds"
+    script:
+        "scripts/train_ml.R"
+```
+
+Using `expand()` creates the exact same list as the list comprehension, but it's
+much easier to read and add variables to.
+
+#### dictionary comprehensions
 
 ```{python}
 #| filename: "Python"
@@ -347,6 +443,8 @@ movie_dict
 
 ```{python}
 #| filename: "Python"
+movies = ['star wars episode V', 'the godfather', 'the dark knight']
+years = [1980, 1972, 2008]
 movie_dict = {movie: year for movie, year in zip(movies, years)}
 ```
 
@@ -426,13 +524,14 @@ class(name) == 'character'
 ```
 
 
-Objects of different classes have different attributes and methods.
+#### Objects of different classes have different attributes and methods.
 
 - attributes: metadata associated with an object.
 - methods: functions that operate on an object.
 
 
-lists have methods that can modify them in place
+Lists have methods that can modify them in place
+
 ```{python}
 #| filename: "Python"
 print(numbers)
@@ -441,7 +540,7 @@ numbers.reverse()
 print(numbers)
 ```
 
-string methods
+Strings can't be modified in place, but you can  methods
 
 join
 split
