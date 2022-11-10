@@ -159,7 +159,12 @@ fruit
 
 Indexing is 0-based in Python.
 You might find 0-based indexing unintuitive if you're used to working in 
-languages like R that use 1-based indexing.
+languages like R that use 1-based indexing, but:
+
+>> [this is] not mad, just differently sane!
+>> - Terry Pratchett
+> - Greg Wilson[^From _The Tidynomicon_ by Greg Wilson: https://tidynomicon.github.io/tidynomicon/]
+
 
 ```{python index}
 #| filename: "Python"
