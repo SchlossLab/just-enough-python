@@ -11,6 +11,9 @@ website:
     left:
       - text: "Home"
         file: just-enough-python.qmd
+    right:
+      - icon: github
+        href: https://github.com/SchlossLab/just-enough-python/
 
 title-block-banner: true
 title-block-style: default
