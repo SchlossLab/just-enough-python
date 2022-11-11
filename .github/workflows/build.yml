@@ -5,7 +5,9 @@ on:
     branches:
       - main
     paths:
+     - "_quarto.yml"
      - "*.qmd"
+     - "*.css"
 
 jobs:
   build:
