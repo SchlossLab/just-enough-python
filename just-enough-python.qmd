@@ -15,10 +15,11 @@ This is just enough Python to understand and apply some cool tricks in your Snak
 
 #####  prereqs
 
-- Basic snakemake knowledge. you've gone through the official tutorial. 
-  maybe you've even tried building your own snakemake workflow.
-- Minimal or no python knowledge outside of what you may have gleaned from the snakemake docs.
-- Basic R experience.
+- **Basic Snakemake knowledge.** You've gone through the official tutorial. 
+  Maybe you've even built your own snakemake workflow.
+- Minimal or **no python knowledge**, aside from what you may have gleaned from 
+  the snakemake docs.
+- **Basic R** knowledge. Tidyverse experience is helpful but not required.
 
 
 ## variables
