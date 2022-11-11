@@ -14,10 +14,12 @@ So as a compromise, here's just a little more Python.
 ## mutability
 ## iterables, iterators, generators
 ## reading & writing files
--->
+
 
 ## mutability
 
+TODO
+-->
 ### more comprehensions
 
 #### dictionary comprehensions
@@ -115,3 +117,9 @@ Alternatively, you can choose to import only the functions you want to use from 
 from pandas import DataFrame
 DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
 ```
+
+<!--
+## reading & writing files
+
+TODO
+-->
