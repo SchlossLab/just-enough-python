@@ -16,6 +16,51 @@ So as a compromise, here's just a little more Python.
 ## reading & writing files
 -->
 
+## mutability
+
+### more comprehensions
+
+#### dictionary comprehensions
+
+```{python}
+#| filename: "Python"
+movies = ['star wars episode V', 'the godfather', 'the dark knight']
+years = [1980, 1972, 2008]
+movie_dict = {}
+for movie, year in zip(movies, years):
+    movie_dict[movie] = year
+movie_dict
+```
+
+
+```{python}
+#| filename: "Python"
+movies = ['star wars episode V', 'the godfather', 'the dark knight']
+years = [1980, 1972, 2008]
+movie_dict = {movie: year for movie, year in zip(movies, years)}
+```
+
+#### set comprehensions
+
+Use a set instead of a list when order doesn't matter and you want every item
+to be unique. 
+
+```{python}
+#| filename: "Python"
+myset = set([1,2,2,2,3,3,4])
+print(myset)
+```
+
+```{python}
+#| filename: "Python"
+presidents = ["George Washington", "John Adams", "Thomas Jefferson", 
+              "James Madison Jr", "James Monroe", "John Quincy Adams"]
+first_names = {name.split()[0] for name in presidents}
+print(first_names)
+```
+
+Looking up whether a set contains an item is more efficient than using a list.
+
 ## packages
 
 Using packages works a little differently between R and Python.

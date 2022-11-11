@@ -23,7 +23,7 @@ This is just enough Python to understand and apply some cool tricks in your Snak
 
 ## variables
 
-### basic data types
+### basic types
 
 | Python  | R         |
 |---------|-----------|
@@ -579,26 +579,6 @@ rule trail_ml_model:
 
 Using `expand()` creates the exact same list as the list comprehension, but it's
 much easier to read and add variables to.
-
-#### dictionary comprehensions
-
-```{python}
-#| filename: "Python"
-movies = ['star wars episode V', 'the godfather', 'the dark knight']
-years = [1980, 1972, 2008]
-movie_dict = {}
-for movie, year in zip(movies, years):
-    movie_dict[movie] = year
-movie_dict
-```
-
-
-```{python}
-#| filename: "Python"
-movies = ['star wars episode V', 'the godfather', 'the dark knight']
-years = [1980, 1972, 2008]
-movie_dict = {movie: year for movie, year in zip(movies, years)}
-```
 
 
 ## functions
