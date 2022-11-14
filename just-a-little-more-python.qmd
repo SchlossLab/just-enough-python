@@ -121,6 +121,9 @@ DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
 
 ## object-oriented programming
 
+I wish I had enough time to cover object-oriented programming (OOP) in depth,
+but we're only going to scratch the surface.
+
 Everything in Python is an object. This is also true in R.
 You can find out what class an object belongs to in Python with `type()`:
 
