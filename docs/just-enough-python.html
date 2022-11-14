@@ -573,7 +573,7 @@ await               finally             nonlocal            yield</code></pre>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>config/default.yml</strong></pre>
+<pre><strong>config/otu.yml</strong></pre>
 </div>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>dataset<span class="sc">:</span> <span class="st">'OTU'</span></span>
 <span id="cb46-2"><a href="#cb46-2"></a>method<span class="sc">:</span> <span class="st">'rf'</span></span>
@@ -586,7 +586,7 @@ await               finally             nonlocal            yield</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Snakefile</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a>configfile: <span class="st">"config/default.yml"</span></span>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a>configfile: <span class="st">"config/otu.yml"</span></span>
 <span id="cb47-2"><a href="#cb47-2"></a></span>
 <span id="cb47-3"><a href="#cb47-3"></a>dataset <span class="op">=</span> config[<span class="st">"dataset"</span>]</span>
 <span id="cb47-4"><a href="#cb47-4"></a>method <span class="op">=</span> config[<span class="st">'rf'</span>]</span>
@@ -602,13 +602,13 @@ await               finally             nonlocal            yield</code></pre>
 <span id="cb47-14"><a href="#cb47-14"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>When you run this workflow, it uses <code>config/default.yml</code> by default:</p>
+<p>When you run this workflow, it uses <code>config/otu.yml</code> by default:</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>sh</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1"></a><span class="ex">snakemake</span> <span class="at">--configfile</span> config/test.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1"></a><span class="ex">snakemake</span> <span class="at">-n</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="cell">
@@ -641,7 +641,7 @@ await               finally             nonlocal            yield</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>sh</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1"></a><span class="ex">snakemake</span> <span class="at">--configfile</span> config/test.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1"></a><span class="ex">snakemake</span> <span class="at">-n</span> <span class="at">--configfile</span> config/genus.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="cell">
@@ -658,6 +658,7 @@ await               finally             nonlocal            yield</code></pre>
 <span id="cb52-11"><a href="#cb52-11"></a><span class="ex">trail_ml_model</span>        1              1              1</span>
 <span id="cb52-12"><a href="#cb52-12"></a><span class="ex">total</span>                 1              1              1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>See this example in context <a href="">here</a>.</p>
 </section></section></section></section><section id="conditionals" class="level2"><h2 class="anchored" data-anchor-id="conditionals">conditionals</h2>
 <p>Think of these as functions that return a boolean.</p>
 <table class="table">
@@ -1080,7 +1081,7 @@ index 3 is 4</code></pre>
 <div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1"></a><span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;function &lt;lambda&gt; at 0x10e2a0940&gt;</code></pre>
+<pre><code>&lt;function &lt;lambda&gt; at 0x10bc1f940&gt;</code></pre>
 </div>
 </div>
 <p>Before the colon, list the arguments of the function. After the colon, compute the value that the function should return.</p>
