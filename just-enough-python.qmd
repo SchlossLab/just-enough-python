@@ -1,6 +1,7 @@
 ---
 title: "Just Enough Python"
 subtitle: "for writing advanced Snakemake workflows"
+date: 2022-11-14
 aliases: 
     - index.html
 engine: knitr
@@ -77,6 +78,8 @@ likes_cats <- TRUE
 # null
 invalid = NULL
 ```
+
+A key difference is that in R, all of the above objects are **vectors** of length 1.
 
 #### type casting
 
@@ -158,6 +161,9 @@ glue::glue("{prefix} {firstname} {middle_init}. {lastname}")
 
 #### lists
 
+Python lists are most similar to lists in R. Python lists can also be compared
+to vectors in R, but unlike vectors, lists can contain objects of different types.
+
 ```{python py-lists}
 #| filename: "Python"
 fruit = ['apple','banana','grape']
@@ -167,14 +173,9 @@ fruit.append('mango')
 fruit
 ```
 
-Indexing is 0-based in Python.
-You might find 0-based indexing unintuitive if you're used to working in 
-languages like R that use 1-based indexing, but:
+##### Indexing
 
->> [this is] not mad, just differently sane!
->> - Terry Pratchett
-> - Greg Wilson[^From _The Tidynomicon_ by Greg Wilson: https://tidynomicon.github.io/tidynomicon/]
-
+Indexing is 0-based in Python. You can index lists and strings. 
 
 ```{python index}
 #| filename: "Python"
@@ -183,6 +184,48 @@ len(numbers) # length
 numbers[0] # first item
 numbers[3] # last item
 numbers[-1] # last item
+```
+
+
+You might find 0-based indexing unintuitive if you're used to working in 
+languages like R that use 1-based indexing, but:
+
+>> [this is] not mad, just differently sane!
+>> - Terry Pratchett
+> - Greg Wilson[^From _The Tidynomicon_ by Greg Wilson: https://tidynomicon.github.io/tidynomicon/]
+
+Here's an illustration that shows how 0-based & 1-based indexing systems compare
+in the context of DNA coordinates^[from biostars: <https://www.biostars.org/p/84686/>]
+
+[![indexing-dna](https://i.postimg.cc/yxxngrS5/single-nucleotide-or-variant.jpg)](https://www.biostars.org/p/84686/)
+
+```{python}
+#| filename: "Python"
+dna = "TACGTCA"
+print(dna[0])
+print(dna[6])
+```
+
+We can try to write equivalent code in R...
+
+```{r}
+#| filename: "R"
+#| error: true
+dna <- "TACGTCA"
+print(dna[1])
+print(dna[7])
+```
+
+But this doesn't work! 
+In the above R code, `dna` is a vector of length 1 with "TACGTCA" as the item at index 1.
+You can't grab individual characters out of it.
+We have to break up the string into a vector with every character as a separate item in R.
+
+```{r}
+#| filename: "R"
+dna <- c('T', 'A', 'C', 'G', 'T', 'C', 'A')
+print(dna[[1]])
+print(dna[[7]])
 ```
 
 
