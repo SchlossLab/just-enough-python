@@ -18,7 +18,6 @@ website:
 title-block-banner: true
 title-block-style: default
 author: "Kelly Sovacool"
-date: 2022-11-14
 date-format: iso
 css: custom.css
 toc: true

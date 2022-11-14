@@ -1,6 +1,7 @@
 ---
 title: "Just Enough Python"
 subtitle: "for writing advanced Snakemake workflows"
+date: 2022-11-14
 aliases: 
     - index.html
 engine: knitr

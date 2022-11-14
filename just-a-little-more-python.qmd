@@ -1,6 +1,7 @@
 ---
 title: "Just A Little More Python"
 subtitle: "than what I could cover in Just Enough Python"
+date: last-modified
 engine: knitr
 ---
 
