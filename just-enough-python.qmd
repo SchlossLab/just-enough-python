@@ -6,9 +6,10 @@ aliases:
 engine: knitr
 ---
 
-```{R}
-#| eval: false
+```{r}
+#| eval: true
 #| echo: false
+#\ message: false
 library(reticulate)
 ```
 
