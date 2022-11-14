@@ -118,6 +118,91 @@ from pandas import DataFrame
 DataFrame(data = {'a': [1,2,3], 'b': [4,5,6]})
 ```
 
+
+## object-oriented programming
+
+Everything in Python is an object. This is also true in R.
+You can find out what class an object belongs to in Python with `type()`:
+
+```{python}
+#| filename: "Python"
+type(numbers)
+type(name)
+type(name) == str
+```
+
+or in R with `class()`:
+
+```{r}
+#| filename: "R"
+class(1:3)
+class(list(1, 2, 3))
+class(name)
+class(name) == 'character'
+```
+
+
+#### Objects of different classes have different methods and attributes.
+
+- methods: functions that operate on an object.
+- attributes: metadata associated with an object.
+
+
+Lists have methods that can modify them in place
+
+```{python}
+#| filename: "Python"
+print(numbers)
+numbers.append(5)
+numbers.reverse()
+print(numbers)
+```
+
+You can split a string into a list based on a separator character with `split()`:
+
+```{python}
+#| filename: "Python"
+filename = "path/to/file.txt"
+filename.split('.')
+filename.split('.')[0]
+```
+
+Use `join()` to do the opposite of `split()`:
+
+```{python}
+#| filename: "Python"
+column_names = ['patient_id', 'sample_id', 'collection_date']
+','.join(column_names)
+```
+
+You can even define your own classes! Use the `class` keyword and define `__init__` -- the function that _initializes_ a new instance of the class.
+
+```{python}
+#| filename: "Python"
+class Dog:
+    def __init__(self = name):
+        self.name = name
+
+    def is_good(self):
+        return True
+```
+
+`name` is an attribute of the Dog class. `is_good()` is a method of the Dog class.
+Create a new instance of the `Dog` class and try using it:
+
+```{python}
+fido = Dog('fido')
+print(fido.name)
+print(fido.is_good())
+```
+
+
+TODO explain how this works in Snakemake input/output/params etc
+
+Take advantage of object-oriented programming to DRY your code by referencing 
+output files from other rules.
+
+
 <!--
 ## reading & writing files
 

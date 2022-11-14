@@ -693,7 +693,7 @@ a few tricks:
 ```{python}
 #| filename: "Snakefile"
 #| eval: false
-figures_dict = {1: 'figures/diversity.tiff', 2: 'figures/error_rates.tiff'}
+figures_dict = {1: 'diversity', 2: 'error_rates'}
 
 rule targets:
     input:
@@ -701,7 +701,7 @@ rule targets:
 
 rule convert_tiff_to_png:
     input:
-        tiff=lambda wildcards: figures_dict[int(wildcards.fig_num)]
+        tiff=lambda wildcards: f"figures/{figures_dict[int(wildcards.fig_num)]}.tiff"
     output:
         png="paper/figure_{fig_num}.png"
     shell:
@@ -729,64 +729,10 @@ def get_fig_name_from_num(wildcards):
     return figures_dict[int(wildcards.fig_num)]
 ```
 
-
+See this full example in context [here](https://github.com/kelly-sovacool/figure-convert-reprex).
 Learn more about input functions [here](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#snakefiles-input-functions)
 and params functions [here](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules).
 
-## object-oriented programming
-
-Everything in Python is an object. This is also true in R.
-You can find out what class an object belongs to in Python with `type()`:
-
-```{python}
-#| filename: "Python"
-type(numbers)
-type(name)
-type(name) == str
-```
-
-or in R with `class()`:
-
-```{r}
-#| filename: "R"
-class(1:3)
-class(list(1, 2, 3))
-class(name)
-class(name) == 'character'
-```
-
-
-#### Objects of different classes have different attributes and methods.
-
-- attributes: metadata associated with an object.
-- methods: functions that operate on an object.
-
-
-Lists have methods that can modify them in place
-
-```{python}
-#| filename: "Python"
-print(numbers)
-numbers.append(5)
-numbers.reverse()
-print(numbers)
-```
-
-Strings can't be modified in place, but you can 
-
- methods
-
-join
-split
-TODO
-
-```{python}
-filename = "path/to/file.txt"
-filename.split('.')
-filename.split('.')[0]
-```
-
-TODO explain how this works in Snakemake input/output/params etc
 
 # Recap
 
@@ -795,7 +741,6 @@ TODO explain how this works in Snakemake input/output/params etc
 - Use f-Strings for readable string formatting.
 - Config files are imported as dictionaries and allow you to change workflow parameters without modifying code.
 - Lambda functions help define Snakemake input files and parameters based on output files and wildcards.
-- Take advantage of object-oriented programming to DRY your code by referencing output files from other rules.
 
 # Resources {.appendix}
 
