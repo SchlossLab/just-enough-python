@@ -203,8 +203,8 @@ hyperparams['glmnet']['alpha'][1]
 ##### Snakemake config
 
 Say you have a Snakemake workflow for training machine learning models.
-You want to be able to specify different datasets, ML methods, and random seeds, so 
-you use f-Strings to fill in these variables:
+You want to be able to specify different datasets, ML methods, and random seeds, 
+so you use f-Strings to fill in these variables:
 
 ```{python}
 #| filename: "Snakefile"
@@ -524,6 +524,7 @@ lists with the values you want and write a target rule at the top of your Snakef
 You could use an f-String and a list comprehension to create the list of target files.
 
 ```{python}
+#| filename: "Python"
 datasets = ['OTU', 'genus']
 methods = ['rf', 'glmnet', 'svmRadial']
 seeds = range(1000, 1005)
@@ -629,15 +630,112 @@ lambda x: x**2
 Before the colon, list the arguments of the function.
 After the colon, compute the value that the function should return.
 
-TODO demonstrate use in Snakemake workflow
+When writing Snakemake workflows, lambda functions are useful for defining input 
+files based on the wildcards in output files.
+Consider a workflow where you have several rules that plot figures for a manuscript.
+When you initially conduct the analysis, you don't know how the figures will be ordered
+in the manuscript.
+Once you begin drafting the manuscript, you decide that your diversity plot will
+be figure 1 and your error rates plot will be figure 2.
+You also decide to convert the figures to a different format, so the conversion
+step seems like a good opportunity to rename the figures.
+Initially you write this workflow:
+
+```{python}
+#| filename: "Snakefile"
+#| eval: false
+
+rule targets:
+    input:
+        "paper/paper.pdf"
+
+rule convert_figure_1:
+    input:
+        tiff='figures/diversity.tiff'
+    output:
+        png="paper/figure_1.png"
+    shell:
+        """
+        convert {input.tiff} {output.png}
+        """
+
+rule convert_figure_2:
+    input:
+        tiff='figures/error_rates.tiff'
+    output:
+        png="paper/figure_2.png"
+    shell:
+        """
+        convert {input.tiff} {output.png}
+        """
+
+rule render_paper:
+    input:
+        Rmd="paper/paper.Rmd",
+        R="workflow/scripts/render_rmd.R",
+        figures=['paper/figure_1.png', 'paper/figure_2.png']
+    output:
+        pdf="paper/paper.pdf"
+    script:
+        "scripts/render_rmd.R"
+```
+
+The rules `convert_figure_1` and `convert_figure_2` are a bit repetitive; they
+only differ by the input filenames and the figure numbers in the output filenames.
+Maybe this isn't so bad with only two figures, but you might actually have 5-10 
+figures for a full scientific paper. We can reduce the repetitive code with
+a few tricks:
+
+1. Create a dictionary that maps the figure numbers to the descriptive figure file names.
+1. Use a single rule to convert figures, using a lambda function to get the input figure filenames based on the final figure numbers.
+
+
+```{python}
+#| filename: "Snakefile"
+#| eval: false
+figures_dict = {1: 'figures/diversity.tiff', 2: 'figures/error_rates.tiff'}
+
+rule targets:
+    input:
+        "paper/paper.pdf"
+
+rule convert_tiff_to_png:
+    input:
+        tiff=lambda wildcards: figures_dict[int(wildcards.fig_num)]
+    output:
+        png="paper/figure_{fig_num}.png"
+    shell:
+        """
+        convert {input.tiff} {output.png}
+        """
+
+rule render_paper:
+    input:
+        Rmd="paper/paper.Rmd",
+        R="workflow/scripts/render_rmd.R",
+        figures=expand(rules.convert_tiff_to_png.output.png, 
+                       fig_num = range(1, len(figures_dict)+1))
+    output:
+        pdf="paper/paper.pdf"
+    script:
+        "scripts/render_rmd.R"
+```
+
+
+This lambda function is equivalent to:
+
+```{python}
+def get_fig_name_from_num(wildcards):
+    return figures_dict[int(wildcards.fig_num)]
+```
+
+
+Learn more about input functions [here](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#snakefiles-input-functions)
+and params functions [here](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules).
 
 ## object-oriented programming
 
-i wish i could justify covering classes and object-oriented programming in depth,
-but i'm only going to scratch the surface.
-
 Everything in Python is an object. This is also true in R.
-
 You can find out what class an object belongs to in Python with `type()`:
 
 ```{python}
