@@ -6,6 +6,13 @@ aliases:
 engine: knitr
 ---
 
+```{R}
+#| eval: false
+#| echo: false
+library(reticulate)
+```
+
+
 Snakemake is a workflow management tool implemented as extra magic on top of Python. 
 If you want to take your Snakemake workflows from beginner to advanced, 
 learning a little Python goes a long way.
