@@ -78,6 +78,8 @@ likes_cats <- TRUE
 invalid = NULL
 ```
 
+A key difference is that in R, all of the above objects are **vectors** of length 1.
+
 #### type casting
 
 ```{python type-cast}
@@ -173,7 +175,6 @@ fruit
 ##### Indexing
 
 Indexing is 0-based in Python. You can index lists and strings. 
-You cannot index characters in R.
 
 ```{python index}
 #| filename: "Python"
@@ -204,12 +205,28 @@ print(dna[0])
 print(dna[6])
 ```
 
+We can try to write equivalent code in R...
+
+```{r}
+#| filename: "R"
+#| error: true
+dna <- "TACGTCA"
+print(dna[1])
+print(dna[7])
+```
+
+But this doesn't work! 
+In the above R code, `dna` is a vector of length 1 with "TACGTCA" as the item at index 1.
+You can't grab individual characters out of it.
+We have to break up the string into a vector with every character as a separate item in R.
+
 ```{r}
 #| filename: "R"
 dna <- c('T', 'A', 'C', 'G', 'T', 'C', 'A')
 print(dna[[1]])
 print(dna[[7]])
 ```
+
 
 #### dictionaries
 
