@@ -10,7 +10,11 @@ engine: knitr
 #| eval: true
 #| echo: false
 #\ message: false
-library(reticulate)
+
+# forces renv to recognize these packages as dependencies
+library(reticulate) # for python
+library(downlit) # for code linking
+library(xml2) # for code linking
 ```
 
 
