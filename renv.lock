@@ -197,10 +197,10 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.17",
+      "Version": "2.18",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e97c8be593e010f93520e8215c0f9189",
+      "Hash": "8063c4e953cefb651e8cd58c82c82d2d",
       "Requirements": [
         "bslib",
         "evaluate",
