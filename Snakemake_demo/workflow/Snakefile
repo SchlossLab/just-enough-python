@@ -2,7 +2,7 @@ dataset = "genus"
 method = "glmnet"
 seed = 1001
 
-rule trail_ml_model:
+rule train_ml_model:
     input:
         R="workflow/scripts/train_ml.R",
         csv=f"data/{dataset}.csv"

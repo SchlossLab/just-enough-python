@@ -225,7 +225,7 @@ dataset = "OTU"
 method = "rf"
 seed = 1001
 
-rule trail_ml_model:
+rule train_ml_model:
     input:
         R="workflow/scripts/train_ml.R",
         csv=f"data/{dataset}.csv"
@@ -257,7 +257,7 @@ dataset = config["dataset"]
 method = config['rf']
 seed = config['seed']
 
-rule trail_ml_model:
+rule train_ml_model:
     input:
         R="workflow/scripts/train_ml.R",
         csv=f"data/{dataset}.csv"
@@ -278,7 +278,7 @@ snakemake -n
 
 ```{bash}
 #| eval: false
-rule trail_ml_model:
+rule train_ml_model:
     input: workflow/scripts/train_ml.R, data/OTU.csv
     output: results/OTU/runs/rf_1001_model.Rds
     jobid: 0
@@ -288,7 +288,7 @@ rule trail_ml_model:
 Job stats:
 job               count    min threads    max threads
 --------------  -------  -------------  -------------
-trail_ml_model        1              1              1
+train_ml_model        1              1              1
 total                 1              1              1
 ```
 
@@ -313,7 +313,7 @@ snakemake -n --configfile config/genus.yml
 
 ```{bash}
 #| eval: false
-rule trail_ml_model:
+rule train_ml_model:
     input: workflow/scripts/train_ml.R, data/genus.csv
     output: results/genus/runs/glmnet_1001_model.Rds
     jobid: 0
@@ -323,7 +323,7 @@ rule trail_ml_model:
 Job stats:
 job               count    min threads    max threads
 --------------  -------  -------------  -------------
-trail_ml_model        1              1              1
+train_ml_model        1              1              1
 total                 1              1              1
 ```
 
@@ -522,7 +522,7 @@ You define these as `wildcards` in a rule to train each ML model:
 #| filename: "Snakefile"
 #| eval: false
 
-rule trail_ml_model:
+rule train_ml_model:
     input:
         R="workflow/scripts/train_ml.R",
         csv="data/{dataset}.csv"
@@ -532,10 +532,14 @@ rule trail_ml_model:
         "scripts/train_ml.R"
 ```
 
-You want snakemake to fill in certain values for these wildcards, so you create 
+Notice that we're _not_ using **f-Strings** within the rule because we want 
+Snakemake to recognize these as **wildcards** and fill in different values for
+them with each run of the `train_ml_model` rule.
+
+To tell Snakemake what values to assign for these wildcards, you can create 
 lists with the values you want and write a target rule at the top of your Snakefile.
 
-You could use an f-String and a list comprehension to create the list of target files.
+Here, you could use an f-String and a list comprehension to create the list of target files.
 
 ```{python}
 #| filename: "Python"
@@ -559,9 +563,10 @@ rule targets:
     input:
         [f"results/{dataset}/runs/{method}_{seed}_model.Rds" for dataset in datasets for method in methods for seed in seeds]
 
-rule trail_ml_model:
+rule train_ml_model:
     input:
-        R="workflow/scripts/train_ml.R"
+        R="workflow/scripts/train_ml.R",
+        csv=f"data/{dataset}.csv"
     output:
         model="results/{dataset}/runs/{method}_{seed}_model.Rds"
     script:
@@ -584,7 +589,7 @@ rule targets:
         expand("results/{dataset}/runs/{method}_{seed}_model.Rds", 
                 dataset = datasets, method = methods, seed = seeds)
 
-rule trail_ml_model:
+rule train_ml_model:
     input:
         R="workflow/scripts/train_ml.R"
     output:
