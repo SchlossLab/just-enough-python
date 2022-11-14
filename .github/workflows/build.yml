@@ -13,7 +13,7 @@ on:
 env:
   actor: "41898282+github-actions[bot]"
   token: ${{ secrets.GITHUB_TOKEN }}
-  repo: ${{ GITHUB_REPOSITORY }}
+  repo: ${{ github.repository }}
 
 jobs:
   build:
