@@ -559,7 +559,7 @@ await               finally             nonlocal            yield</code></pre>
 <span id="cb45-2"><a href="#cb45-2"></a>method <span class="op">=</span> <span class="st">"rf"</span></span>
 <span id="cb45-3"><a href="#cb45-3"></a>seed <span class="op">=</span> <span class="dv">1001</span></span>
 <span id="cb45-4"><a href="#cb45-4"></a></span>
-<span id="cb45-5"><a href="#cb45-5"></a>rule trail_ml_model:</span>
+<span id="cb45-5"><a href="#cb45-5"></a>rule train_ml_model:</span>
 <span id="cb45-6"><a href="#cb45-6"></a>    <span class="bu">input</span>:</span>
 <span id="cb45-7"><a href="#cb45-7"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span>,</span>
 <span id="cb45-8"><a href="#cb45-8"></a>        csv<span class="op">=</span><span class="ss">f"data/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">.csv"</span></span>
@@ -592,7 +592,7 @@ await               finally             nonlocal            yield</code></pre>
 <span id="cb47-4"><a href="#cb47-4"></a>method <span class="op">=</span> config[<span class="st">'rf'</span>]</span>
 <span id="cb47-5"><a href="#cb47-5"></a>seed <span class="op">=</span> config[<span class="st">'seed'</span>]</span>
 <span id="cb47-6"><a href="#cb47-6"></a></span>
-<span id="cb47-7"><a href="#cb47-7"></a>rule trail_ml_model:</span>
+<span id="cb47-7"><a href="#cb47-7"></a>rule train_ml_model:</span>
 <span id="cb47-8"><a href="#cb47-8"></a>    <span class="bu">input</span>:</span>
 <span id="cb47-9"><a href="#cb47-9"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span>,</span>
 <span id="cb47-10"><a href="#cb47-10"></a>        csv<span class="op">=</span><span class="ss">f"data/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">.csv"</span></span>
@@ -612,7 +612,7 @@ await               finally             nonlocal            yield</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1"></a><span class="ex">rule</span> trail_ml_model:</span>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1"></a><span class="ex">rule</span> train_ml_model:</span>
 <span id="cb49-2"><a href="#cb49-2"></a>    <span class="ex">input:</span> workflow/scripts/train_ml.R, data/OTU.csv</span>
 <span id="cb49-3"><a href="#cb49-3"></a>    <span class="ex">output:</span> results/OTU/runs/rf_1001_model.Rds</span>
 <span id="cb49-4"><a href="#cb49-4"></a>    <span class="ex">jobid:</span> 0</span>
@@ -622,7 +622,7 @@ await               finally             nonlocal            yield</code></pre>
 <span id="cb49-8"><a href="#cb49-8"></a><span class="ex">Job</span> stats:</span>
 <span id="cb49-9"><a href="#cb49-9"></a><span class="ex">job</span>               count    min threads    max threads</span>
 <span id="cb49-10"><a href="#cb49-10"></a><span class="ex">--------------</span>  <span class="at">-------</span>  <span class="at">-------------</span>  <span class="at">-------------</span></span>
-<span id="cb49-11"><a href="#cb49-11"></a><span class="ex">trail_ml_model</span>        1              1              1</span>
+<span id="cb49-11"><a href="#cb49-11"></a><span class="ex">train_ml_model</span>        1              1              1</span>
 <span id="cb49-12"><a href="#cb49-12"></a><span class="ex">total</span>                 1              1              1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now you can change the values of these variables by editing the config file, or by creating multiple config files and specifying them on the command line:</p>
@@ -645,7 +645,7 @@ await               finally             nonlocal            yield</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1"></a><span class="ex">rule</span> trail_ml_model:</span>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1"></a><span class="ex">rule</span> train_ml_model:</span>
 <span id="cb52-2"><a href="#cb52-2"></a>    <span class="ex">input:</span> workflow/scripts/train_ml.R, data/genus.csv</span>
 <span id="cb52-3"><a href="#cb52-3"></a>    <span class="ex">output:</span> results/genus/runs/glmnet_1001_model.Rds</span>
 <span id="cb52-4"><a href="#cb52-4"></a>    <span class="ex">jobid:</span> 0</span>
@@ -655,7 +655,7 @@ await               finally             nonlocal            yield</code></pre>
 <span id="cb52-8"><a href="#cb52-8"></a><span class="ex">Job</span> stats:</span>
 <span id="cb52-9"><a href="#cb52-9"></a><span class="ex">job</span>               count    min threads    max threads</span>
 <span id="cb52-10"><a href="#cb52-10"></a><span class="ex">--------------</span>  <span class="at">-------</span>  <span class="at">-------------</span>  <span class="at">-------------</span></span>
-<span id="cb52-11"><a href="#cb52-11"></a><span class="ex">trail_ml_model</span>        1              1              1</span>
+<span id="cb52-11"><a href="#cb52-11"></a><span class="ex">train_ml_model</span>        1              1              1</span>
 <span id="cb52-12"><a href="#cb52-12"></a><span class="ex">total</span>                 1              1              1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>See this example in context <a href="">here</a>.</p>
@@ -952,7 +952,7 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Snakefile</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1"></a>rule trail_ml_model:</span>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1"></a>rule train_ml_model:</span>
 <span id="cb86-2"><a href="#cb86-2"></a>    <span class="bu">input</span>:</span>
 <span id="cb86-3"><a href="#cb86-3"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span>,</span>
 <span id="cb86-4"><a href="#cb86-4"></a>        csv<span class="op">=</span><span class="st">"data/</span><span class="sc">{dataset}</span><span class="st">.csv"</span></span>
@@ -962,8 +962,9 @@ index 3 is 4</code></pre>
 <span id="cb86-8"><a href="#cb86-8"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>You want snakemake to fill in certain values for these wildcards, so you create lists with the values you want and write a target rule at the top of your Snakefile.</p>
-<p>You could use an f-String and a list comprehension to create the list of target files.</p>
+<p>Notice that we’re <em>not</em> using <strong>f-Strings</strong> within the rule because we want Snakemake to recognize these as <strong>wildcards</strong> and fill in different values for them with each run of the <code>train_ml_model</code> rule.</p>
+<p>To tell Snakemake what values to assign for these wildcards, you can create lists with the values you want and write a target rule at the top of your Snakefile.</p>
+<p>Here, you could use an f-String and a list comprehension to create the list of target files.</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -992,13 +993,14 @@ index 3 is 4</code></pre>
 <span id="cb89-6"><a href="#cb89-6"></a>    <span class="bu">input</span>:</span>
 <span id="cb89-7"><a href="#cb89-7"></a>        [<span class="ss">f"results/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">/runs/</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>seed<span class="sc">}</span><span class="ss">_model.Rds"</span> <span class="cf">for</span> dataset <span class="kw">in</span> datasets <span class="cf">for</span> method <span class="kw">in</span> methods <span class="cf">for</span> seed <span class="kw">in</span> seeds]</span>
 <span id="cb89-8"><a href="#cb89-8"></a></span>
-<span id="cb89-9"><a href="#cb89-9"></a>rule trail_ml_model:</span>
+<span id="cb89-9"><a href="#cb89-9"></a>rule train_ml_model:</span>
 <span id="cb89-10"><a href="#cb89-10"></a>    <span class="bu">input</span>:</span>
-<span id="cb89-11"><a href="#cb89-11"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span></span>
-<span id="cb89-12"><a href="#cb89-12"></a>    output:</span>
-<span id="cb89-13"><a href="#cb89-13"></a>        model<span class="op">=</span><span class="st">"results/</span><span class="sc">{dataset}</span><span class="st">/runs/</span><span class="sc">{method}</span><span class="st">_</span><span class="sc">{seed}</span><span class="st">_model.Rds"</span></span>
-<span id="cb89-14"><a href="#cb89-14"></a>    script:</span>
-<span id="cb89-15"><a href="#cb89-15"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb89-11"><a href="#cb89-11"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span>,</span>
+<span id="cb89-12"><a href="#cb89-12"></a>        csv<span class="op">=</span><span class="ss">f"data/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">.csv"</span></span>
+<span id="cb89-13"><a href="#cb89-13"></a>    output:</span>
+<span id="cb89-14"><a href="#cb89-14"></a>        model<span class="op">=</span><span class="st">"results/</span><span class="sc">{dataset}</span><span class="st">/runs/</span><span class="sc">{method}</span><span class="st">_</span><span class="sc">{seed}</span><span class="st">_model.Rds"</span></span>
+<span id="cb89-15"><a href="#cb89-15"></a>    script:</span>
+<span id="cb89-16"><a href="#cb89-16"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>The list comprehension gets harder to read the more <code>for</code> statements you add to it. So Snakemake provides a function <code>expand()</code> to clean this up:</p>
@@ -1016,7 +1018,7 @@ index 3 is 4</code></pre>
 <span id="cb90-7"><a href="#cb90-7"></a>        expand(<span class="st">"results/</span><span class="sc">{dataset}</span><span class="st">/runs/</span><span class="sc">{method}</span><span class="st">_</span><span class="sc">{seed}</span><span class="st">_model.Rds"</span>, </span>
 <span id="cb90-8"><a href="#cb90-8"></a>                dataset <span class="op">=</span> datasets, method <span class="op">=</span> methods, seed <span class="op">=</span> seeds)</span>
 <span id="cb90-9"><a href="#cb90-9"></a></span>
-<span id="cb90-10"><a href="#cb90-10"></a>rule trail_ml_model:</span>
+<span id="cb90-10"><a href="#cb90-10"></a>rule train_ml_model:</span>
 <span id="cb90-11"><a href="#cb90-11"></a>    <span class="bu">input</span>:</span>
 <span id="cb90-12"><a href="#cb90-12"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span></span>
 <span id="cb90-13"><a href="#cb90-13"></a>    output:</span>
@@ -1081,7 +1083,7 @@ index 3 is 4</code></pre>
 <div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1"></a><span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;function &lt;lambda&gt; at 0x10bc1f940&gt;</code></pre>
+<pre><code>&lt;function &lt;lambda&gt; at 0x109a4f940&gt;</code></pre>
 </div>
 </div>
 <p>Before the colon, list the arguments of the function. After the colon, compute the value that the function should return.</p>
