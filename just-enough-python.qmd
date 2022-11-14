@@ -238,7 +238,7 @@ rule trail_ml_model:
 You can improve this by creating a configuration file in YAML format:
 
 ```{R}
-#| filename: "config/default.yml"
+#| filename: "config/otu.yml"
 #| eval: false
 dataset: 'OTU'
 method: 'rf'
@@ -251,7 +251,7 @@ Snakemake parses your YAML config files to a dictionary called `config`.
 ```{python}
 #| filename: "Snakefile"
 #| eval: false
-configfile: "config/default.yml"
+configfile: "config/otu.yml"
 
 dataset = config["dataset"]
 method = config['rf']
@@ -268,12 +268,12 @@ rule trail_ml_model:
 ```
 
 
-When you run this workflow, it uses `config/default.yml` by default:
+When you run this workflow, it uses `config/otu.yml` by default:
 
 ```{bash}
 #| filename: sh
 #| eval: false
-snakemake --configfile config/test.yml
+snakemake -n
 ```
 
 ```{bash}
@@ -308,7 +308,7 @@ seed: 1001
 ```{bash}
 #| filename: sh
 #| eval: false
-snakemake --configfile config/test.yml
+snakemake -n --configfile config/genus.yml
 ```
 
 ```{bash}
@@ -328,6 +328,7 @@ total                 1              1              1
 ```
 
 
+See this example in context [here]().
 
 ## conditionals
 
