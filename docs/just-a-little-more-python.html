@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Kelly Sovacool">
 <meta name="dcterms.date" content="2022-11-14">
-
 <title>Just A Little More Python</title>
 <style>
 code{white-space: pre-wrap;}
@@ -87,7 +84,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -103,8 +99,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -122,42 +117,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-
-<link rel="stylesheet" href="custom.css">
+}</script><link rel="stylesheet" href="custom.css">
 </head>
-
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link" href="./just-enough-python.html">Home</a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
     <a class="nav-link" href="https://github.com/SchlossLab/just-enough-python/"><i class="bi bi-github" role="img">
 </i> 
  </a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+<div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Just A Little More Python</h1>
             <p class="subtitle lead">than what I could cover in Just Enough Python</p>
@@ -188,30 +173,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#more-comprehensions" id="toc-more-comprehensions" class="nav-link active" data-scroll-target="#more-comprehensions">more comprehensions</a>
+<li>
+<a href="#more-comprehensions" id="toc-more-comprehensions" class="nav-link active" data-scroll-target="#more-comprehensions">more comprehensions</a>
   <ul>
-  <li><a href="#dictionary-comprehensions" id="toc-dictionary-comprehensions" class="nav-link" data-scroll-target="#dictionary-comprehensions">dictionary comprehensions</a></li>
+<li><a href="#dictionary-comprehensions" id="toc-dictionary-comprehensions" class="nav-link" data-scroll-target="#dictionary-comprehensions">dictionary comprehensions</a></li>
   <li><a href="#set-comprehensions" id="toc-set-comprehensions" class="nav-link" data-scroll-target="#set-comprehensions">set comprehensions</a></li>
-  </ul></li>
-  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">packages</a></li>
-  <li><a href="#object-oriented-programming" id="toc-object-oriented-programming" class="nav-link" data-scroll-target="#object-oriented-programming">object-oriented programming</a>
-  <ul>
-  <li><a href="#objects-of-different-classes-have-different-methods-and-attributes." id="toc-objects-of-different-classes-have-different-methods-and-attributes." class="nav-link" data-scroll-target="#objects-of-different-classes-have-different-methods-and-attributes.">Objects of different classes have different methods and attributes.</a></li>
-  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SchlossLab/just-enough-python/edit/main/just-a-little-more-python.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SchlossLab/just-enough-python/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+</li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">packages</a></li>
+  <li>
+<a href="#object-oriented-programming" id="toc-object-oriented-programming" class="nav-link" data-scroll-target="#object-oriented-programming">object-oriented programming</a>
+  <ul>
+<li><a href="#objects-of-different-classes-have-different-methods-and-attributes." id="toc-objects-of-different-classes-have-different-methods-and-attributes." class="nav-link" data-scroll-target="#objects-of-different-classes-have-different-methods-and-attributes.">Objects of different classes have different methods and attributes.</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SchlossLab/just-enough-python/edit/main/just-a-little-more-python.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SchlossLab/just-enough-python/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
-
-
-
-
-<p>I wish I had time to cover everything in-depth, but then I’d have to change the title from “<a href="./just-enough-python.html">Just Enough Python</a>” to “Way More Python Than We Could Possibly Cover In An Hour”. So as a compromise, here’s just a little more Python.</p>
+<main class="content quarto-banner-title-block" id="quarto-document-content"><p>I wish I had time to cover everything in-depth, but then I’d have to change the title from “<a href="./just-enough-python.html">Just Enough Python</a>” to “Way More Python Than We Could Possibly Cover In An Hour”. So as a compromise, here’s just a little more Python.</p>
 <!--
 # topics i wish i had time to cover 
 ## mutability
@@ -223,10 +205,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 TODO
 -->
-<section id="more-comprehensions" class="level3">
-<h3 class="anchored" data-anchor-id="more-comprehensions">more comprehensions</h3>
-<section id="dictionary-comprehensions" class="level4">
-<h4 class="anchored" data-anchor-id="dictionary-comprehensions">dictionary comprehensions</h4>
+<section id="more-comprehensions" class="level3"><h3 class="anchored" data-anchor-id="more-comprehensions">more comprehensions</h3>
+<section id="dictionary-comprehensions" class="level4"><h4 class="anchored" data-anchor-id="dictionary-comprehensions">dictionary comprehensions</h4>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -253,9 +233,7 @@ TODO
 <span id="cb3-3"><a href="#cb3-3"></a>movie_dict <span class="op">=</span> {movie: year <span class="cf">for</span> movie, year <span class="kw">in</span> <span class="bu">zip</span>(movies, years)}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</section>
-<section id="set-comprehensions" class="level4">
-<h4 class="anchored" data-anchor-id="set-comprehensions">set comprehensions</h4>
+</section><section id="set-comprehensions" class="level4"><h4 class="anchored" data-anchor-id="set-comprehensions">set comprehensions</h4>
 <p>Use a set instead of a list when order doesn’t matter and you want every item to be unique.</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -280,14 +258,11 @@ TODO
 <span id="cb6-4"><a href="#cb6-4"></a><span class="bu">print</span>(first_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'John', 'James', 'Thomas', 'George'}</code></pre>
+<pre><code>{'John', 'Thomas', 'George', 'James'}</code></pre>
 </div>
 </div>
 <p>Looking up whether a set contains an item is more efficient than using a list.</p>
-</section>
-</section>
-<section id="packages" class="level2">
-<h2 class="anchored" data-anchor-id="packages">packages</h2>
+</section></section><section id="packages" class="level2"><h2 class="anchored" data-anchor-id="packages">packages</h2>
 <p>Using packages works a little differently between R and Python.</p>
 <p>In R, you can refer to a function from any package you have installed with double colons:</p>
 <div class="cell">
@@ -339,9 +314,7 @@ TODO
 <span id="cb12-2"><a href="#cb12-2"></a>DataFrame(data <span class="op">=</span> {<span class="st">'a'</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], <span class="st">'b'</span>: [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-</section>
-<section id="object-oriented-programming" class="level2">
-<h2 class="anchored" data-anchor-id="object-oriented-programming">object-oriented programming</h2>
+</section><section id="object-oriented-programming" class="level2"><h2 class="anchored" data-anchor-id="object-oriented-programming">object-oriented programming</h2>
 <p>I wish I had enough time to cover object-oriented programming (OOP) in depth, but we’re only going to scratch the surface.</p>
 <p>Everything in Python is an object. This is also true in R. You can find out what class an object belongs to in Python with <code>type()</code>:</p>
 <div class="cell">
@@ -365,7 +338,7 @@ TODO
 <pre><code>True</code></pre>
 </div>
 </div>
-<p>or in R with <code>class()</code>:</p>
+<p>or in R with <code><a href="https://rdrr.io/r/base/class.html">class()</a></code>:</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -390,8 +363,7 @@ TODO
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<section id="objects-of-different-classes-have-different-methods-and-attributes." class="level4">
-<h4 class="anchored" data-anchor-id="objects-of-different-classes-have-different-methods-and-attributes.">Objects of different classes have different methods and attributes.</h4>
+<section id="objects-of-different-classes-have-different-methods-and-attributes." class="level4"><h4 class="anchored" data-anchor-id="objects-of-different-classes-have-different-methods-and-attributes.">Objects of different classes have different methods and attributes.</h4>
 <ul>
 <li>methods: functions that operate on an object.</li>
 <li>attributes: metadata associated with an object.</li>
@@ -414,7 +386,7 @@ TODO
 <pre><code>[5, 4, 3, 2, 1]</code></pre>
 </div>
 </div>
-<p>You can split a string into a list based on a separator character with <code>split()</code>:</p>
+<p>You can split a string into a list based on a separator character with <code><a href="https://rdrr.io/r/base/split.html">split()</a></code>:</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -431,7 +403,7 @@ TODO
 <pre><code>'path/to/file'</code></pre>
 </div>
 </div>
-<p>Use <code>join()</code> to do the opposite of <code>split()</code>:</p>
+<p>Use <code>join()</code> to do the opposite of <code><a href="https://rdrr.io/r/base/split.html">split()</a></code>:</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -479,11 +451,7 @@ TODO
 -->
 
 
-</section>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");

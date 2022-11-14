@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Kelly Sovacool">
 <meta name="dcterms.date" content="2022-11-14">
-
 <title>Just Enough Python</title>
 <style>
 code{white-space: pre-wrap;}
@@ -87,7 +84,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -103,8 +99,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -122,42 +117,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-
-
-<link rel="stylesheet" href="custom.css">
+}</script><link rel="stylesheet" href="custom.css">
 </head>
-
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link active" href="./just-enough-python.html" aria-current="page">Home</a>
   </li>  
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item compact">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
     <a class="nav-link" href="https://github.com/SchlossLab/just-enough-python/"><i class="bi bi-github" role="img">
 </i> 
  </a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+<div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
+    </nav></header><!-- content --><header id="title-block-header" class="quarto-title-block default page-columns page-full"><div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Just Enough Python</h1>
             <p class="subtitle lead">for writing advanced Snakemake workflows</p>
@@ -188,87 +173,95 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prereqs" id="toc-prereqs" class="nav-link active" data-scroll-target="#prereqs">prereqs</a></li>
-  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">variables</a>
+<li><a href="#prereqs" id="toc-prereqs" class="nav-link active" data-scroll-target="#prereqs">prereqs</a></li>
+  <li>
+<a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">variables</a>
   <ul>
-  <li><a href="#basic-types" id="toc-basic-types" class="nav-link" data-scroll-target="#basic-types">basic types</a>
+<li>
+<a href="#basic-types" id="toc-basic-types" class="nav-link" data-scroll-target="#basic-types">basic types</a>
   <ul>
-  <li><a href="#type-casting" id="toc-type-casting" class="nav-link" data-scroll-target="#type-casting">type casting</a></li>
+<li><a href="#type-casting" id="toc-type-casting" class="nav-link" data-scroll-target="#type-casting">type casting</a></li>
   <li><a href="#naming-variables" id="toc-naming-variables" class="nav-link" data-scroll-target="#naming-variables">Naming variables</a></li>
   <li><a href="#formatting-strings" id="toc-formatting-strings" class="nav-link" data-scroll-target="#formatting-strings">formatting strings</a></li>
-  </ul></li>
-  <li><a href="#container-types" id="toc-container-types" class="nav-link" data-scroll-target="#container-types">container types</a>
+  </ul>
+</li>
+  <li>
+<a href="#container-types" id="toc-container-types" class="nav-link" data-scroll-target="#container-types">container types</a>
   <ul>
-  <li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists">lists</a></li>
-  <li><a href="#dictionaries" id="toc-dictionaries" class="nav-link" data-scroll-target="#dictionaries">dictionaries</a>
+<li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists">lists</a></li>
+  <li>
+<a href="#dictionaries" id="toc-dictionaries" class="nav-link" data-scroll-target="#dictionaries">dictionaries</a>
   <ul class="collapse">
-  <li><a href="#snakemake-config" id="toc-snakemake-config" class="nav-link" data-scroll-target="#snakemake-config">Snakemake config</a></li>
-  </ul></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#conditionals" id="toc-conditionals" class="nav-link" data-scroll-target="#conditionals">conditionals</a>
+<li><a href="#snakemake-config" id="toc-snakemake-config" class="nav-link" data-scroll-target="#snakemake-config">Snakemake config</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li>
+<a href="#conditionals" id="toc-conditionals" class="nav-link" data-scroll-target="#conditionals">conditionals</a>
   <ul>
-  <li><a href="#if-else-statements" id="toc-if-else-statements" class="nav-link" data-scroll-target="#if-else-statements">if-else statements</a>
+<li>
+<a href="#if-else-statements" id="toc-if-else-statements" class="nav-link" data-scroll-target="#if-else-statements">if-else statements</a>
   <ul>
-  <li><a href="#inline-if-else-statement" id="toc-inline-if-else-statement" class="nav-link" data-scroll-target="#inline-if-else-statement">inline if-else statement</a></li>
+<li><a href="#inline-if-else-statement" id="toc-inline-if-else-statement" class="nav-link" data-scroll-target="#inline-if-else-statement">inline if-else statement</a></li>
   <li><a href="#nested-if-else-blocks" id="toc-nested-if-else-blocks" class="nav-link" data-scroll-target="#nested-if-else-blocks">nested if-else blocks</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#for-loops" id="toc-for-loops" class="nav-link" data-scroll-target="#for-loops">for loops</a>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li>
+<a href="#for-loops" id="toc-for-loops" class="nav-link" data-scroll-target="#for-loops">for loops</a>
   <ul>
-  <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range">range</a></li>
+<li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range">range</a></li>
   <li><a href="#iterate-over-dictionaries" id="toc-iterate-over-dictionaries" class="nav-link" data-scroll-target="#iterate-over-dictionaries">iterate over dictionaries</a></li>
-  <li><a href="#comprehensions" id="toc-comprehensions" class="nav-link" data-scroll-target="#comprehensions">comprehensions</a>
+  <li>
+<a href="#comprehensions" id="toc-comprehensions" class="nav-link" data-scroll-target="#comprehensions">comprehensions</a>
   <ul>
-  <li><a href="#list-comprehensions" id="toc-list-comprehensions" class="nav-link" data-scroll-target="#list-comprehensions">list comprehensions</a>
+<li>
+<a href="#list-comprehensions" id="toc-list-comprehensions" class="nav-link" data-scroll-target="#list-comprehensions">list comprehensions</a>
   <ul class="collapse">
-  <li><a href="#snakemake-expand" id="toc-snakemake-expand" class="nav-link" data-scroll-target="#snakemake-expand">Snakemake expand</a></li>
-  </ul></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">functions</a>
+<li><a href="#snakemake-expand" id="toc-snakemake-expand" class="nav-link" data-scroll-target="#snakemake-expand">Snakemake expand</a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul>
+</li>
+  <li>
+<a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions">functions</a>
   <ul>
-  <li><a href="#anonymous-functions" id="toc-anonymous-functions" class="nav-link" data-scroll-target="#anonymous-functions">anonymous functions</a></li>
-  </ul></li>
+<li><a href="#anonymous-functions" id="toc-anonymous-functions" class="nav-link" data-scroll-target="#anonymous-functions">anonymous functions</a></li>
+  </ul>
+</li>
   <li><a href="#recap" id="toc-recap" class="nav-link" data-scroll-target="#recap">Recap</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SchlossLab/just-enough-python/edit/main/just-enough-python.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SchlossLab/just-enough-python/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/SchlossLab/just-enough-python/edit/main/just-enough-python.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/SchlossLab/just-enough-python/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
-
-
-
-
-<div class="cell">
+<main class="content quarto-banner-title-block" id="quarto-document-content"><div class="cell">
 
 </div>
 <p>Snakemake is a workflow management tool implemented as extra magic on top of Python. If you want to take your Snakemake workflows from beginner to advanced, learning a little Python goes a long way.</p>
 <p>This is just enough Python to understand and apply some cool tricks in your Snakemake workflows.</p>
-<section id="prereqs" class="level5">
-<h5 class="anchored" data-anchor-id="prereqs">prereqs</h5>
+<section id="prereqs" class="level5"><h5 class="anchored" data-anchor-id="prereqs">prereqs</h5>
 <ul>
-<li><strong>Basic Snakemake knowledge.</strong> You’ve gone through <a href="https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html">the official tutorial</a>. Maybe you’ve even built your own snakemake workflow.</li>
+<li>
+<strong>Basic Snakemake knowledge.</strong> You’ve gone through <a href="https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html">the official tutorial</a>. Maybe you’ve even built your own snakemake workflow.</li>
 <li>Minimal or <strong>no python knowledge</strong>, aside from what you may have gleaned from the snakemake docs.</li>
-<li><strong>Basic R knowledge.</strong> Tidyverse experience is helpful but not required.</li>
-</ul>
-</section>
-<section id="variables" class="level2">
-<h2 class="anchored" data-anchor-id="variables">variables</h2>
-<section id="basic-types" class="level3">
-<h3 class="anchored" data-anchor-id="basic-types">basic types</h3>
+<li>
+<strong>Basic R knowledge.</strong> Tidyverse experience is helpful but not required.</li>
+</ul></section><section id="variables" class="level2"><h2 class="anchored" data-anchor-id="variables">variables</h2>
+<section id="basic-types" class="level3"><h3 class="anchored" data-anchor-id="basic-types">basic types</h3>
 <table class="table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th>Python</th>
 <th>R</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td>string</td>
@@ -328,8 +321,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-11"><a href="#cb2-11"></a>invalid <span class="ot">=</span> <span class="cn">NULL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<section id="type-casting" class="level4">
-<h4 class="anchored" data-anchor-id="type-casting">type casting</h4>
+<section id="type-casting" class="level4"><h4 class="anchored" data-anchor-id="type-casting">type casting</h4>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -361,9 +353,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>False</code></pre>
 </div>
 </div>
-</section>
-<section id="naming-variables" class="level4">
-<h4 class="anchored" data-anchor-id="naming-variables">Naming variables</h4>
+</section><section id="naming-variables" class="level4"><h4 class="anchored" data-anchor-id="naming-variables">Naming variables</h4>
 <p>Biggest difference between R and Python: no dots are allowed in Python variable names. All other rules from R apply. Python variable names must start with an alphabetic character and they can contain alphanumeric characters and underscores.</p>
 <p>Just like in R, it is a good idea not to name a variable the same thing as a reserved keyword or global function.</p>
 <div class="cell">
@@ -388,9 +378,7 @@ async               except              lambda              with
 await               finally             nonlocal            yield</code></pre>
 </div>
 </div>
-</section>
-<section id="formatting-strings" class="level4">
-<h4 class="anchored" data-anchor-id="formatting-strings">formatting strings</h4>
+</section><section id="formatting-strings" class="level4"><h4 class="anchored" data-anchor-id="formatting-strings">formatting strings</h4>
 <p>You can add strings together to build new ones like this:</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -450,17 +438,12 @@ await               finally             nonlocal            yield</code></pre>
 <pre><code>Madame Marie S. Curie</code></pre>
 </div>
 </div>
-</section>
-</section>
-<section id="container-types" class="level3">
-<h3 class="anchored" data-anchor-id="container-types">container types</h3>
+</section></section><section id="container-types" class="level3"><h3 class="anchored" data-anchor-id="container-types">container types</h3>
 <table class="table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th>Python</th>
 <th>R</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td>list</td>
@@ -476,8 +459,7 @@ await               finally             nonlocal            yield</code></pre>
 </tr>
 </tbody>
 </table>
-<section id="lists" class="level4">
-<h4 class="anchored" data-anchor-id="lists">lists</h4>
+<section id="lists" class="level4"><h4 class="anchored" data-anchor-id="lists">lists</h4>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -526,9 +508,7 @@ await               finally             nonlocal            yield</code></pre>
 <pre><code>4</code></pre>
 </div>
 </div>
-</section>
-<section id="dictionaries" class="level4">
-<h4 class="anchored" data-anchor-id="dictionaries">dictionaries</h4>
+</section><section id="dictionaries" class="level4"><h4 class="anchored" data-anchor-id="dictionaries">dictionaries</h4>
 <p>Dictionaries consist of key-value pairs where you use the key to access the value. Keys can be strings, integers, floats, or booleans. Values can be anything!</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -568,8 +548,7 @@ await               finally             nonlocal            yield</code></pre>
 <pre><code>0.5</code></pre>
 </div>
 </div>
-<section id="snakemake-config" class="level5">
-<h5 class="anchored" data-anchor-id="snakemake-config">Snakemake config</h5>
+<section id="snakemake-config" class="level5"><h5 class="anchored" data-anchor-id="snakemake-config">Snakemake config</h5>
 <p>Say you have a Snakemake workflow for training machine learning models. You want to be able to specify different datasets, ML methods, and random seeds, so you use f-Strings to fill in these variables:</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -679,21 +658,14 @@ await               finally             nonlocal            yield</code></pre>
 <span id="cb52-11"><a href="#cb52-11"></a><span class="ex">trail_ml_model</span>        1              1              1</span>
 <span id="cb52-12"><a href="#cb52-12"></a><span class="ex">total</span>                 1              1              1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-</section>
-</section>
-</section>
-<section id="conditionals" class="level2">
-<h2 class="anchored" data-anchor-id="conditionals">conditionals</h2>
+</section></section></section></section><section id="conditionals" class="level2"><h2 class="anchored" data-anchor-id="conditionals">conditionals</h2>
 <p>Think of these as functions that return a boolean.</p>
 <table class="table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th>operator</th>
 <th>meaning</th>
 <th>same in R</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td><code>==</code></td>
@@ -757,8 +729,7 @@ await               finally             nonlocal            yield</code></pre>
 <pre><code>True</code></pre>
 </div>
 </div>
-<section id="if-else-statements" class="level3">
-<h3 class="anchored" data-anchor-id="if-else-statements">if-else statements</h3>
+<section id="if-else-statements" class="level3"><h3 class="anchored" data-anchor-id="if-else-statements">if-else statements</h3>
 <p>No curly braces here! But indentation does matter.</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -777,8 +748,7 @@ await               finally             nonlocal            yield</code></pre>
 <pre><code>This list is short</code></pre>
 </div>
 </div>
-<section id="inline-if-else-statement" class="level4">
-<h4 class="anchored" data-anchor-id="inline-if-else-statement">inline if-else statement</h4>
+<section id="inline-if-else-statement" class="level4"><h4 class="anchored" data-anchor-id="inline-if-else-statement">inline if-else statement</h4>
 <p>When you create a variable with an if-else statement, you can do it all on one line:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a>list_description <span class="op">=</span> <span class="st">"short"</span> <span class="cf">if</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">10</span> <span class="cf">else</span> <span class="st">"not short"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -791,9 +761,7 @@ await               finally             nonlocal            yield</code></pre>
 <span id="cb60-4"><a href="#cb60-4"></a>    list_description <span class="op">=</span> <span class="st">"not short"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can’t make it a one-liner if you need to use <code>elif</code>.</p>
-</section>
-<section id="nested-if-else-blocks" class="level4">
-<h4 class="anchored" data-anchor-id="nested-if-else-blocks">nested if-else blocks</h4>
+</section><section id="nested-if-else-blocks" class="level4"><h4 class="anchored" data-anchor-id="nested-if-else-blocks">nested if-else blocks</h4>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -812,11 +780,7 @@ await               finally             nonlocal            yield</code></pre>
 <pre><code>positive</code></pre>
 </div>
 </div>
-</section>
-</section>
-</section>
-<section id="for-loops" class="level2">
-<h2 class="anchored" data-anchor-id="for-loops">for loops</h2>
+</section></section></section><section id="for-loops" class="level2"><h2 class="anchored" data-anchor-id="for-loops">for loops</h2>
 <p>If a variable has a length (i.e.&nbsp;you can run <code>len(myvar)</code>), then you can <strong>iterate</strong> over it in a for loop.</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -833,9 +797,8 @@ Courtney Armour, PhD
 Sarah Lucas, PhD</code></pre>
 </div>
 </div>
-<section id="range" class="level3">
-<h3 class="anchored" data-anchor-id="range">range</h3>
-<p>Use <code>range()</code> to loop over a range of numbers. If you give <code>range()</code> two arguments, range starts counting from the first argument and stops <em>just before</em> the second argument, stepping by 1. In other words, the stop argument is <em>exclusive</em>.</p>
+<section id="range" class="level3"><h3 class="anchored" data-anchor-id="range">range</h3>
+<p>Use <code><a href="https://rdrr.io/r/base/range.html">range()</a></code> to loop over a range of numbers. If you give <code><a href="https://rdrr.io/r/base/range.html">range()</a></code> two arguments, range starts counting from the first argument and stops <em>just before</em> the second argument, stepping by 1. In other words, the stop argument is <em>exclusive</em>.</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -868,7 +831,7 @@ Sarah Lucas, PhD</code></pre>
 3  bottles of pop on the wall</code></pre>
 </div>
 </div>
-<p>You can also use <code>range()</code> to create lists:</p>
+<p>You can also use <code><a href="https://rdrr.io/r/base/range.html">range()</a></code> to create lists:</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -922,9 +885,7 @@ index 2 is 3
 index 3 is 4</code></pre>
 </div>
 </div>
-</section>
-<section id="iterate-over-dictionaries" class="level3">
-<h3 class="anchored" data-anchor-id="iterate-over-dictionaries">iterate over dictionaries</h3>
+</section><section id="iterate-over-dictionaries" class="level3"><h3 class="anchored" data-anchor-id="iterate-over-dictionaries">iterate over dictionaries</h3>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -944,12 +905,9 @@ index 3 is 4</code></pre>
      3 off-by-one errors</code></pre>
 </div>
 </div>
-</section>
-<section id="comprehensions" class="level3">
-<h3 class="anchored" data-anchor-id="comprehensions">comprehensions</h3>
+</section><section id="comprehensions" class="level3"><h3 class="anchored" data-anchor-id="comprehensions">comprehensions</h3>
 <p>When you want to make a for loop that creates a new list, dictionary, or set, use a <strong>comprehension</strong>. I’m only going to cover list comprehensions below, but you can learn about dictionary and set comprehensions <a href="./just-a-little-more-python.html#more-comprehensions">here</a>.</p>
-<section id="list-comprehensions" class="level4">
-<h4 class="anchored" data-anchor-id="list-comprehensions">list comprehensions</h4>
+<section id="list-comprehensions" class="level4"><h4 class="anchored" data-anchor-id="list-comprehensions">list comprehensions</h4>
 <p>To build a list with a for loop, you can do this</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -986,8 +944,7 @@ index 3 is 4</code></pre>
 <pre><code>[1] 0 1 4 9</code></pre>
 </div>
 </div>
-<section id="snakemake-expand" class="level5">
-<h5 class="anchored" data-anchor-id="snakemake-expand">Snakemake expand</h5>
+<section id="snakemake-expand" class="level5"><h5 class="anchored" data-anchor-id="snakemake-expand">Snakemake expand</h5>
 <p>Let’s say you have a Snakemake workflow with a rule that should run multiple times with different parameters. For example, you may want to train machine learning models with different ML methods, datasets, and random seeds. You define these as <code>wildcards</code> in a rule to train each ML model:</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -1068,12 +1025,7 @@ index 3 is 4</code></pre>
 </div>
 </div>
 <p>Using <code>expand()</code> creates the exact same list as the list comprehension, but it’s much easier to read and add variables to.</p>
-</section>
-</section>
-</section>
-</section>
-<section id="functions" class="level2">
-<h2 class="anchored" data-anchor-id="functions">functions</h2>
+</section></section></section></section><section id="functions" class="level2"><h2 class="anchored" data-anchor-id="functions">functions</h2>
 <p>in R:</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -1105,10 +1057,9 @@ index 3 is 4</code></pre>
 <pre><code>4</code></pre>
 </div>
 </div>
-<section id="anonymous-functions" class="level3">
-<h3 class="anchored" data-anchor-id="anonymous-functions">anonymous functions</h3>
+<section id="anonymous-functions" class="level3"><h3 class="anchored" data-anchor-id="anonymous-functions">anonymous functions</h3>
 <p>Sometimes you want to write a simple function that you only use once. They’re so inconsequential you don’t even want to give them a name.</p>
-<p>We’ve already used one in R<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> inside <code>sapply()</code>:</p>
+<p>We’ve already used one in R<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> inside <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>:</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -1129,7 +1080,7 @@ index 3 is 4</code></pre>
 <div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1"></a><span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;function &lt;lambda&gt; at 0x104ab8940&gt;</code></pre>
+<pre><code>&lt;function &lt;lambda&gt; at 0x10e2a0940&gt;</code></pre>
 </div>
 </div>
 <p>Before the colon, list the arguments of the function. After the colon, compute the value that the function should return.</p>
@@ -1218,36 +1169,25 @@ index 3 is 4</code></pre>
 <span id="cb101-2"><a href="#cb101-2"></a>    <span class="cf">return</span> figures_dict[<span class="bu">int</span>(wildcards.fig_num)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>See this full example in context <a href="https://github.com/kelly-sovacool/figure-convert-reprex">here</a>. Learn more about input functions <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#snakefiles-input-functions">here</a> and params functions <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules">here</a>.</p>
-</section>
-</section>
-<section id="recap" class="level1">
-<h1>Recap</h1>
+</section></section><section id="recap" class="level1"><h1>Recap</h1>
 <p><strong>Snakemake concepts covered</strong></p>
 <ul>
 <li>Use f-Strings for readable string formatting.</li>
 <li>Config files are imported as dictionaries and allow you to change workflow parameters without modifying code.</li>
 <li>Lambda functions help define Snakemake input files and parameters based on output files and wildcards.</li>
-</ul>
-</section>
-
-
-
-<div id="quarto-appendix" class="default"><section id="resources" class="level1 appendix"><h2 class="quarto-appendix-heading">Resources</h2><div class="quarto-appendix-contents">
-
+</ul></section><div id="quarto-appendix" class="default"><section id="resources" class="level1 appendix"><h2 class="quarto-appendix-heading">Resources</h2><div class="quarto-appendix-contents">
 <ul>
-<li><a href="./just-a-little-more-python.html">Just A Little More Python</a>: topics I wish I had time to cover in this tutorial.</li>
+<li>
+<a href="./just-a-little-more-python.html">Just A Little More Python</a>: topics I wish I had time to cover in this tutorial.</li>
 <li><a href="https://docs.python.org/3/">The Python docs</a></li>
 <li><a href="https://snakemake.readthedocs.io/">The Snakemake docs</a></li>
 </ul>
 
 
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
 <ol>
 <li id="fn1"><p>more on anonymous functions here: <a href="http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions" class="uri">http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
