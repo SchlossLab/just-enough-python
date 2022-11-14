@@ -403,7 +403,7 @@ No curly braces here! But indentation does matter.
 #| filename: "Python"
 if len(my_list) < 10:
     list_description = "This list is short"
-elif len(my_list) >= 10 and len(my_list) < 15:
+elif len(my_list) < 15:
     list_description = "This list is medium length"
 else:
     list_description = "This list is long!"
@@ -479,6 +479,8 @@ num_bottles = 3
 for i in range(num_bottles+1):
     print(i, " bottles of pop on the wall")
 ```
+
+<!-- made it to here in code club #1 -->
 
 You can also use `range()` to create lists:
 
@@ -796,7 +798,7 @@ Learn more about input functions [here](https://snakemake.readthedocs.io/en/stab
 and params functions [here](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules).
 
 
-# Recap
+# recap
 
 **Snakemake concepts covered**
 
@@ -804,7 +806,7 @@ and params functions [here](https://snakemake.readthedocs.io/en/stable/snakefile
 - Config files are imported as dictionaries and allow you to change workflow parameters without modifying code.
 - Lambda functions help define Snakemake input files and parameters based on output files and wildcards.
 
-# Resources {.appendix}
+# resources {.appendix}
 
 - [Just A Little More Python](just-a-little-more-python.qmd): topics I wish I had time to cover in this tutorial.
 - [The Python docs](https://docs.python.org/3/)
