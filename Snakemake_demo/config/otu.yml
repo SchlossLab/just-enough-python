@@ -1,0 +1,3 @@
+dataset: 'OTU'
+method: 'rf'
+seed: 1001

@@ -1,0 +1,3 @@
+dataset: 'genus'
+method: 'glmnet'
+seed: 1001
