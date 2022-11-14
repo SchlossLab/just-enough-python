@@ -195,9 +195,9 @@ languages like R that use 1-based indexing, but:
 > - Greg Wilson[^From _The Tidynomicon_ by Greg Wilson: https://tidynomicon.github.io/tidynomicon/]
 
 Here's an illustration that shows how 0-based & 1-based indexing systems compare
-in the context of DNA coordinates^[from biostars: <https://www.biostars.org/p/84686/>]
+in the context of DNA coordinates^[from biostars: <https://www.biostars.org/p/84686/>]:
 
-[![indexing-dna](https://i.postimg.cc/yxxngrS5/single-nucleotide-or-variant.jpg)](https://www.biostars.org/p/84686/)
+[![DNA indexing comparison](https://i.postimg.cc/yxxngrS5/single-nucleotide-or-variant.jpg)](https://www.biostars.org/p/84686/)
 
 ```{python}
 #| filename: "Python"
