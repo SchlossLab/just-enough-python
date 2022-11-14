@@ -15,7 +15,7 @@ This is just enough Python to understand and apply some cool tricks in your Snak
 
 #####  prereqs
 
-- **Basic Snakemake knowledge.** You've gone through the official tutorial. 
+- **Basic Snakemake knowledge.** You've gone through [the official tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html). 
   Maybe you've even built your own snakemake workflow.
 - Minimal or **no python knowledge**, aside from what you may have gleaned from 
   the snakemake docs.
@@ -450,6 +450,7 @@ But it works nicely when you give it the length of the list -- now you have the 
 
 ```{python}
 #| filename: "Python"
+numbers = [1,2,3,4]
 for i in range(len(numbers)):
     print(f"index {i} is {numbers[i]}")
 ```
@@ -746,3 +747,4 @@ and params functions [here](https://snakemake.readthedocs.io/en/stable/snakefile
 
 - [Just A Little More Python](just-a-little-more-python.qmd): topics I wish I had time to cover in this tutorial.
 - [The Python docs](https://docs.python.org/3/)
+- [The Snakemake docs](https://snakemake.readthedocs.io/)
