@@ -757,7 +757,7 @@ a few tricks:
 ```{python}
 #| filename: "Snakefile"
 #| eval: false
-figures_dict = {1: 'diversity', 2: 'error_rates'}
+figures_dict = {'1': 'diversity', '2': 'error_rates'}
 
 rule targets:
     input:
@@ -765,7 +765,7 @@ rule targets:
 
 rule convert_tiff_to_png:
     input:
-        tiff=lambda wildcards: f"figures/{figures_dict[int(wildcards.fig_num)]}.tiff"
+        tiff=lambda wildcards: f"figures/{figures_dict[wildcards.fig_num]}.tiff"
     output:
         png="paper/figure_{fig_num}.png"
     shell:
@@ -804,7 +804,8 @@ and params functions [here](https://snakemake.readthedocs.io/en/stable/snakefile
 
 - Use f-Strings for readable string formatting.
 - Config files are imported as dictionaries and allow you to change workflow parameters without modifying code.
-- Lambda functions help define Snakemake input files and parameters based on output files and wildcards.
+- Snakemake's `expand()` function is a readable way to build lists just like list comprehensions.
+- Lambda functions help define Snakemake input files based on wildcards. You can also use them to define params based on wildcards and/or output files.
 
 # resources {.appendix}
 
