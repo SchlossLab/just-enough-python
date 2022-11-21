@@ -757,7 +757,7 @@ a few tricks:
 ```{python}
 #| filename: "Snakefile"
 #| eval: false
-figures_dict = {1: 'diversity', 2: 'error_rates'}
+figures_dict = {'1': 'diversity', '2': 'error_rates'}
 
 rule targets:
     input:
@@ -765,7 +765,7 @@ rule targets:
 
 rule convert_tiff_to_png:
     input:
-        tiff=lambda wildcards: f"figures/{figures_dict[int(wildcards.fig_num)]}.tiff"
+        tiff=lambda wildcards: f"figures/{figures_dict[wildcards.fig_num]}.tiff"
     output:
         png="paper/figure_{fig_num}.png"
     shell:
