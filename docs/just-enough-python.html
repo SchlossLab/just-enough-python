@@ -1102,7 +1102,7 @@ index 3 is 4</code></pre>
 </div>
 <p>Using <code>expand()</code> creates the exact same list as the list comprehension, but it’s much easier to read and add variables to.</p>
 </section></section></section></section><section id="functions" class="level2"><h2 class="anchored" data-anchor-id="functions">functions</h2>
-<p>in R:</p>
+<p>You can define your own functions in R:</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -1118,7 +1118,7 @@ index 3 is 4</code></pre>
 <pre><code>[1] 4</code></pre>
 </div>
 </div>
-<p>in Python:</p>
+<p>and in Python:</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -1156,7 +1156,7 @@ index 3 is 4</code></pre>
 <div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb109-1"><a href="#cb109-1"></a><span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;function &lt;lambda&gt; at 0x10d0fe940&gt;</code></pre>
+<pre><code>&lt;function &lt;lambda&gt; at 0x112317940&gt;</code></pre>
 </div>
 </div>
 <p>Before the colon, list the arguments of the function. After the colon, compute the value that the function should return.</p>
@@ -1232,7 +1232,7 @@ index 3 is 4</code></pre>
 <span id="cb112-19"><a href="#cb112-19"></a>        Rmd<span class="op">=</span><span class="st">"paper/paper.Rmd"</span>,</span>
 <span id="cb112-20"><a href="#cb112-20"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/render_rmd.R"</span>,</span>
 <span id="cb112-21"><a href="#cb112-21"></a>        figures<span class="op">=</span>expand(rules.convert_tiff_to_png.output.png, </span>
-<span id="cb112-22"><a href="#cb112-22"></a>                       fig_num <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(figures_dict)<span class="op">+</span><span class="dv">1</span>))</span>
+<span id="cb112-22"><a href="#cb112-22"></a>                       fig_num <span class="op">=</span> figures_dict.keys())</span>
 <span id="cb112-23"><a href="#cb112-23"></a>    output:</span>
 <span id="cb112-24"><a href="#cb112-24"></a>        pdf<span class="op">=</span><span class="st">"paper/paper.pdf"</span></span>
 <span id="cb112-25"><a href="#cb112-25"></a>    script:</span>
@@ -1242,7 +1242,7 @@ index 3 is 4</code></pre>
 <p>This lambda function is equivalent to:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1"></a><span class="kw">def</span> get_fig_name_from_num(wildcards):</span>
-<span id="cb113-2"><a href="#cb113-2"></a>    <span class="cf">return</span> figures_dict[<span class="bu">int</span>(wildcards.fig_num)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb113-2"><a href="#cb113-2"></a>    <span class="cf">return</span> figures_dict[wildcards.fig_num]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>See this full example in context <a href="https://github.com/kelly-sovacool/figure-convert-reprex">here</a>. Learn more about input functions <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#snakefiles-input-functions">here</a> and params functions <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules">here</a>.</p>
 </section></section><section id="recap" class="level1"><h1>recap</h1>
