@@ -804,7 +804,8 @@ and params functions [here](https://snakemake.readthedocs.io/en/stable/snakefile
 
 - Use f-Strings for readable string formatting.
 - Config files are imported as dictionaries and allow you to change workflow parameters without modifying code.
-- Lambda functions help define Snakemake input files and parameters based on output files and wildcards.
+- Snakemake's `expand()` function is a readable way to build lists just like list comprehensions.
+- Lambda functions help define Snakemake input files based on wildcards. You can also use them to define params based on wildcards and/or output files.
 
 # resources {.appendix}
 
