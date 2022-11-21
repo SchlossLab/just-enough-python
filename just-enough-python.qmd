@@ -649,6 +649,7 @@ much easier to read and add variables to.
 
 ## functions
 
+You can define your own functions
 in R: 
 
 ```{R r-function}
@@ -660,7 +661,7 @@ square <- function(x) {
 square(2)
 ```
 
-in Python:
+and in Python:
 
 ```{python py-function}
 #| filename: "Python"
@@ -778,7 +779,7 @@ rule render_paper:
         Rmd="paper/paper.Rmd",
         R="workflow/scripts/render_rmd.R",
         figures=expand(rules.convert_tiff_to_png.output.png, 
-                       fig_num = range(1, len(figures_dict)+1))
+                       fig_num = figures_dict.keys())
     output:
         pdf="paper/paper.pdf"
     script:
@@ -790,7 +791,7 @@ This lambda function is equivalent to:
 
 ```{python}
 def get_fig_name_from_num(wildcards):
-    return figures_dict[int(wildcards.fig_num)]
+    return figures_dict[wildcards.fig_num]
 ```
 
 See this full example in context [here](https://github.com/kelly-sovacool/figure-convert-reprex).
