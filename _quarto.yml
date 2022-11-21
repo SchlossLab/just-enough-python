@@ -10,7 +10,7 @@ website:
     search: true
     left:
       - text: "Home"
-        file: just-enough-python.qmd
+        file: index.qmd
     right:
       - icon: github
         href: https://github.com/SchlossLab/just-enough-python/
