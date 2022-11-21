@@ -6,7 +6,7 @@ engine: knitr
 ---
 
 I wish I had time to cover everything in-depth, but then I'd have to change the 
-title from "[Just Enough Python](just-enough-python.qmd)" to "Way More Python 
+title from "[Just Enough Python](index.qmd)" to "Way More Python 
 Than We Could Possibly Cover In An Hour". 
 So as a compromise, here's just a little more Python.
 
