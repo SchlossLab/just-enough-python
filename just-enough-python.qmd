@@ -38,6 +38,8 @@ This is just enough Python to understand and apply some cool tricks in your Snak
 
 ## variables
 
+Here are the basic variable types in Python and the equivalent type in R:
+
 ### basic types
 
 | Python  | R         |
@@ -84,6 +86,8 @@ A key difference is that in R, all of the above objects are **vectors** of lengt
 
 #### type casting
 
+You can convert variables to different types:
+
 ```{python type-cast}
 #| filename: "Python"
 int(32.0)
@@ -94,10 +98,26 @@ bool(1)
 bool(None)
 ```
 
+The equivalent R code:
+
+```{R}
+#| filename: "R"
+as.integer(32)
+as.numeric(32L)
+as.character(32)
+as.logical(0)
+as.logical(1)
+as.logical(NULL)
+```
+
+What similarities and differences do you notice when type-casting in Python vs. R?
+
 #### Naming variables
 
-Biggest difference between R and Python: no dots are allowed in Python variable names.
-All other rules from R apply. Python variable names must start with an alphabetic character and they can contain alphanumeric characters and underscores.
+The biggest difference between R and Python: no dots are allowed in Python 
+variable names. All other rules from R apply. Python variable names must start 
+with an alphabetic character and they can contain alphanumeric characters 
+and underscores.
 
 Just like in R, it is a good idea not to name a variable the same thing as a 
 reserved keyword or global function.
@@ -189,11 +209,9 @@ numbers[-1] # last item
 
 
 You might find 0-based indexing unintuitive if you're used to working in 
-languages like R that use 1-based indexing, but:
-
->> [this is] not mad, just differently sane!
->> - Terry Pratchett
-> - Greg Wilson[^From _The Tidynomicon_ by Greg Wilson: https://tidynomicon.github.io/tidynomicon/]
+languages like R that use 1-based indexing, but this is 
+"not mad, just differently sane!"^[Greg Wilson quoting Terry Pratchett in 
+_The Tidynomicon_: <https://tidynomicon.github.io/tidynomicon/>]
 
 Here's an illustration that shows how 0-based & 1-based indexing systems compare
 in the context of DNA coordinates^[from biostars: <https://www.biostars.org/p/84686/>]:
@@ -372,7 +390,7 @@ total                 1              1              1
 ```
 
 
-See this example in context [here]().
+See this example in context [here](https://github.com/SchlossLab/just-enough-python/blob/main/Snakemake_demo/workflow/Snakefile).
 
 ## conditionals
 
@@ -526,16 +544,14 @@ for num in problems:
 ```
 
 
-### comprehensions
+### list comprehensions
 
 When you want to make a for loop that creates a new list, dictionary, or set,
 use a **comprehension**. I'm only going to cover list comprehensions below,
 but you can learn about dictionary and set comprehensions 
 [here](just-a-little-more-python.qmd#more-comprehensions).
 
-#### list comprehensions
-
-To build a list with a for loop, you can do this
+To build a list with a for loop, you can do this:
 ```{python list-comp-for}
 #| filename: "Python"
 squares = []
@@ -544,20 +560,27 @@ for i in range(4):
 squares
 ```
 
-but a list comprehension is much sleeker and performs faster:
+but a **list comprehension** is much sleeker and performs faster:
 ```{python list-comp}
 #| filename: "Python"
 squares = [i**2 for i in range(4)]
 ```
 
-this is roughly equivalent to using *apply functions in R:
+This is roughly equivalent to using *apply functions in R:
 
 ```{r apply}
 #| filename: "R"
 sapply(0:3, function(x) {x**2})
 ```
 
-##### Snakemake expand
+You can continue nesting `for x in y` statements to build complex lists like this:
+
+```{python}
+#| filename: "Python"
+[f"{x}{y}{z}" for x in range(1,3) for y in range(2,4) for z in range(3,5)]
+```
+
+#### Snakemake expand
 
 Let's say you have a Snakemake workflow with a rule that should run multiple times
 with different parameters. For example, you may want to train machine learning models
@@ -678,15 +701,16 @@ square(2)
 Sometimes you want to write a simple function that you only use once.
 They're so inconsequential you don't even want to give them a name.
 
-We've already used one in R^[more on anonymous functions here: <http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions>] inside `sapply()`:
+We've already used one in R^[Read more about anonymous functions in Hadley Wickham's book _Advanced R_: <http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions>] inside `sapply()` above:
 
 ```{R r-anon}
 #| filename: "R"
 function(x) { x**2 }
 ```
 
+#### lambda in Snakemake
 
-in Python you use the `lambda` keyword:
+In Python you use the `lambda` keyword:
 
 ```{python py-anon}
 #| filename: "Python"
@@ -752,8 +776,9 @@ Maybe this isn't so bad with only two figures, but you might actually have 5-10
 figures for a full scientific paper. We can reduce the repetitive code with
 a few tricks:
 
-1. Create a dictionary that maps the figure numbers to the descriptive figure file names.
-1. Use a single rule to convert figures, using a lambda function to get the input figure filenames based on the final figure numbers.
+1. Create a dictionary `figures_dict` that maps the figure numbers to the descriptive figure file names.
+1. Use a single rule to convert figures called `convert_tiff_to_png`, using a lambda function to get the input figure filenames based on the final figure numbers.
+1. Bonus: use `expand()` to get a list of figures for the paper in `render_paper`.
 
 
 ```{python}
@@ -795,19 +820,19 @@ def get_fig_name_from_num(wildcards):
     return figures_dict[wildcards.fig_num]
 ```
 
-See this full example in context [here](https://github.com/kelly-sovacool/figure-convert-reprex).
-Learn more about input functions [here](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#snakefiles-input-functions)
-and params functions [here](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules).
+You can take a look at this full example in context [here](https://github.com/kelly-sovacool/figure-convert-reprex).
+Also see the Snakemake docs for more about [input functions](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#snakefiles-input-functions)
+and [params functions](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules).
 
 
 # recap
 
 **Snakemake concepts covered**
 
-- Use f-Strings for readable string formatting.
-- Config files are imported as dictionaries and allow you to change workflow parameters without modifying code.
-- Snakemake's `expand()` function is a readable way to build lists just like list comprehensions.
-- Lambda functions help define Snakemake input files based on wildcards. You can also use them to define params based on wildcards and/or output files.
+- Use **f-Strings** for readable string formatting.
+- Config files are imported as **dictionaries** and allow you to change workflow parameters without modifying code.
+- Snakemake's **expand()** function is a readable way to build lists just like list comprehensions.
+- **Lambda functions** help define Snakemake input files based on wildcards. You can also use them to define params based on wildcards and/or output files.
 
 # resources {.appendix}
 
