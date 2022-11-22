@@ -836,6 +836,8 @@ and [params functions](https://snakemake.readthedocs.io/en/stable/snakefiles/rul
 
 # resources {.appendix}
 
-- [Just A Little More Python](just-a-little-more-python.qmd): topics I wish I had time to cover in this tutorial.
 - [The Python docs](https://docs.python.org/3/)
 - [The Snakemake docs](https://snakemake.readthedocs.io/)
+<!--
+- [Just A Little More Python](just-a-little-more-python.qmd): topics I wish I had time to cover in this tutorial.
+-->
