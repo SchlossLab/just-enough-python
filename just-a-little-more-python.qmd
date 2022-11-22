@@ -17,8 +17,7 @@ So as a compromise, here's just a little more Python.
 ### range returns somehting like a generator. lazy evaluation.
 ## reading & writing files
 ## tupes, named tupes. for snakemake wildcards
-
-## mutability
+## snakemake params - use lambda with wildcards & output args
 
 TODO
 -->
