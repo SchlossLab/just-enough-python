@@ -19,7 +19,7 @@ execute:
   freeze: auto
 title-block-banner: true
 title-block-style: default
-author: "Kelly Sovacool"
+author: "[Kelly Sovacool](https://sovacool.dev)"
 date-format: iso
 css: custom.css
 toc: true
