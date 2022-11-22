@@ -266,6 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Snakemake is a workflow management tool implemented as extra magic on top of Python. If you want to take your Snakemake workflows from beginner to advanced, learning a little Python goes a long way.</p>
 <p>This is just enough Python to understand and apply some cool tricks in your Snakemake workflows.</p>
+<p><img src="./images/python-snakemake-r-logos-horiz.png" class="img-fluid" data-fig-align="center" alt="The Python, R, and Snakemake logos linked together." width="300"><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <section id="prereqs" class="level5"><h5 class="anchored" data-anchor-id="prereqs">prereqs</h5>
 <ul>
 <li>
@@ -560,8 +561,8 @@ await               finally             nonlocal            yield</code></pre>
 <pre><code>4</code></pre>
 </div>
 </div>
-<p>You might find 0-based indexing unintuitive if you’re used to working in languages like R that use 1-based indexing, but this is “not mad, just differently sane!”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>Here’s an illustration that shows how 0-based &amp; 1-based indexing systems compare in the context of DNA coordinates<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>:</p>
+<p>You might find 0-based indexing unintuitive if you’re used to working in languages like R that use 1-based indexing, but this is “not mad, just differently sane!”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Here’s an illustration that shows how 0-based &amp; 1-based indexing systems compare in the context of DNA coordinates<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><a href="https://www.biostars.org/p/84686/"><img src="https://i.postimg.cc/yxxngrS5/single-nucleotide-or-variant.jpg" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">DNA indexing comparison</figcaption><p></p>
@@ -1195,7 +1196,7 @@ index 3 is 4</code></pre>
 </div>
 <section id="anonymous-functions" class="level3"><h3 class="anchored" data-anchor-id="anonymous-functions">anonymous functions</h3>
 <p>Sometimes you want to write a simple function that you only use once. They’re so inconsequential you don’t even want to give them a name.</p>
-<p>We’ve already used one in R<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> inside <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> above:</p>
+<p>We’ve already used one in R<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> inside <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> above:</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -1216,7 +1217,7 @@ index 3 is 4</code></pre>
 <div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1"></a><span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;function &lt;lambda&gt; at 0x102a19af0&gt;</code></pre>
+<pre><code>&lt;function &lt;lambda&gt; at 0x105230af0&gt;</code></pre>
 </div>
 </div>
 <p>Before the colon, list the arguments of the function. After the colon, compute the value that the function should return.</p>
@@ -1362,9 +1363,10 @@ index 3 is 4</code></pre>
 
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 <ol>
-<li id="fn1"><p>Greg Wilson quoting Terry Pratchett in <em>The Tidynomicon</em>: <a href="https://tidynomicon.github.io/tidynomicon/" class="uri">https://tidynomicon.github.io/tidynomicon/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>from biostars: <a href="https://www.biostars.org/p/84686/" class="uri">https://www.biostars.org/p/84686/</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Read more about anonymous functions in Hadley Wickham’s book <em>Advanced R</em>: <a href="http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions" class="uri">http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>The <a href="https://commons.wikimedia.org/wiki/File:Python-logo-notext.svg">Python logo</a> by the Python Software Foundation is licensed under GNU GPL v2. The <a href="https://commons.wikimedia.org/wiki/File:Snakemake_logo_dark.png">Snakemake logo</a> by Johannes Köster is licensed under CC BY-SA 4.0. The <a href="https://commons.wikimedia.org/wiki/File:R_logo.svg">R logo</a> by Hadley Wickham and others at RStudio is licensed under CC BY-SA 4.0.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Greg Wilson quoting Terry Pratchett in <em>The Tidynomicon</em>: <a href="https://tidynomicon.github.io/tidynomicon/" class="uri">https://tidynomicon.github.io/tidynomicon/</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>from biostars: <a href="https://www.biostars.org/p/84686/" class="uri">https://www.biostars.org/p/84686/</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Read more about anonymous functions in Hadley Wickham’s book <em>Advanced R</em>: <a href="http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions" class="uri">http://adv-r.had.co.nz/Functional-programming.html#anonymous-functions</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
