@@ -114,8 +114,9 @@ What similarities and differences do you notice when type-casting in Python vs. 
 
 #### Naming variables
 
-The biggest difference between R and Python: no dots are allowed in Python 
-variable names. All other rules from R apply. Python variable names must start 
+The biggest difference in variable names between R and Python: 
+no dots are allowed in Python variable names. 
+All other rules from R apply. Python variable names must start 
 with an alphabetic character and they can contain alphanumeric characters 
 and underscores.
 
@@ -174,11 +175,13 @@ glue::glue("{prefix} {firstname} {middle_init}. {lastname}")
 
 ### container types
 
+Here are a few of the most useful container types and their equivalents in R:
+
 | Python             | R              |
 |--------------------|----------------|
 | list               | vector (all same type) or list (multiple types) |
 | dictionary         | named list     |
-| dataframe (pandas) | dataframe (base) or tibble (tidyverse) |
+| DataFrame (pandas) | data.frame (base) or tibble (tidyverse) |
 
 #### lists
 
@@ -272,6 +275,13 @@ hyperparams = {'glmnet': {'alpha': [0, 0.5, 1],
                 'rf': {'mtry': [128, 256, 512]}
                }
 hyperparams['glmnet']['alpha'][1]
+```
+
+Get a list of keys in the dictionary with:
+
+```{python}
+#| filename: "Python"
+hyperparams.keys()
 ```
 
 ##### Snakemake config
@@ -540,7 +550,7 @@ for i in range(len(numbers)):
 problems = {1: "naming things", 2: "understanding binary", 3: "off-by-one errors"}
 print('There are only 10 hard problems in computer science:')
 for num in problems:
-    print("\t", num, problems[num])
+    print(f"\t {num} {problems[num]}")
 ```
 
 
@@ -585,7 +595,7 @@ You can continue nesting `for x in y` statements to build complex lists like thi
 Let's say you have a Snakemake workflow with a rule that should run multiple times
 with different parameters. For example, you may want to train machine learning models
 with different ML methods, datasets, and random seeds. 
-You define these as `wildcards` in a rule to train each ML model:
+You define these as [wildcards](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#wildcards) in a rule to train each ML model:
 
 ```{python}
 #| filename: "Snakefile"
@@ -779,8 +789,53 @@ a few tricks:
 
 1. Create a dictionary `figures_dict` that maps the figure numbers to the descriptive figure file names.
 1. Use a single rule to convert figures called `convert_tiff_to_png`, using a lambda function to get the input figure filenames based on the final figure numbers.
-1. Bonus: use `expand()` to get a list of figures for the paper in `render_paper`.
 
+
+```{python}
+#| filename: "Snakefile"
+#| eval: false
+figures_dict = {'1': 'diversity', '2': 'error_rates'}
+
+rule targets:
+    input:
+        "paper/paper.pdf"
+
+rule convert_tiff_to_png:
+    input:
+        tiff=lambda wildcards: f"figures/{figures_dict[wildcards.fig_num]}.tiff"
+    output:
+        png="paper/figure_{fig_num}.png"
+    shell:
+        """
+        convert {input.tiff} {output.png}
+        """
+
+rule render_paper:
+    input:
+        Rmd="paper/paper.Rmd",
+        R="workflow/scripts/render_rmd.R",
+        figures=['paper/figure_1.png', 'paper/figure_2.png']
+    output:
+        pdf="paper/paper.pdf"
+    script:
+        "scripts/render_rmd.R"
+```
+
+
+This lambda function is equivalent to:
+
+```{python}
+def get_fig_name_from_num(wildcards):
+    return figures_dict[wildcards.fig_num]
+```
+
+This works because Snakemake allows you to define a function that takes the 
+rule's wildcards and returns a list of input filenames, rather than literally
+listing the input filenames as before.
+This greatly reduces the repetitiveness of the code and makes it easier to maintain.
+
+We can improve this Snakefile even further by replacing the list of figures in
+`render_paper` with a call to `expand()`:
 
 ```{python}
 #| filename: "Snakefile"
@@ -813,13 +868,6 @@ rule render_paper:
         "scripts/render_rmd.R"
 ```
 
-
-This lambda function is equivalent to:
-
-```{python}
-def get_fig_name_from_num(wildcards):
-    return figures_dict[wildcards.fig_num]
-```
 
 You can take a look at this full example in context [here](https://github.com/kelly-sovacool/figure-convert-reprex).
 Also see the Snakemake docs for more about [input functions](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#snakefiles-input-functions)
