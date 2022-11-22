@@ -8,7 +8,7 @@ website:
   repo-actions: [edit, issue]
   site-url: https://www.schlosslab.org/just-enough-python/
   twitter-card: 
-    creator: @kelly-sovacool
+    creator: "@kelly_sovacool"
   open-graph: true
   navbar:
     search: true
