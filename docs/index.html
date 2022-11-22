@@ -408,7 +408,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>What similarities and differences do you notice when type-casting in Python vs.&nbsp;R?</p>
 </section><section id="naming-variables" class="level4"><h4 class="anchored" data-anchor-id="naming-variables">Naming variables</h4>
-<p>The biggest difference between R and Python: no dots are allowed in Python variable names. All other rules from R apply. Python variable names must start with an alphabetic character and they can contain alphanumeric characters and underscores.</p>
+<p>The biggest difference in variable names between R and Python: no dots are allowed in Python variable names. All other rules from R apply. Python variable names must start with an alphabetic character and they can contain alphanumeric characters and underscores.</p>
 <p>Just like in R, it is a good idea not to name a variable the same thing as a reserved keyword or global function.</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -493,6 +493,7 @@ await               finally             nonlocal            yield</code></pre>
 </div>
 </div>
 </section></section><section id="container-types" class="level3"><h3 class="anchored" data-anchor-id="container-types">container types</h3>
+<p>Here are a few of the most useful container types and their equivalents in R:</p>
 <table class="table">
 <thead><tr class="header">
 <th>Python</th>
@@ -508,8 +509,8 @@ await               finally             nonlocal            yield</code></pre>
 <td>named list</td>
 </tr>
 <tr class="odd">
-<td>dataframe (pandas)</td>
-<td>dataframe (base) or tibble (tidyverse)</td>
+<td>DataFrame (pandas)</td>
+<td>data.frame (base) or tibble (tidyverse)</td>
 </tr>
 </tbody>
 </table>
@@ -656,6 +657,18 @@ await               finally             nonlocal            yield</code></pre>
 <pre><code>0.5</code></pre>
 </div>
 </div>
+<p>Get a list of keys in the dictionary with:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1"></a>hyperparams.keys()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>dict_keys(['glmnet', 'rf'])</code></pre>
+</div>
+</div>
 <section id="snakemake-config" class="level5"><h5 class="anchored" data-anchor-id="snakemake-config">Snakemake config</h5>
 <p>Say you have a Snakemake workflow for training machine learning models. You want to be able to specify different datasets, ML methods, and random seeds, so you use f-Strings to fill in these variables:</p>
 <div class="cell">
@@ -663,18 +676,18 @@ await               finally             nonlocal            yield</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Snakefile</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1"></a>dataset <span class="op">=</span> <span class="st">"OTU"</span></span>
-<span id="cb69-2"><a href="#cb69-2"></a>method <span class="op">=</span> <span class="st">"rf"</span></span>
-<span id="cb69-3"><a href="#cb69-3"></a>seed <span class="op">=</span> <span class="dv">1001</span></span>
-<span id="cb69-4"><a href="#cb69-4"></a></span>
-<span id="cb69-5"><a href="#cb69-5"></a>rule train_ml_model:</span>
-<span id="cb69-6"><a href="#cb69-6"></a>    <span class="bu">input</span>:</span>
-<span id="cb69-7"><a href="#cb69-7"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span>,</span>
-<span id="cb69-8"><a href="#cb69-8"></a>        csv<span class="op">=</span><span class="ss">f"data/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">.csv"</span></span>
-<span id="cb69-9"><a href="#cb69-9"></a>    output:</span>
-<span id="cb69-10"><a href="#cb69-10"></a>        model<span class="op">=</span><span class="ss">f"results/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">/runs/</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>seed<span class="sc">}</span><span class="ss">_model.Rds"</span></span>
-<span id="cb69-11"><a href="#cb69-11"></a>    script:</span>
-<span id="cb69-12"><a href="#cb69-12"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1"></a>dataset <span class="op">=</span> <span class="st">"OTU"</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a>method <span class="op">=</span> <span class="st">"rf"</span></span>
+<span id="cb71-3"><a href="#cb71-3"></a>seed <span class="op">=</span> <span class="dv">1001</span></span>
+<span id="cb71-4"><a href="#cb71-4"></a></span>
+<span id="cb71-5"><a href="#cb71-5"></a>rule train_ml_model:</span>
+<span id="cb71-6"><a href="#cb71-6"></a>    <span class="bu">input</span>:</span>
+<span id="cb71-7"><a href="#cb71-7"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span>,</span>
+<span id="cb71-8"><a href="#cb71-8"></a>        csv<span class="op">=</span><span class="ss">f"data/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">.csv"</span></span>
+<span id="cb71-9"><a href="#cb71-9"></a>    output:</span>
+<span id="cb71-10"><a href="#cb71-10"></a>        model<span class="op">=</span><span class="ss">f"results/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">/runs/</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>seed<span class="sc">}</span><span class="ss">_model.Rds"</span></span>
+<span id="cb71-11"><a href="#cb71-11"></a>    script:</span>
+<span id="cb71-12"><a href="#cb71-12"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>You can improve this by creating a configuration file in YAML format:</p>
@@ -683,9 +696,9 @@ await               finally             nonlocal            yield</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>config/otu.yml</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a>dataset<span class="sc">:</span> <span class="st">'OTU'</span></span>
-<span id="cb70-2"><a href="#cb70-2"></a>method<span class="sc">:</span> <span class="st">'rf'</span></span>
-<span id="cb70-3"><a href="#cb70-3"></a>seed<span class="sc">:</span> <span class="dv">1001</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>dataset<span class="sc">:</span> <span class="st">'OTU'</span></span>
+<span id="cb72-2"><a href="#cb72-2"></a>method<span class="sc">:</span> <span class="st">'rf'</span></span>
+<span id="cb72-3"><a href="#cb72-3"></a>seed<span class="sc">:</span> <span class="dv">1001</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>Then specify your config file at the top of your Snakefile. Snakemake parses your YAML config files to a dictionary called <code>config</code>.</p>
@@ -694,20 +707,20 @@ await               finally             nonlocal            yield</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Snakefile</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1"></a>configfile: <span class="st">"config/otu.yml"</span></span>
-<span id="cb71-2"><a href="#cb71-2"></a></span>
-<span id="cb71-3"><a href="#cb71-3"></a>dataset <span class="op">=</span> config[<span class="st">"dataset"</span>]</span>
-<span id="cb71-4"><a href="#cb71-4"></a>method <span class="op">=</span> config[<span class="st">'rf'</span>]</span>
-<span id="cb71-5"><a href="#cb71-5"></a>seed <span class="op">=</span> config[<span class="st">'seed'</span>]</span>
-<span id="cb71-6"><a href="#cb71-6"></a></span>
-<span id="cb71-7"><a href="#cb71-7"></a>rule train_ml_model:</span>
-<span id="cb71-8"><a href="#cb71-8"></a>    <span class="bu">input</span>:</span>
-<span id="cb71-9"><a href="#cb71-9"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span>,</span>
-<span id="cb71-10"><a href="#cb71-10"></a>        csv<span class="op">=</span><span class="ss">f"data/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">.csv"</span></span>
-<span id="cb71-11"><a href="#cb71-11"></a>    output:</span>
-<span id="cb71-12"><a href="#cb71-12"></a>        model<span class="op">=</span><span class="ss">f"results/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">/runs/</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>seed<span class="sc">}</span><span class="ss">_model.Rds"</span></span>
-<span id="cb71-13"><a href="#cb71-13"></a>    script:</span>
-<span id="cb71-14"><a href="#cb71-14"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1"></a>configfile: <span class="st">"config/otu.yml"</span></span>
+<span id="cb73-2"><a href="#cb73-2"></a></span>
+<span id="cb73-3"><a href="#cb73-3"></a>dataset <span class="op">=</span> config[<span class="st">"dataset"</span>]</span>
+<span id="cb73-4"><a href="#cb73-4"></a>method <span class="op">=</span> config[<span class="st">'rf'</span>]</span>
+<span id="cb73-5"><a href="#cb73-5"></a>seed <span class="op">=</span> config[<span class="st">'seed'</span>]</span>
+<span id="cb73-6"><a href="#cb73-6"></a></span>
+<span id="cb73-7"><a href="#cb73-7"></a>rule train_ml_model:</span>
+<span id="cb73-8"><a href="#cb73-8"></a>    <span class="bu">input</span>:</span>
+<span id="cb73-9"><a href="#cb73-9"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span>,</span>
+<span id="cb73-10"><a href="#cb73-10"></a>        csv<span class="op">=</span><span class="ss">f"data/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">.csv"</span></span>
+<span id="cb73-11"><a href="#cb73-11"></a>    output:</span>
+<span id="cb73-12"><a href="#cb73-12"></a>        model<span class="op">=</span><span class="ss">f"results/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">/runs/</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>seed<span class="sc">}</span><span class="ss">_model.Rds"</span></span>
+<span id="cb73-13"><a href="#cb73-13"></a>    script:</span>
+<span id="cb73-14"><a href="#cb73-14"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>When you run this workflow, it uses <code>config/otu.yml</code> by default:</p>
@@ -716,22 +729,22 @@ await               finally             nonlocal            yield</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>sh</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb72-1"><a href="#cb72-1"></a><span class="ex">snakemake</span> <span class="at">-n</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb74-1"><a href="#cb74-1"></a><span class="ex">snakemake</span> <span class="at">-n</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb73-1"><a href="#cb73-1"></a><span class="ex">rule</span> train_ml_model:</span>
-<span id="cb73-2"><a href="#cb73-2"></a>    <span class="ex">input:</span> workflow/scripts/train_ml.R, data/OTU.csv</span>
-<span id="cb73-3"><a href="#cb73-3"></a>    <span class="ex">output:</span> results/OTU/runs/rf_1001_model.Rds</span>
-<span id="cb73-4"><a href="#cb73-4"></a>    <span class="ex">jobid:</span> 0</span>
-<span id="cb73-5"><a href="#cb73-5"></a>    <span class="ex">reason:</span> Missing output files: results/OTU/runs/rf_1001_model.Rds</span>
-<span id="cb73-6"><a href="#cb73-6"></a>    <span class="ex">resources:</span> tmpdir=/var/folders/9n/glrhxtfx453gl68sc1gzq0mc0000gr/T</span>
-<span id="cb73-7"><a href="#cb73-7"></a></span>
-<span id="cb73-8"><a href="#cb73-8"></a><span class="ex">Job</span> stats:</span>
-<span id="cb73-9"><a href="#cb73-9"></a><span class="ex">job</span>               count    min threads    max threads</span>
-<span id="cb73-10"><a href="#cb73-10"></a><span class="ex">--------------</span>  <span class="at">-------</span>  <span class="at">-------------</span>  <span class="at">-------------</span></span>
-<span id="cb73-11"><a href="#cb73-11"></a><span class="ex">train_ml_model</span>        1              1              1</span>
-<span id="cb73-12"><a href="#cb73-12"></a><span class="ex">total</span>                 1              1              1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1"></a><span class="ex">rule</span> train_ml_model:</span>
+<span id="cb75-2"><a href="#cb75-2"></a>    <span class="ex">input:</span> workflow/scripts/train_ml.R, data/OTU.csv</span>
+<span id="cb75-3"><a href="#cb75-3"></a>    <span class="ex">output:</span> results/OTU/runs/rf_1001_model.Rds</span>
+<span id="cb75-4"><a href="#cb75-4"></a>    <span class="ex">jobid:</span> 0</span>
+<span id="cb75-5"><a href="#cb75-5"></a>    <span class="ex">reason:</span> Missing output files: results/OTU/runs/rf_1001_model.Rds</span>
+<span id="cb75-6"><a href="#cb75-6"></a>    <span class="ex">resources:</span> tmpdir=/var/folders/9n/glrhxtfx453gl68sc1gzq0mc0000gr/T</span>
+<span id="cb75-7"><a href="#cb75-7"></a></span>
+<span id="cb75-8"><a href="#cb75-8"></a><span class="ex">Job</span> stats:</span>
+<span id="cb75-9"><a href="#cb75-9"></a><span class="ex">job</span>               count    min threads    max threads</span>
+<span id="cb75-10"><a href="#cb75-10"></a><span class="ex">--------------</span>  <span class="at">-------</span>  <span class="at">-------------</span>  <span class="at">-------------</span></span>
+<span id="cb75-11"><a href="#cb75-11"></a><span class="ex">train_ml_model</span>        1              1              1</span>
+<span id="cb75-12"><a href="#cb75-12"></a><span class="ex">total</span>                 1              1              1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now you can change the values of these variables by editing the config file, or by creating multiple config files and specifying them on the command line:</p>
 <div class="cell">
@@ -739,9 +752,9 @@ await               finally             nonlocal            yield</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>config/genus.yml</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>dataset<span class="sc">:</span> <span class="st">'genus'</span></span>
-<span id="cb74-2"><a href="#cb74-2"></a>method<span class="sc">:</span> <span class="st">'glmnet'</span></span>
-<span id="cb74-3"><a href="#cb74-3"></a>seed<span class="sc">:</span> <span class="dv">1001</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>dataset<span class="sc">:</span> <span class="st">'genus'</span></span>
+<span id="cb76-2"><a href="#cb76-2"></a>method<span class="sc">:</span> <span class="st">'glmnet'</span></span>
+<span id="cb76-3"><a href="#cb76-3"></a>seed<span class="sc">:</span> <span class="dv">1001</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="cell">
@@ -749,22 +762,22 @@ await               finally             nonlocal            yield</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>sh</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1"></a><span class="ex">snakemake</span> <span class="at">-n</span> <span class="at">--configfile</span> config/genus.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb77-1"><a href="#cb77-1"></a><span class="ex">snakemake</span> <span class="at">-n</span> <span class="at">--configfile</span> config/genus.yml</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb76-1"><a href="#cb76-1"></a><span class="ex">rule</span> train_ml_model:</span>
-<span id="cb76-2"><a href="#cb76-2"></a>    <span class="ex">input:</span> workflow/scripts/train_ml.R, data/genus.csv</span>
-<span id="cb76-3"><a href="#cb76-3"></a>    <span class="ex">output:</span> results/genus/runs/glmnet_1001_model.Rds</span>
-<span id="cb76-4"><a href="#cb76-4"></a>    <span class="ex">jobid:</span> 0</span>
-<span id="cb76-5"><a href="#cb76-5"></a>    <span class="ex">reason:</span> Missing output files: results/genus/runs/glmnet_1001_model.Rds</span>
-<span id="cb76-6"><a href="#cb76-6"></a>    <span class="ex">resources:</span> tmpdir=/var/folders/9n/glrhxtfx453gl68sc1gzq0mc0000gr/T</span>
-<span id="cb76-7"><a href="#cb76-7"></a></span>
-<span id="cb76-8"><a href="#cb76-8"></a><span class="ex">Job</span> stats:</span>
-<span id="cb76-9"><a href="#cb76-9"></a><span class="ex">job</span>               count    min threads    max threads</span>
-<span id="cb76-10"><a href="#cb76-10"></a><span class="ex">--------------</span>  <span class="at">-------</span>  <span class="at">-------------</span>  <span class="at">-------------</span></span>
-<span id="cb76-11"><a href="#cb76-11"></a><span class="ex">train_ml_model</span>        1              1              1</span>
-<span id="cb76-12"><a href="#cb76-12"></a><span class="ex">total</span>                 1              1              1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb78-1"><a href="#cb78-1"></a><span class="ex">rule</span> train_ml_model:</span>
+<span id="cb78-2"><a href="#cb78-2"></a>    <span class="ex">input:</span> workflow/scripts/train_ml.R, data/genus.csv</span>
+<span id="cb78-3"><a href="#cb78-3"></a>    <span class="ex">output:</span> results/genus/runs/glmnet_1001_model.Rds</span>
+<span id="cb78-4"><a href="#cb78-4"></a>    <span class="ex">jobid:</span> 0</span>
+<span id="cb78-5"><a href="#cb78-5"></a>    <span class="ex">reason:</span> Missing output files: results/genus/runs/glmnet_1001_model.Rds</span>
+<span id="cb78-6"><a href="#cb78-6"></a>    <span class="ex">resources:</span> tmpdir=/var/folders/9n/glrhxtfx453gl68sc1gzq0mc0000gr/T</span>
+<span id="cb78-7"><a href="#cb78-7"></a></span>
+<span id="cb78-8"><a href="#cb78-8"></a><span class="ex">Job</span> stats:</span>
+<span id="cb78-9"><a href="#cb78-9"></a><span class="ex">job</span>               count    min threads    max threads</span>
+<span id="cb78-10"><a href="#cb78-10"></a><span class="ex">--------------</span>  <span class="at">-------</span>  <span class="at">-------------</span>  <span class="at">-------------</span></span>
+<span id="cb78-11"><a href="#cb78-11"></a><span class="ex">train_ml_model</span>        1              1              1</span>
+<span id="cb78-12"><a href="#cb78-12"></a><span class="ex">total</span>                 1              1              1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>See this example in context <a href="https://github.com/SchlossLab/just-enough-python/blob/main/Snakemake_demo/workflow/Snakefile">here</a>.</p>
 </section></section></section></section><section id="conditionals" class="level2"><h2 class="anchored" data-anchor-id="conditionals">conditionals</h2>
@@ -829,11 +842,11 @@ await               finally             nonlocal            yield</code></pre>
 </tbody>
 </table>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1"></a><span class="dv">3</span> <span class="op">&gt;</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1"></a><span class="dv">3</span> <span class="op">&gt;</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>True</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1"></a><span class="va">True</span> <span class="kw">or</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1"></a><span class="va">True</span> <span class="kw">or</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>True</code></pre>
 </div>
@@ -845,13 +858,13 @@ await               finally             nonlocal            yield</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1"></a><span class="cf">if</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">10</span>:</span>
-<span id="cb81-2"><a href="#cb81-2"></a>    list_description <span class="op">=</span> <span class="st">"This list is short"</span></span>
-<span id="cb81-3"><a href="#cb81-3"></a><span class="cf">elif</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">15</span>:</span>
-<span id="cb81-4"><a href="#cb81-4"></a>    list_description <span class="op">=</span> <span class="st">"This list is medium length"</span></span>
-<span id="cb81-5"><a href="#cb81-5"></a><span class="cf">else</span>:</span>
-<span id="cb81-6"><a href="#cb81-6"></a>    list_description <span class="op">=</span> <span class="st">"This list is long!"</span></span>
-<span id="cb81-7"><a href="#cb81-7"></a><span class="bu">print</span>(list_description)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1"></a><span class="cf">if</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">10</span>:</span>
+<span id="cb83-2"><a href="#cb83-2"></a>    list_description <span class="op">=</span> <span class="st">"This list is short"</span></span>
+<span id="cb83-3"><a href="#cb83-3"></a><span class="cf">elif</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">15</span>:</span>
+<span id="cb83-4"><a href="#cb83-4"></a>    list_description <span class="op">=</span> <span class="st">"This list is medium length"</span></span>
+<span id="cb83-5"><a href="#cb83-5"></a><span class="cf">else</span>:</span>
+<span id="cb83-6"><a href="#cb83-6"></a>    list_description <span class="op">=</span> <span class="st">"This list is long!"</span></span>
+<span id="cb83-7"><a href="#cb83-7"></a><span class="bu">print</span>(list_description)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>This list is short</code></pre>
@@ -860,14 +873,14 @@ await               finally             nonlocal            yield</code></pre>
 <section id="inline-if-else-statement" class="level4"><h4 class="anchored" data-anchor-id="inline-if-else-statement">inline if-else statement</h4>
 <p>When you create a variable with an if-else statement, you can do it all on one line:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1"></a>list_description <span class="op">=</span> <span class="st">"short"</span> <span class="cf">if</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">10</span> <span class="cf">else</span> <span class="st">"not short"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1"></a>list_description <span class="op">=</span> <span class="st">"short"</span> <span class="cf">if</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">10</span> <span class="cf">else</span> <span class="st">"not short"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This is equivalent to:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1"></a><span class="cf">if</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">10</span>:</span>
-<span id="cb84-2"><a href="#cb84-2"></a>    list_description <span class="op">=</span> <span class="st">"short"</span></span>
-<span id="cb84-3"><a href="#cb84-3"></a><span class="cf">else</span>:</span>
-<span id="cb84-4"><a href="#cb84-4"></a>    list_description <span class="op">=</span> <span class="st">"not short"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1"></a><span class="cf">if</span> <span class="bu">len</span>(my_list) <span class="op">&lt;</span> <span class="dv">10</span>:</span>
+<span id="cb86-2"><a href="#cb86-2"></a>    list_description <span class="op">=</span> <span class="st">"short"</span></span>
+<span id="cb86-3"><a href="#cb86-3"></a><span class="cf">else</span>:</span>
+<span id="cb86-4"><a href="#cb86-4"></a>    list_description <span class="op">=</span> <span class="st">"not short"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can’t make it a one-liner if you need to use <code>elif</code>.</p>
 </section><section id="nested-if-else-blocks" class="level4"><h4 class="anchored" data-anchor-id="nested-if-else-blocks">nested if-else blocks</h4>
@@ -876,14 +889,14 @@ await               finally             nonlocal            yield</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1"></a>num <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb85-2"><a href="#cb85-2"></a><span class="cf">if</span> num <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
-<span id="cb85-3"><a href="#cb85-3"></a>    <span class="cf">if</span> num <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb85-4"><a href="#cb85-4"></a>        <span class="bu">print</span>(<span class="st">"zero"</span>)</span>
-<span id="cb85-5"><a href="#cb85-5"></a>    <span class="cf">else</span>:</span>
-<span id="cb85-6"><a href="#cb85-6"></a>        <span class="bu">print</span>(<span class="st">"positive"</span>)</span>
-<span id="cb85-7"><a href="#cb85-7"></a><span class="cf">else</span>:</span>
-<span id="cb85-8"><a href="#cb85-8"></a>    <span class="bu">print</span>(<span class="st">"negative"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1"></a>num <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb87-2"><a href="#cb87-2"></a><span class="cf">if</span> num <span class="op">&gt;=</span> <span class="dv">0</span>:</span>
+<span id="cb87-3"><a href="#cb87-3"></a>    <span class="cf">if</span> num <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb87-4"><a href="#cb87-4"></a>        <span class="bu">print</span>(<span class="st">"zero"</span>)</span>
+<span id="cb87-5"><a href="#cb87-5"></a>    <span class="cf">else</span>:</span>
+<span id="cb87-6"><a href="#cb87-6"></a>        <span class="bu">print</span>(<span class="st">"positive"</span>)</span>
+<span id="cb87-7"><a href="#cb87-7"></a><span class="cf">else</span>:</span>
+<span id="cb87-8"><a href="#cb87-8"></a>    <span class="bu">print</span>(<span class="st">"negative"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>positive</code></pre>
@@ -896,9 +909,9 @@ await               finally             nonlocal            yield</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1"></a>postdocs <span class="op">=</span> [<span class="st">'Allison Mason'</span>, <span class="st">'Courtney Armour'</span>, <span class="st">'Sarah Lucas'</span>]</span>
-<span id="cb87-2"><a href="#cb87-2"></a><span class="cf">for</span> person <span class="kw">in</span> postdocs:</span>
-<span id="cb87-3"><a href="#cb87-3"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>person<span class="sc">}</span><span class="ss">, PhD"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1"></a>postdocs <span class="op">=</span> [<span class="st">'Allison Mason'</span>, <span class="st">'Courtney Armour'</span>, <span class="st">'Sarah Lucas'</span>]</span>
+<span id="cb89-2"><a href="#cb89-2"></a><span class="cf">for</span> person <span class="kw">in</span> postdocs:</span>
+<span id="cb89-3"><a href="#cb89-3"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>person<span class="sc">}</span><span class="ss">, PhD"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Allison Mason, PhD
@@ -913,9 +926,9 @@ Sarah Lucas, PhD</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1"></a>num_bottles <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb89-2"><a href="#cb89-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, num_bottles<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb89-3"><a href="#cb89-3"></a>    <span class="bu">print</span>(i, <span class="st">" bottles of pop on the wall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1"></a>num_bottles <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb91-2"><a href="#cb91-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, num_bottles<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb91-3"><a href="#cb91-3"></a>    <span class="bu">print</span>(i, <span class="st">" bottles of pop on the wall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1  bottles of pop on the wall
@@ -929,9 +942,9 @@ Sarah Lucas, PhD</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1"></a>num_bottles <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb91-2"><a href="#cb91-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num_bottles<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb91-3"><a href="#cb91-3"></a>    <span class="bu">print</span>(i, <span class="st">" bottles of pop on the wall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1"></a>num_bottles <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb93-2"><a href="#cb93-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(num_bottles<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb93-3"><a href="#cb93-3"></a>    <span class="bu">print</span>(i, <span class="st">" bottles of pop on the wall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0  bottles of pop on the wall
@@ -947,8 +960,8 @@ Sarah Lucas, PhD</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1"></a>mylist <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">3</span>))</span>
-<span id="cb93-2"><a href="#cb93-2"></a>mylist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1"></a>mylist <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">3</span>))</span>
+<span id="cb95-2"><a href="#cb95-2"></a>mylist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[0, 1, 2]</code></pre>
@@ -960,7 +973,7 @@ Sarah Lucas, PhD</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1"></a><span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">11</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1"></a><span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">11</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[2, 4, 6, 8, 10]</code></pre>
@@ -972,7 +985,7 @@ Sarah Lucas, PhD</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1"></a><span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, <span class="op">-</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1"></a><span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, <span class="op">-</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[4, 2, 0, -2, -4, -6]</code></pre>
@@ -984,9 +997,9 @@ Sarah Lucas, PhD</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]</span>
-<span id="cb99-2"><a href="#cb99-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(numbers)):</span>
-<span id="cb99-3"><a href="#cb99-3"></a>    <span class="bu">print</span>(<span class="ss">f"index </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>numbers[i]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>]</span>
+<span id="cb101-2"><a href="#cb101-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(numbers)):</span>
+<span id="cb101-3"><a href="#cb101-3"></a>    <span class="bu">print</span>(<span class="ss">f"index </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>numbers[i]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>index 0 is 1
@@ -1001,14 +1014,14 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1"></a>problems <span class="op">=</span> {<span class="dv">1</span>: <span class="st">"naming things"</span>, <span class="dv">2</span>: <span class="st">"understanding binary"</span>, <span class="dv">3</span>: <span class="st">"off-by-one errors"</span>}</span>
-<span id="cb101-2"><a href="#cb101-2"></a><span class="bu">print</span>(<span class="st">'There are only 10 hard problems in computer science:'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1"></a>problems <span class="op">=</span> {<span class="dv">1</span>: <span class="st">"naming things"</span>, <span class="dv">2</span>: <span class="st">"understanding binary"</span>, <span class="dv">3</span>: <span class="st">"off-by-one errors"</span>}</span>
+<span id="cb103-2"><a href="#cb103-2"></a><span class="bu">print</span>(<span class="st">'There are only 10 hard problems in computer science:'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>There are only 10 hard problems in computer science:</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1"></a><span class="cf">for</span> num <span class="kw">in</span> problems:</span>
-<span id="cb103-2"><a href="#cb103-2"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">"</span>, num, problems[num])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1"></a><span class="cf">for</span> num <span class="kw">in</span> problems:</span>
+<span id="cb105-2"><a href="#cb105-2"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\t</span><span class="ss"> </span><span class="sc">{</span>num<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>problems[num]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     1 naming things
      2 understanding binary
@@ -1023,10 +1036,10 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1"></a>squares <span class="op">=</span> []</span>
-<span id="cb105-2"><a href="#cb105-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
-<span id="cb105-3"><a href="#cb105-3"></a>    squares.append(i<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb105-4"><a href="#cb105-4"></a>squares</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1"></a>squares <span class="op">=</span> []</span>
+<span id="cb107-2"><a href="#cb107-2"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
+<span id="cb107-3"><a href="#cb107-3"></a>    squares.append(i<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb107-4"><a href="#cb107-4"></a>squares</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[0, 1, 4, 9]</code></pre>
@@ -1038,7 +1051,7 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1"></a>squares <span class="op">=</span> [i<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb109-1"><a href="#cb109-1"></a>squares <span class="op">=</span> [i<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>This is roughly equivalent to using *apply functions in R:</p>
@@ -1047,7 +1060,7 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1"></a><span class="fu">sapply</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, <span class="cf">function</span>(x) {x<span class="sc">**</span><span class="dv">2</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1"></a><span class="fu">sapply</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">3</span>, <span class="cf">function</span>(x) {x<span class="sc">**</span><span class="dv">2</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0 1 4 9</code></pre>
@@ -1059,27 +1072,27 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1"></a>[<span class="ss">f"</span><span class="sc">{</span>x<span class="sc">}{</span>y<span class="sc">}{</span>z<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">3</span>) <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">4</span>) <span class="cf">for</span> z <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>,<span class="dv">5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1"></a>[<span class="ss">f"</span><span class="sc">{</span>x<span class="sc">}{</span>y<span class="sc">}{</span>z<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">3</span>) <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">4</span>) <span class="cf">for</span> z <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>,<span class="dv">5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>['123', '124', '133', '134', '223', '224', '233', '234']</code></pre>
 </div>
 </div>
 <section id="snakemake-expand" class="level4"><h4 class="anchored" data-anchor-id="snakemake-expand">Snakemake expand</h4>
-<p>Let’s say you have a Snakemake workflow with a rule that should run multiple times with different parameters. For example, you may want to train machine learning models with different ML methods, datasets, and random seeds. You define these as <code>wildcards</code> in a rule to train each ML model:</p>
+<p>Let’s say you have a Snakemake workflow with a rule that should run multiple times with different parameters. For example, you may want to train machine learning models with different ML methods, datasets, and random seeds. You define these as <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#wildcards">wildcards</a> in a rule to train each ML model:</p>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Snakefile</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1"></a>rule train_ml_model:</span>
-<span id="cb112-2"><a href="#cb112-2"></a>    <span class="bu">input</span>:</span>
-<span id="cb112-3"><a href="#cb112-3"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span>,</span>
-<span id="cb112-4"><a href="#cb112-4"></a>        csv<span class="op">=</span><span class="st">"data/</span><span class="sc">{dataset}</span><span class="st">.csv"</span></span>
-<span id="cb112-5"><a href="#cb112-5"></a>    output:</span>
-<span id="cb112-6"><a href="#cb112-6"></a>        model<span class="op">=</span><span class="st">"results/</span><span class="sc">{dataset}</span><span class="st">/runs/</span><span class="sc">{method}</span><span class="st">_</span><span class="sc">{seed}</span><span class="st">_model.Rds"</span></span>
-<span id="cb112-7"><a href="#cb112-7"></a>    script:</span>
-<span id="cb112-8"><a href="#cb112-8"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1"></a>rule train_ml_model:</span>
+<span id="cb114-2"><a href="#cb114-2"></a>    <span class="bu">input</span>:</span>
+<span id="cb114-3"><a href="#cb114-3"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span>,</span>
+<span id="cb114-4"><a href="#cb114-4"></a>        csv<span class="op">=</span><span class="st">"data/</span><span class="sc">{dataset}</span><span class="st">.csv"</span></span>
+<span id="cb114-5"><a href="#cb114-5"></a>    output:</span>
+<span id="cb114-6"><a href="#cb114-6"></a>        model<span class="op">=</span><span class="st">"results/</span><span class="sc">{dataset}</span><span class="st">/runs/</span><span class="sc">{method}</span><span class="st">_</span><span class="sc">{seed}</span><span class="st">_model.Rds"</span></span>
+<span id="cb114-7"><a href="#cb114-7"></a>    script:</span>
+<span id="cb114-8"><a href="#cb114-8"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>Notice that we’re <em>not</em> using <strong>f-Strings</strong> within the rule because we want Snakemake to recognize these as <strong>wildcards</strong> and fill in different values for them with each run of the <code>train_ml_model</code> rule.</p>
@@ -1090,10 +1103,10 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1"></a>datasets <span class="op">=</span> [<span class="st">'OTU'</span>, <span class="st">'genus'</span>]</span>
-<span id="cb113-2"><a href="#cb113-2"></a>methods <span class="op">=</span> [<span class="st">'rf'</span>, <span class="st">'glmnet'</span>, <span class="st">'svmRadial'</span>]</span>
-<span id="cb113-3"><a href="#cb113-3"></a>seeds <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1000</span>, <span class="dv">1005</span>)</span>
-<span id="cb113-4"><a href="#cb113-4"></a>[<span class="ss">f"results/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">/runs/</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>seed<span class="sc">}</span><span class="ss">_model.Rds"</span> <span class="cf">for</span> dataset <span class="kw">in</span> datasets <span class="cf">for</span> method <span class="kw">in</span> methods <span class="cf">for</span> seed <span class="kw">in</span> seeds]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1"></a>datasets <span class="op">=</span> [<span class="st">'OTU'</span>, <span class="st">'genus'</span>]</span>
+<span id="cb115-2"><a href="#cb115-2"></a>methods <span class="op">=</span> [<span class="st">'rf'</span>, <span class="st">'glmnet'</span>, <span class="st">'svmRadial'</span>]</span>
+<span id="cb115-3"><a href="#cb115-3"></a>seeds <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1000</span>, <span class="dv">1005</span>)</span>
+<span id="cb115-4"><a href="#cb115-4"></a>[<span class="ss">f"results/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">/runs/</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>seed<span class="sc">}</span><span class="ss">_model.Rds"</span> <span class="cf">for</span> dataset <span class="kw">in</span> datasets <span class="cf">for</span> method <span class="kw">in</span> methods <span class="cf">for</span> seed <span class="kw">in</span> seeds]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>['results/OTU/runs/rf_1000_model.Rds', 'results/OTU/runs/rf_1001_model.Rds', 'results/OTU/runs/rf_1002_model.Rds', 'results/OTU/runs/rf_1003_model.Rds', 'results/OTU/runs/rf_1004_model.Rds', 'results/OTU/runs/glmnet_1000_model.Rds', 'results/OTU/runs/glmnet_1001_model.Rds', 'results/OTU/runs/glmnet_1002_model.Rds', 'results/OTU/runs/glmnet_1003_model.Rds', 'results/OTU/runs/glmnet_1004_model.Rds', 'results/OTU/runs/svmRadial_1000_model.Rds', 'results/OTU/runs/svmRadial_1001_model.Rds', 'results/OTU/runs/svmRadial_1002_model.Rds', 'results/OTU/runs/svmRadial_1003_model.Rds', 'results/OTU/runs/svmRadial_1004_model.Rds', 'results/genus/runs/rf_1000_model.Rds', 'results/genus/runs/rf_1001_model.Rds', 'results/genus/runs/rf_1002_model.Rds', 'results/genus/runs/rf_1003_model.Rds', 'results/genus/runs/rf_1004_model.Rds', 'results/genus/runs/glmnet_1000_model.Rds', 'results/genus/runs/glmnet_1001_model.Rds', 'results/genus/runs/glmnet_1002_model.Rds', 'results/genus/runs/glmnet_1003_model.Rds', 'results/genus/runs/glmnet_1004_model.Rds', 'results/genus/runs/svmRadial_1000_model.Rds', 'results/genus/runs/svmRadial_1001_model.Rds', 'results/genus/runs/svmRadial_1002_model.Rds', 'results/genus/runs/svmRadial_1003_model.Rds', 'results/genus/runs/svmRadial_1004_model.Rds']</code></pre>
@@ -1105,22 +1118,22 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Snakefile</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1"></a>datasets <span class="op">=</span> [<span class="st">'OTU'</span>, <span class="st">'genus'</span>]</span>
-<span id="cb115-2"><a href="#cb115-2"></a>methods <span class="op">=</span> [<span class="st">'rf'</span>, <span class="st">'glmnet'</span>, <span class="st">'svmRadial'</span>]</span>
-<span id="cb115-3"><a href="#cb115-3"></a>seeds <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1000</span>, <span class="dv">1005</span>)</span>
-<span id="cb115-4"><a href="#cb115-4"></a></span>
-<span id="cb115-5"><a href="#cb115-5"></a>rule targets:</span>
-<span id="cb115-6"><a href="#cb115-6"></a>    <span class="bu">input</span>:</span>
-<span id="cb115-7"><a href="#cb115-7"></a>        [<span class="ss">f"results/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">/runs/</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>seed<span class="sc">}</span><span class="ss">_model.Rds"</span> <span class="cf">for</span> dataset <span class="kw">in</span> datasets <span class="cf">for</span> method <span class="kw">in</span> methods <span class="cf">for</span> seed <span class="kw">in</span> seeds]</span>
-<span id="cb115-8"><a href="#cb115-8"></a></span>
-<span id="cb115-9"><a href="#cb115-9"></a>rule train_ml_model:</span>
-<span id="cb115-10"><a href="#cb115-10"></a>    <span class="bu">input</span>:</span>
-<span id="cb115-11"><a href="#cb115-11"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span>,</span>
-<span id="cb115-12"><a href="#cb115-12"></a>        csv<span class="op">=</span><span class="ss">f"data/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">.csv"</span></span>
-<span id="cb115-13"><a href="#cb115-13"></a>    output:</span>
-<span id="cb115-14"><a href="#cb115-14"></a>        model<span class="op">=</span><span class="st">"results/</span><span class="sc">{dataset}</span><span class="st">/runs/</span><span class="sc">{method}</span><span class="st">_</span><span class="sc">{seed}</span><span class="st">_model.Rds"</span></span>
-<span id="cb115-15"><a href="#cb115-15"></a>    script:</span>
-<span id="cb115-16"><a href="#cb115-16"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1"></a>datasets <span class="op">=</span> [<span class="st">'OTU'</span>, <span class="st">'genus'</span>]</span>
+<span id="cb117-2"><a href="#cb117-2"></a>methods <span class="op">=</span> [<span class="st">'rf'</span>, <span class="st">'glmnet'</span>, <span class="st">'svmRadial'</span>]</span>
+<span id="cb117-3"><a href="#cb117-3"></a>seeds <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1000</span>, <span class="dv">1005</span>)</span>
+<span id="cb117-4"><a href="#cb117-4"></a></span>
+<span id="cb117-5"><a href="#cb117-5"></a>rule targets:</span>
+<span id="cb117-6"><a href="#cb117-6"></a>    <span class="bu">input</span>:</span>
+<span id="cb117-7"><a href="#cb117-7"></a>        [<span class="ss">f"results/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">/runs/</span><span class="sc">{</span>method<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>seed<span class="sc">}</span><span class="ss">_model.Rds"</span> <span class="cf">for</span> dataset <span class="kw">in</span> datasets <span class="cf">for</span> method <span class="kw">in</span> methods <span class="cf">for</span> seed <span class="kw">in</span> seeds]</span>
+<span id="cb117-8"><a href="#cb117-8"></a></span>
+<span id="cb117-9"><a href="#cb117-9"></a>rule train_ml_model:</span>
+<span id="cb117-10"><a href="#cb117-10"></a>    <span class="bu">input</span>:</span>
+<span id="cb117-11"><a href="#cb117-11"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span>,</span>
+<span id="cb117-12"><a href="#cb117-12"></a>        csv<span class="op">=</span><span class="ss">f"data/</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss">.csv"</span></span>
+<span id="cb117-13"><a href="#cb117-13"></a>    output:</span>
+<span id="cb117-14"><a href="#cb117-14"></a>        model<span class="op">=</span><span class="st">"results/</span><span class="sc">{dataset}</span><span class="st">/runs/</span><span class="sc">{method}</span><span class="st">_</span><span class="sc">{seed}</span><span class="st">_model.Rds"</span></span>
+<span id="cb117-15"><a href="#cb117-15"></a>    script:</span>
+<span id="cb117-16"><a href="#cb117-16"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>The list comprehension gets harder to read the more <code>for</code> statements you add to it. So Snakemake provides a function <code>expand()</code> to clean this up:</p>
@@ -1129,22 +1142,22 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Snakefile</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1"></a>datasets <span class="op">=</span> [<span class="st">'OTU'</span>, <span class="st">'genus'</span>]</span>
-<span id="cb116-2"><a href="#cb116-2"></a>methods <span class="op">=</span> [<span class="st">'rf'</span>, <span class="st">'glmnet'</span>, <span class="st">'svmRadial'</span>]</span>
-<span id="cb116-3"><a href="#cb116-3"></a>seeds <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1000</span>, <span class="dv">1005</span>)</span>
-<span id="cb116-4"><a href="#cb116-4"></a></span>
-<span id="cb116-5"><a href="#cb116-5"></a>rule targets:</span>
-<span id="cb116-6"><a href="#cb116-6"></a>    <span class="bu">input</span>:</span>
-<span id="cb116-7"><a href="#cb116-7"></a>        expand(<span class="st">"results/</span><span class="sc">{dataset}</span><span class="st">/runs/</span><span class="sc">{method}</span><span class="st">_</span><span class="sc">{seed}</span><span class="st">_model.Rds"</span>, </span>
-<span id="cb116-8"><a href="#cb116-8"></a>                dataset <span class="op">=</span> datasets, method <span class="op">=</span> methods, seed <span class="op">=</span> seeds)</span>
-<span id="cb116-9"><a href="#cb116-9"></a></span>
-<span id="cb116-10"><a href="#cb116-10"></a>rule train_ml_model:</span>
-<span id="cb116-11"><a href="#cb116-11"></a>    <span class="bu">input</span>:</span>
-<span id="cb116-12"><a href="#cb116-12"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span></span>
-<span id="cb116-13"><a href="#cb116-13"></a>    output:</span>
-<span id="cb116-14"><a href="#cb116-14"></a>        model<span class="op">=</span><span class="st">"results/</span><span class="sc">{dataset}</span><span class="st">/runs/</span><span class="sc">{method}</span><span class="st">_</span><span class="sc">{seed}</span><span class="st">_model.Rds"</span></span>
-<span id="cb116-15"><a href="#cb116-15"></a>    script:</span>
-<span id="cb116-16"><a href="#cb116-16"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1"></a>datasets <span class="op">=</span> [<span class="st">'OTU'</span>, <span class="st">'genus'</span>]</span>
+<span id="cb118-2"><a href="#cb118-2"></a>methods <span class="op">=</span> [<span class="st">'rf'</span>, <span class="st">'glmnet'</span>, <span class="st">'svmRadial'</span>]</span>
+<span id="cb118-3"><a href="#cb118-3"></a>seeds <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1000</span>, <span class="dv">1005</span>)</span>
+<span id="cb118-4"><a href="#cb118-4"></a></span>
+<span id="cb118-5"><a href="#cb118-5"></a>rule targets:</span>
+<span id="cb118-6"><a href="#cb118-6"></a>    <span class="bu">input</span>:</span>
+<span id="cb118-7"><a href="#cb118-7"></a>        expand(<span class="st">"results/</span><span class="sc">{dataset}</span><span class="st">/runs/</span><span class="sc">{method}</span><span class="st">_</span><span class="sc">{seed}</span><span class="st">_model.Rds"</span>, </span>
+<span id="cb118-8"><a href="#cb118-8"></a>                dataset <span class="op">=</span> datasets, method <span class="op">=</span> methods, seed <span class="op">=</span> seeds)</span>
+<span id="cb118-9"><a href="#cb118-9"></a></span>
+<span id="cb118-10"><a href="#cb118-10"></a>rule train_ml_model:</span>
+<span id="cb118-11"><a href="#cb118-11"></a>    <span class="bu">input</span>:</span>
+<span id="cb118-12"><a href="#cb118-12"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/train_ml.R"</span></span>
+<span id="cb118-13"><a href="#cb118-13"></a>    output:</span>
+<span id="cb118-14"><a href="#cb118-14"></a>        model<span class="op">=</span><span class="st">"results/</span><span class="sc">{dataset}</span><span class="st">/runs/</span><span class="sc">{method}</span><span class="st">_</span><span class="sc">{seed}</span><span class="st">_model.Rds"</span></span>
+<span id="cb118-15"><a href="#cb118-15"></a>    script:</span>
+<span id="cb118-16"><a href="#cb118-16"></a>        <span class="co">"scripts/train_ml.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>Using <code>expand()</code> creates the exact same list as the list comprehension, but it’s much easier to read and add variables to.</p>
@@ -1155,11 +1168,11 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1"></a>square <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb117-2"><a href="#cb117-2"></a>    <span class="fu">return</span>(x<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb117-3"><a href="#cb117-3"></a>}</span>
-<span id="cb117-4"><a href="#cb117-4"></a></span>
-<span id="cb117-5"><a href="#cb117-5"></a><span class="fu">square</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1"></a>square <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb119-2"><a href="#cb119-2"></a>    <span class="fu">return</span>(x<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb119-3"><a href="#cb119-3"></a>}</span>
+<span id="cb119-4"><a href="#cb119-4"></a></span>
+<span id="cb119-5"><a href="#cb119-5"></a><span class="fu">square</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
@@ -1171,10 +1184,10 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1"></a><span class="kw">def</span> square(x):</span>
-<span id="cb119-2"><a href="#cb119-2"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb119-3"><a href="#cb119-3"></a></span>
-<span id="cb119-4"><a href="#cb119-4"></a>square(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1"></a><span class="kw">def</span> square(x):</span>
+<span id="cb121-2"><a href="#cb121-2"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb121-3"><a href="#cb121-3"></a></span>
+<span id="cb121-4"><a href="#cb121-4"></a>square(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>4</code></pre>
@@ -1188,7 +1201,7 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>R</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1"></a><span class="cf">function</span>(x) { x<span class="sc">**</span><span class="dv">2</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1"></a><span class="cf">function</span>(x) { x<span class="sc">**</span><span class="dv">2</span> }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function(x) { x**2 }</code></pre>
@@ -1200,10 +1213,10 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Python</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1"></a><span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1"></a><span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;function &lt;lambda&gt; at 0x1110fcaf0&gt;</code></pre>
+<pre><code>&lt;function &lt;lambda&gt; at 0x102a19af0&gt;</code></pre>
 </div>
 </div>
 <p>Before the colon, list the arguments of the function. After the colon, compute the value that the function should return.</p>
@@ -1214,84 +1227,117 @@ index 3 is 4</code></pre>
 <div class="code-with-filename-file">
 <pre><strong>Snakefile</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1"></a>rule targets:</span>
-<span id="cb125-2"><a href="#cb125-2"></a>    <span class="bu">input</span>:</span>
-<span id="cb125-3"><a href="#cb125-3"></a>        <span class="co">"paper/paper.pdf"</span></span>
-<span id="cb125-4"><a href="#cb125-4"></a></span>
-<span id="cb125-5"><a href="#cb125-5"></a>rule convert_figure_1:</span>
-<span id="cb125-6"><a href="#cb125-6"></a>    <span class="bu">input</span>:</span>
-<span id="cb125-7"><a href="#cb125-7"></a>        tiff<span class="op">=</span><span class="st">'figures/diversity.tiff'</span></span>
-<span id="cb125-8"><a href="#cb125-8"></a>    output:</span>
-<span id="cb125-9"><a href="#cb125-9"></a>        png<span class="op">=</span><span class="st">"paper/figure_1.png"</span></span>
-<span id="cb125-10"><a href="#cb125-10"></a>    shell:</span>
-<span id="cb125-11"><a href="#cb125-11"></a>        <span class="co">"""</span></span>
-<span id="cb125-12"><a href="#cb125-12"></a><span class="co">        convert {input.tiff} {output.png}</span></span>
-<span id="cb125-13"><a href="#cb125-13"></a><span class="co">        """</span></span>
-<span id="cb125-14"><a href="#cb125-14"></a></span>
-<span id="cb125-15"><a href="#cb125-15"></a>rule convert_figure_2:</span>
-<span id="cb125-16"><a href="#cb125-16"></a>    <span class="bu">input</span>:</span>
-<span id="cb125-17"><a href="#cb125-17"></a>        tiff<span class="op">=</span><span class="st">'figures/error_rates.tiff'</span></span>
-<span id="cb125-18"><a href="#cb125-18"></a>    output:</span>
-<span id="cb125-19"><a href="#cb125-19"></a>        png<span class="op">=</span><span class="st">"paper/figure_2.png"</span></span>
-<span id="cb125-20"><a href="#cb125-20"></a>    shell:</span>
-<span id="cb125-21"><a href="#cb125-21"></a>        <span class="co">"""</span></span>
-<span id="cb125-22"><a href="#cb125-22"></a><span class="co">        convert {input.tiff} {output.png}</span></span>
-<span id="cb125-23"><a href="#cb125-23"></a><span class="co">        """</span></span>
-<span id="cb125-24"><a href="#cb125-24"></a></span>
-<span id="cb125-25"><a href="#cb125-25"></a>rule render_paper:</span>
-<span id="cb125-26"><a href="#cb125-26"></a>    <span class="bu">input</span>:</span>
-<span id="cb125-27"><a href="#cb125-27"></a>        Rmd<span class="op">=</span><span class="st">"paper/paper.Rmd"</span>,</span>
-<span id="cb125-28"><a href="#cb125-28"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/render_rmd.R"</span>,</span>
-<span id="cb125-29"><a href="#cb125-29"></a>        figures<span class="op">=</span>[<span class="st">'paper/figure_1.png'</span>, <span class="st">'paper/figure_2.png'</span>]</span>
-<span id="cb125-30"><a href="#cb125-30"></a>    output:</span>
-<span id="cb125-31"><a href="#cb125-31"></a>        pdf<span class="op">=</span><span class="st">"paper/paper.pdf"</span></span>
-<span id="cb125-32"><a href="#cb125-32"></a>    script:</span>
-<span id="cb125-33"><a href="#cb125-33"></a>        <span class="co">"scripts/render_rmd.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1"></a>rule targets:</span>
+<span id="cb127-2"><a href="#cb127-2"></a>    <span class="bu">input</span>:</span>
+<span id="cb127-3"><a href="#cb127-3"></a>        <span class="co">"paper/paper.pdf"</span></span>
+<span id="cb127-4"><a href="#cb127-4"></a></span>
+<span id="cb127-5"><a href="#cb127-5"></a>rule convert_figure_1:</span>
+<span id="cb127-6"><a href="#cb127-6"></a>    <span class="bu">input</span>:</span>
+<span id="cb127-7"><a href="#cb127-7"></a>        tiff<span class="op">=</span><span class="st">'figures/diversity.tiff'</span></span>
+<span id="cb127-8"><a href="#cb127-8"></a>    output:</span>
+<span id="cb127-9"><a href="#cb127-9"></a>        png<span class="op">=</span><span class="st">"paper/figure_1.png"</span></span>
+<span id="cb127-10"><a href="#cb127-10"></a>    shell:</span>
+<span id="cb127-11"><a href="#cb127-11"></a>        <span class="co">"""</span></span>
+<span id="cb127-12"><a href="#cb127-12"></a><span class="co">        convert {input.tiff} {output.png}</span></span>
+<span id="cb127-13"><a href="#cb127-13"></a><span class="co">        """</span></span>
+<span id="cb127-14"><a href="#cb127-14"></a></span>
+<span id="cb127-15"><a href="#cb127-15"></a>rule convert_figure_2:</span>
+<span id="cb127-16"><a href="#cb127-16"></a>    <span class="bu">input</span>:</span>
+<span id="cb127-17"><a href="#cb127-17"></a>        tiff<span class="op">=</span><span class="st">'figures/error_rates.tiff'</span></span>
+<span id="cb127-18"><a href="#cb127-18"></a>    output:</span>
+<span id="cb127-19"><a href="#cb127-19"></a>        png<span class="op">=</span><span class="st">"paper/figure_2.png"</span></span>
+<span id="cb127-20"><a href="#cb127-20"></a>    shell:</span>
+<span id="cb127-21"><a href="#cb127-21"></a>        <span class="co">"""</span></span>
+<span id="cb127-22"><a href="#cb127-22"></a><span class="co">        convert {input.tiff} {output.png}</span></span>
+<span id="cb127-23"><a href="#cb127-23"></a><span class="co">        """</span></span>
+<span id="cb127-24"><a href="#cb127-24"></a></span>
+<span id="cb127-25"><a href="#cb127-25"></a>rule render_paper:</span>
+<span id="cb127-26"><a href="#cb127-26"></a>    <span class="bu">input</span>:</span>
+<span id="cb127-27"><a href="#cb127-27"></a>        Rmd<span class="op">=</span><span class="st">"paper/paper.Rmd"</span>,</span>
+<span id="cb127-28"><a href="#cb127-28"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/render_rmd.R"</span>,</span>
+<span id="cb127-29"><a href="#cb127-29"></a>        figures<span class="op">=</span>[<span class="st">'paper/figure_1.png'</span>, <span class="st">'paper/figure_2.png'</span>]</span>
+<span id="cb127-30"><a href="#cb127-30"></a>    output:</span>
+<span id="cb127-31"><a href="#cb127-31"></a>        pdf<span class="op">=</span><span class="st">"paper/paper.pdf"</span></span>
+<span id="cb127-32"><a href="#cb127-32"></a>    script:</span>
+<span id="cb127-33"><a href="#cb127-33"></a>        <span class="co">"scripts/render_rmd.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>The rules <code>convert_figure_1</code> and <code>convert_figure_2</code> are a bit repetitive; they only differ by the input filenames and the figure numbers in the output filenames. Maybe this isn’t so bad with only two figures, but you might actually have 5-10 figures for a full scientific paper. We can reduce the repetitive code with a few tricks:</p>
 <ol type="1">
 <li>Create a dictionary <code>figures_dict</code> that maps the figure numbers to the descriptive figure file names.</li>
 <li>Use a single rule to convert figures called <code>convert_tiff_to_png</code>, using a lambda function to get the input figure filenames based on the final figure numbers.</li>
-<li>Bonus: use <code>expand()</code> to get a list of figures for the paper in <code>render_paper</code>.</li>
 </ol>
 <div class="cell">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Snakefile</strong></pre>
 </div>
-<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb126-1"><a href="#cb126-1"></a>figures_dict <span class="op">=</span> {<span class="st">'1'</span>: <span class="st">'diversity'</span>, <span class="st">'2'</span>: <span class="st">'error_rates'</span>}</span>
-<span id="cb126-2"><a href="#cb126-2"></a></span>
-<span id="cb126-3"><a href="#cb126-3"></a>rule targets:</span>
-<span id="cb126-4"><a href="#cb126-4"></a>    <span class="bu">input</span>:</span>
-<span id="cb126-5"><a href="#cb126-5"></a>        <span class="co">"paper/paper.pdf"</span></span>
-<span id="cb126-6"><a href="#cb126-6"></a></span>
-<span id="cb126-7"><a href="#cb126-7"></a>rule convert_tiff_to_png:</span>
-<span id="cb126-8"><a href="#cb126-8"></a>    <span class="bu">input</span>:</span>
-<span id="cb126-9"><a href="#cb126-9"></a>        tiff<span class="op">=</span><span class="kw">lambda</span> wildcards: <span class="ss">f"figures/</span><span class="sc">{</span>figures_dict[wildcards.fig_num]<span class="sc">}</span><span class="ss">.tiff"</span></span>
-<span id="cb126-10"><a href="#cb126-10"></a>    output:</span>
-<span id="cb126-11"><a href="#cb126-11"></a>        png<span class="op">=</span><span class="st">"paper/figure_</span><span class="sc">{fig_num}</span><span class="st">.png"</span></span>
-<span id="cb126-12"><a href="#cb126-12"></a>    shell:</span>
-<span id="cb126-13"><a href="#cb126-13"></a>        <span class="co">"""</span></span>
-<span id="cb126-14"><a href="#cb126-14"></a><span class="co">        convert {input.tiff} {output.png}</span></span>
-<span id="cb126-15"><a href="#cb126-15"></a><span class="co">        """</span></span>
-<span id="cb126-16"><a href="#cb126-16"></a></span>
-<span id="cb126-17"><a href="#cb126-17"></a>rule render_paper:</span>
-<span id="cb126-18"><a href="#cb126-18"></a>    <span class="bu">input</span>:</span>
-<span id="cb126-19"><a href="#cb126-19"></a>        Rmd<span class="op">=</span><span class="st">"paper/paper.Rmd"</span>,</span>
-<span id="cb126-20"><a href="#cb126-20"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/render_rmd.R"</span>,</span>
-<span id="cb126-21"><a href="#cb126-21"></a>        figures<span class="op">=</span>expand(rules.convert_tiff_to_png.output.png, </span>
-<span id="cb126-22"><a href="#cb126-22"></a>                       fig_num <span class="op">=</span> figures_dict.keys())</span>
-<span id="cb126-23"><a href="#cb126-23"></a>    output:</span>
-<span id="cb126-24"><a href="#cb126-24"></a>        pdf<span class="op">=</span><span class="st">"paper/paper.pdf"</span></span>
-<span id="cb126-25"><a href="#cb126-25"></a>    script:</span>
-<span id="cb126-26"><a href="#cb126-26"></a>        <span class="co">"scripts/render_rmd.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1"></a>figures_dict <span class="op">=</span> {<span class="st">'1'</span>: <span class="st">'diversity'</span>, <span class="st">'2'</span>: <span class="st">'error_rates'</span>}</span>
+<span id="cb128-2"><a href="#cb128-2"></a></span>
+<span id="cb128-3"><a href="#cb128-3"></a>rule targets:</span>
+<span id="cb128-4"><a href="#cb128-4"></a>    <span class="bu">input</span>:</span>
+<span id="cb128-5"><a href="#cb128-5"></a>        <span class="co">"paper/paper.pdf"</span></span>
+<span id="cb128-6"><a href="#cb128-6"></a></span>
+<span id="cb128-7"><a href="#cb128-7"></a>rule convert_tiff_to_png:</span>
+<span id="cb128-8"><a href="#cb128-8"></a>    <span class="bu">input</span>:</span>
+<span id="cb128-9"><a href="#cb128-9"></a>        tiff<span class="op">=</span><span class="kw">lambda</span> wildcards: <span class="ss">f"figures/</span><span class="sc">{</span>figures_dict[wildcards.fig_num]<span class="sc">}</span><span class="ss">.tiff"</span></span>
+<span id="cb128-10"><a href="#cb128-10"></a>    output:</span>
+<span id="cb128-11"><a href="#cb128-11"></a>        png<span class="op">=</span><span class="st">"paper/figure_</span><span class="sc">{fig_num}</span><span class="st">.png"</span></span>
+<span id="cb128-12"><a href="#cb128-12"></a>    shell:</span>
+<span id="cb128-13"><a href="#cb128-13"></a>        <span class="co">"""</span></span>
+<span id="cb128-14"><a href="#cb128-14"></a><span class="co">        convert {input.tiff} {output.png}</span></span>
+<span id="cb128-15"><a href="#cb128-15"></a><span class="co">        """</span></span>
+<span id="cb128-16"><a href="#cb128-16"></a></span>
+<span id="cb128-17"><a href="#cb128-17"></a>rule render_paper:</span>
+<span id="cb128-18"><a href="#cb128-18"></a>    <span class="bu">input</span>:</span>
+<span id="cb128-19"><a href="#cb128-19"></a>        Rmd<span class="op">=</span><span class="st">"paper/paper.Rmd"</span>,</span>
+<span id="cb128-20"><a href="#cb128-20"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/render_rmd.R"</span>,</span>
+<span id="cb128-21"><a href="#cb128-21"></a>        figures<span class="op">=</span>[<span class="st">'paper/figure_1.png'</span>, <span class="st">'paper/figure_2.png'</span>]</span>
+<span id="cb128-22"><a href="#cb128-22"></a>    output:</span>
+<span id="cb128-23"><a href="#cb128-23"></a>        pdf<span class="op">=</span><span class="st">"paper/paper.pdf"</span></span>
+<span id="cb128-24"><a href="#cb128-24"></a>    script:</span>
+<span id="cb128-25"><a href="#cb128-25"></a>        <span class="co">"scripts/render_rmd.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>This lambda function is equivalent to:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1"></a><span class="kw">def</span> get_fig_name_from_num(wildcards):</span>
-<span id="cb127-2"><a href="#cb127-2"></a>    <span class="cf">return</span> figures_dict[wildcards.fig_num]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb129-1"><a href="#cb129-1"></a><span class="kw">def</span> get_fig_name_from_num(wildcards):</span>
+<span id="cb129-2"><a href="#cb129-2"></a>    <span class="cf">return</span> figures_dict[wildcards.fig_num]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This works because Snakemake allows you to define a function that takes the rule’s wildcards and returns a list of input filenames, rather than literally listing the input filenames as before. This greatly reduces the repetitiveness of the code and makes it easier to maintain.</p>
+<p>We can improve this Snakefile even further by replacing the list of figures in <code>render_paper</code> with a call to <code>expand()</code>:</p>
+<div class="cell">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Snakefile</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1"></a>figures_dict <span class="op">=</span> {<span class="st">'1'</span>: <span class="st">'diversity'</span>, <span class="st">'2'</span>: <span class="st">'error_rates'</span>}</span>
+<span id="cb130-2"><a href="#cb130-2"></a></span>
+<span id="cb130-3"><a href="#cb130-3"></a>rule targets:</span>
+<span id="cb130-4"><a href="#cb130-4"></a>    <span class="bu">input</span>:</span>
+<span id="cb130-5"><a href="#cb130-5"></a>        <span class="co">"paper/paper.pdf"</span></span>
+<span id="cb130-6"><a href="#cb130-6"></a></span>
+<span id="cb130-7"><a href="#cb130-7"></a>rule convert_tiff_to_png:</span>
+<span id="cb130-8"><a href="#cb130-8"></a>    <span class="bu">input</span>:</span>
+<span id="cb130-9"><a href="#cb130-9"></a>        tiff<span class="op">=</span><span class="kw">lambda</span> wildcards: <span class="ss">f"figures/</span><span class="sc">{</span>figures_dict[wildcards.fig_num]<span class="sc">}</span><span class="ss">.tiff"</span></span>
+<span id="cb130-10"><a href="#cb130-10"></a>    output:</span>
+<span id="cb130-11"><a href="#cb130-11"></a>        png<span class="op">=</span><span class="st">"paper/figure_</span><span class="sc">{fig_num}</span><span class="st">.png"</span></span>
+<span id="cb130-12"><a href="#cb130-12"></a>    shell:</span>
+<span id="cb130-13"><a href="#cb130-13"></a>        <span class="co">"""</span></span>
+<span id="cb130-14"><a href="#cb130-14"></a><span class="co">        convert {input.tiff} {output.png}</span></span>
+<span id="cb130-15"><a href="#cb130-15"></a><span class="co">        """</span></span>
+<span id="cb130-16"><a href="#cb130-16"></a></span>
+<span id="cb130-17"><a href="#cb130-17"></a>rule render_paper:</span>
+<span id="cb130-18"><a href="#cb130-18"></a>    <span class="bu">input</span>:</span>
+<span id="cb130-19"><a href="#cb130-19"></a>        Rmd<span class="op">=</span><span class="st">"paper/paper.Rmd"</span>,</span>
+<span id="cb130-20"><a href="#cb130-20"></a>        R<span class="op">=</span><span class="st">"workflow/scripts/render_rmd.R"</span>,</span>
+<span id="cb130-21"><a href="#cb130-21"></a>        figures<span class="op">=</span>expand(rules.convert_tiff_to_png.output.png, </span>
+<span id="cb130-22"><a href="#cb130-22"></a>                       fig_num <span class="op">=</span> figures_dict.keys())</span>
+<span id="cb130-23"><a href="#cb130-23"></a>    output:</span>
+<span id="cb130-24"><a href="#cb130-24"></a>        pdf<span class="op">=</span><span class="st">"paper/paper.pdf"</span></span>
+<span id="cb130-25"><a href="#cb130-25"></a>    script:</span>
+<span id="cb130-26"><a href="#cb130-26"></a>        <span class="co">"scripts/render_rmd.R"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 <p>You can take a look at this full example in context <a href="https://github.com/kelly-sovacool/figure-convert-reprex">here</a>. Also see the Snakemake docs for more about <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#snakefiles-input-functions">input functions</a> and <a href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#non-file-parameters-for-rules">params functions</a>.</p>
 </section></section></section><section id="recap" class="level1"><h1>recap</h1>
