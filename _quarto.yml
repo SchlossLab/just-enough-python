@@ -12,9 +12,6 @@ website:
   open-graph: true
   navbar:
     search: true
-    left:
-      - text: "Home"
-        file: index.html
     right:
       - icon: github
         href: https://github.com/SchlossLab/just-enough-python/
