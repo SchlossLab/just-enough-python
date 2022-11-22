@@ -5,6 +5,10 @@ date: last-modified
 engine: knitr
 ---
 
+::: {.callout-warning}
+This tutorial is under construction.
+:::
+
 I wish I had time to cover everything in-depth, but then I'd have to change the 
 title from "[Just Enough Python](index.qmd)" to "Way More Python 
 Than We Could Possibly Cover In An Hour". 
