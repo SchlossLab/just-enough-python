@@ -1194,7 +1194,6 @@ index 3 is 4</code></pre>
 <pre><code>function(x) { x**2 }</code></pre>
 </div>
 </div>
-<section id="lambda-in-snakemake" class="level4"><h4 class="anchored" data-anchor-id="lambda-in-snakemake">lambda in Snakemake</h4>
 <p>In Python you use the <code>lambda</code> keyword:</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -1204,10 +1203,11 @@ index 3 is 4</code></pre>
 <div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1"></a><span class="kw">lambda</span> x: x<span class="op">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;function &lt;lambda&gt; at 0x10caeb940&gt;</code></pre>
+<pre><code>&lt;function &lt;lambda&gt; at 0x1110fcaf0&gt;</code></pre>
 </div>
 </div>
 <p>Before the colon, list the arguments of the function. After the colon, compute the value that the function should return.</p>
+<section id="lambda-in-snakemake" class="level4"><h4 class="anchored" data-anchor-id="lambda-in-snakemake">lambda in Snakemake</h4>
 <p>When writing Snakemake workflows, lambda functions are useful for defining input files based on the wildcards in output files. Consider a workflow where you have several rules that plot figures for a manuscript. When you initially conduct the analysis, you don’t know how the figures will be ordered in the manuscript. Once you begin drafting the manuscript, you decide that your diversity plot will be figure 1 and your error rates plot will be figure 2. You also decide to convert the figures to a different format, so the conversion step seems like a good opportunity to rename the figures. Initially you write this workflow:</p>
 <div class="cell">
 <div class="code-with-filename">
@@ -1297,17 +1297,20 @@ index 3 is 4</code></pre>
 </section></section></section><section id="recap" class="level1"><h1>recap</h1>
 <p><strong>Snakemake concepts covered</strong></p>
 <ul>
-<li>Use <strong>f-Strings</strong> for readable string formatting.</li>
-<li>Config files are imported as <strong>dictionaries</strong> and allow you to change workflow parameters without modifying code.</li>
-<li>Snakemake’s <strong>expand()</strong> function is a readable way to build lists just like list comprehensions.</li>
+<li>Use <a href="#formatting-strings"><strong>f-Strings</strong></a> for human-readable string formatting.</li>
 <li>
-<strong>Lambda functions</strong> help define Snakemake input files based on wildcards. You can also use them to define params based on wildcards and/or output files.</li>
+<a href="#snakemake-config"><strong>Config files</strong></a> are imported as dictionaries and allow you to change workflow parameters without modifying code.</li>
+<li>Snakemake’s <a href="#snakemake-expand"><strong>expand()</strong></a> function is a readable way to build lists just like list comprehensions.</li>
+<li>
+<a href="#lambda-in-snakemake"><strong>Lambda functions</strong></a> help define Snakemake input files based on wildcards. You can also use them to define params based on wildcards and/or output files.</li>
 </ul></section><div id="quarto-appendix" class="default"><section id="resources" class="level1 appendix"><h2 class="quarto-appendix-heading">resources</h2><div class="quarto-appendix-contents">
 <ul>
-<li>
-<a href="./just-a-little-more-python.html">Just A Little More Python</a>: topics I wish I had time to cover in this tutorial.</li>
 <li><a href="https://docs.python.org/3/">The Python docs</a></li>
-<li><a href="https://snakemake.readthedocs.io/">The Snakemake docs</a></li>
+<li>
+<a href="https://snakemake.readthedocs.io/">The Snakemake docs</a> <!--
+- [Just A Little More Python](just-a-little-more-python.qmd): topics I wish I had time to cover in this tutorial.
+-->
+</li>
 </ul>
 
 
