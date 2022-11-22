@@ -6,11 +6,12 @@ project:
 website:
   repo-url: https://github.com/SchlossLab/just-enough-python/
   repo-actions: [edit, issue]
+  site-url: https://www.schlosslab.org/just-enough-python/
+  twitter-card: 
+    creator: "@kelly_sovacool"
+  open-graph: true
   navbar:
     search: true
-    left:
-      - text: "Home"
-        file: index.html
     right:
       - icon: github
         href: https://github.com/SchlossLab/just-enough-python/
