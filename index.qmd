@@ -708,7 +708,6 @@ We've already used one in R^[Read more about anonymous functions in Hadley Wickh
 function(x) { x**2 }
 ```
 
-#### lambda in Snakemake
 
 In Python you use the `lambda` keyword:
 
@@ -719,6 +718,8 @@ lambda x: x**2
 
 Before the colon, list the arguments of the function.
 After the colon, compute the value that the function should return.
+
+#### lambda in Snakemake
 
 When writing Snakemake workflows, lambda functions are useful for defining input 
 files based on the wildcards in output files.
@@ -829,10 +830,10 @@ and [params functions](https://snakemake.readthedocs.io/en/stable/snakefiles/rul
 
 **Snakemake concepts covered**
 
-- Use **f-Strings** for readable string formatting.
-- Config files are imported as **dictionaries** and allow you to change workflow parameters without modifying code.
-- Snakemake's **expand()** function is a readable way to build lists just like list comprehensions.
-- **Lambda functions** help define Snakemake input files based on wildcards. You can also use them to define params based on wildcards and/or output files.
+- Use [**f-Strings**](#formatting-strings) for human-readable string formatting.
+- [**Config files**](#snakemake-config) are imported as dictionaries and allow you to change workflow parameters without modifying code.
+- Snakemake's [**expand()**](#snakemake-expand) function is a readable way to build lists just like list comprehensions.
+- [**Lambda functions**](#lambda-in-snakemake) help define Snakemake input files based on wildcards. You can also use them to define params based on wildcards and/or output files.
 
 # resources {.appendix}
 
