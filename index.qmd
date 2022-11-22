@@ -26,6 +26,7 @@ learning a little Python goes a long way.
 
 This is just enough Python to understand and apply some cool tricks in your Snakemake workflows.
 
+![](/images/python-snakemake-r-logos-horiz.png){ width=300px fig-align="center" fig-alt="The Python, R, and Snakemake logos linked together."}^[The [Python logo](https://commons.wikimedia.org/wiki/File:Python-logo-notext.svg) by the Python Software Foundation is licensed under GNU GPL v2. The [Snakemake logo](https://commons.wikimedia.org/wiki/File:Snakemake_logo_dark.png) by Johannes Köster is  licensed under CC BY-SA 4.0. The [R logo](https://commons.wikimedia.org/wiki/File:R_logo.svg) by Hadley Wickham and others at RStudio is licensed under CC BY-SA 4.0.]
 
 #####  prereqs
 
