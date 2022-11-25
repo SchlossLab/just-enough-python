@@ -6,9 +6,13 @@ The original software included in this repository is made available under the
 All other original content is made available under the 
 [Creative Commons Attribution License](#cc-by-license).
 
+The [Python logo](https://commons.wikimedia.org/wiki/File:Python-logo-notext.svg) by the Python Software Foundation is licensed under GNU GPL v2. 
+The [Snakemake logo](https://commons.wikimedia.org/wiki/File:Snakemake_logo_dark.png) by Johannes Köster is  licensed under CC BY-SA 4.0. 
+The [R logo](https://commons.wikimedia.org/wiki/File:R_logo.svg) by Hadley Wickham and others at RStudio is licensed under CC BY-SA 4.0.
+
 ## MIT License
 
-Copyright (c) 2022 Kelly Sovacool
+Copyright (c) 2022 Kelly L. Sovacool and Patrick D. Schloss
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +55,7 @@ Under the following terms:
 
 * **Attribution**---You must give appropriate credit by:
   - mentioning that your work is derived from work that is
-    Copyright © Kelly Sovacool.
+    Copyright ©  Kelly L. Sovacool and Patrick D. Schloss.
   - where practical, linking to https://sovacool.dev, 
     provide a [link to the license][cc-by-human]
   - and indicate if changes were made. You may do so in any reasonable manner, 
